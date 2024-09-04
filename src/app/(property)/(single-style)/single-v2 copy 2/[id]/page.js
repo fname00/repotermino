@@ -28,7 +28,7 @@ import CustomContact from "@/components/property/property-single-style/common/Cu
 import OtherInArea from "@/components/property/property-single-style/common/OtherInArea"; // Import CustomContact
 
 export const metadata = {
-  title: "Property Single V2 || Homez - Real Estate NextJS Template",
+  title: "Property Single V2 || Teneryfa.org.pl",
 };
 
 const SingleV2 = ({params}) => {

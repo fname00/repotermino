@@ -18,7 +18,7 @@ const Footer = () => {
                   width={138}
                   height={44}
                   className="mb40"
-                  src="/images/header-logo.svg"
+                  src="/images/header-logo8.svg"
                   alt="logo"
                 />
               </Link>

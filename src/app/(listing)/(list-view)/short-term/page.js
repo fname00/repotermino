@@ -5,7 +5,7 @@ import PropertyFilteringList from "@/components/listing/list-view/short-term/Pro
 import React from "react";
 
 export const metadata = {
-  title: "List || Homez - Real Estate NextJS Template",
+  title: "List || Teneryfa.org.pl",
 };
 
 const ListV1 = () => {

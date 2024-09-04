@@ -11,7 +11,7 @@ import PropertyGallery from "@/components/property/property-single-style/single-
 import PropertyHeader from "@/components/property/property-single-style/single-activity/PropertyHeader";
 import OtherInArea from "@/components/property/property-single-style/single-activity/OtherInArea"; // Import CustomContact
 export const metadata = {
-  title: "Property Single V2 || Homez - Real Estate NextJS Template",
+  title: "Property Single V2 || Teneryfa.org.pl",
 };
 
 const SingleV2 = ({params}) => {

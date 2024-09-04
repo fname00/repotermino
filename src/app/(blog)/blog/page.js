@@ -6,7 +6,7 @@ import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
 
 export const metadata = {
-  title: "Blog List v2  || Homez - Real Estate NextJS Template",
+  title: "Blog List v2  || Teneryfa.org.pl",
 };
 
 const BlogV2 = () => {

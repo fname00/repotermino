@@ -51,7 +51,7 @@ export const agentsData = [
     {
       id: 6,
       city:'Los Angeles',category: 'Apartments',
-      name: "Ib-Themes",imgSrc: "/images/team/agency-1.png",
+      name: "Teneryfa.org.pl",imgSrc: "/images/team/agency-1.png",
       propertiesCount: "6 Properties",
       starRating: 4.6,
       agencyTitle: "All American Real Estate",
