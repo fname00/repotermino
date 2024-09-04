@@ -34,6 +34,7 @@ const MobileMenu = () => {
                   alt="logo"
                 />
               </Link>
+              <a className="pl25"></a>
             </div>
           </div>
         </div>

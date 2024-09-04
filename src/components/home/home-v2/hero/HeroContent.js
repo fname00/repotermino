@@ -10,7 +10,7 @@ const HeroContent = () => {
       <div className="advance-content-style2">
         <div className="row align-items-center">
           <div className="custom-search2 col-md-9 col-lg-12">
-            <div className="advance-search-field position-relative text-start  bdrrn-sm bb1-sm">
+            <div className="advance-search-field position-relative text-start  bdrrn-sm">
               <form className="form-search position-relative d-flex">
                 <div className="box-search flex-grow-1 d-flex">
                   <span className="icon flaticon-home-1" />

@@ -3405,7 +3405,7 @@ button.btn.btn-primary.mb10:hover {
 }
 @media (max-width: 991.98px) {
     .home2-hero-banner {
-        top: 100px;
+        top: 0px;
     }
 }
 .custom-search{
@@ -3548,12 +3548,19 @@ section.pt0.pb90.bgc-f7.custom_top_activity > div{
     display: flex;
     height: 650px;
 }
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
     .home-banner-style2 .home-style2 {
         height: 500px;
     }
 }
+.custom-search2{
+    width:100% !important;
+}
+
 @media (max-width: 767px) {
+    .hero-title{
+        font-size:60px !important;
+    }
     .home-banner-style1 {
         padding: 60px 0 !important;
     }
@@ -10737,6 +10744,7 @@ input:focus-visible {
         border-right: none;
     }
 }
+
 @media (max-width: 767.98px) {
     .slider-dib-sm.owl-theme .owl-stage-outer {
         display: inline-block;
