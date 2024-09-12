@@ -1,4 +1,3 @@
-// /pages/api/listings/filter.js
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -11,39 +10,39 @@ export default async function handler(req, res) {
       propertyTypes,
       priceRange,
       bedrooms,
-      bathroms,
-      squirefeet,
+      bathrooms,
+      squarefeet,
       yearBuild,
       categories,
       searchQuery,
-      holiday, // Add holiday filter
+      holiday,
     } = req.query;
 
     const whereClause = {
       ...(location && location !== "All Cities" ? { city: location } : {}),
-      ...(listingStatus !== "All" ? { forRent: listingStatus === "Rent" } : {}),
-      ...(propertyTypes.length ? { propertyType: { in: propertyTypes } } : {}),
-      ...(bedrooms ? { bed: { gte: parseInt(bedrooms) } } : {}),
-      ...(bathroms ? { bath: { gte: parseInt(bathroms) } } : {}),
-      ...(priceRange.length ? {
+      ...(listingStatus && listingStatus !== "All" ? { forRent: listingStatus === "Rent" } : {}),
+      ...(propertyTypes && propertyTypes.length ? { propertyType: { in: propertyTypes.split(',') } } : {}),
+      ...(bedrooms ? { bed: { gte: parseInt(bedrooms, 10) } } : {}),
+      ...(bathrooms ? { bath: { gte: parseInt(bathrooms, 10) } } : {}),
+      ...(priceRange && priceRange.length ? {
         price: {
-          gte: parseFloat(priceRange[0]),
-          lte: parseFloat(priceRange[1]),
+          gte: parseFloat(priceRange.split(',')[0]),
+          lte: parseFloat(priceRange.split(',')[1]),
         },
       } : {}),
-      ...(squirefeet.length ? {
+      ...(squarefeet && squarefeet.length ? {
         sqft: {
-          gte: parseInt(squirefeet[0]),
-          lte: parseInt(squirefeet[1]),
+          gte: parseInt(squarefeet.split(',')[0], 10),
+          lte: parseInt(squarefeet.split(',')[1], 10),
         },
       } : {}),
-      ...(yearBuild.length ? {
+      ...(yearBuild && yearBuild.length ? {
         yearBuilding: {
-          gte: parseInt(yearBuild[0]),
-          lte: parseInt(yearBuild[1]),
+          gte: parseInt(yearBuild.split(',')[0], 10),
+          lte: parseInt(yearBuild.split(',')[1], 10),
         },
       } : {}),
-      ...(categories.length ? { features: { hasEvery: categories } } : {}),
+      ...(categories && categories.length ? { features: { hasEvery: categories.split(',') } } : {}),
       ...(searchQuery ? {
         OR: [
           { city: { contains: searchQuery, mode: 'insensitive' } },
@@ -52,7 +51,7 @@ export default async function handler(req, res) {
           { features: { hasSome: searchQuery.split(' ') } }
         ]
       } : {}),
-      ...(holiday === "true" ? { holiday: true } : {}) // Add holiday filter
+      ...(holiday === "true" ? { holiday: true } : {})
     };
 
     const listings = await prisma.listing.findMany({
@@ -61,7 +60,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(listings);
   } catch (error) {
-    console.error(error); // Log the error for debugging
-    res.status(500).json({ error: 'Failed to fetch listings' });
+    console.error('Error in /api/listings/filter:', error);
+    res.status(500).json({ error: 'Failed to fetch listings', details: error.message });
   }
 }
