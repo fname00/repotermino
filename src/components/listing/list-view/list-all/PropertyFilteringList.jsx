@@ -117,7 +117,6 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
     categories,
     currentSortingOption,
     searchQuery,
-    fetchListings,
     updateURL,
   ]);
 
@@ -131,17 +130,17 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       { threshold: 1.0 }
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    const currentObserverRef = observerRef.current;
+    if (currentObserverRef) {
+      observer.observe(currentObserverRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (currentObserverRef) {
+        observer.unobserve(currentObserverRef);
       }
     };
   }, [isLoading, hasMore]);
-
   return (
     <>
       <section className="pt10 pb90 bgc-f7">
