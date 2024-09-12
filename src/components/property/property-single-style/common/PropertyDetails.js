@@ -1,8 +1,7 @@
 import React from "react";
-import listings from "@/data/listings";
 
-const PropertyDetails = ({ id }) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
+const PropertyDetails = ({ data }) => {
+  if (!data) return null;
 
   const columns = [
     [
@@ -16,7 +15,7 @@ const PropertyDetails = ({ id }) => {
       },
       {
         label: "Property Size",
-        value: data.sqft,
+        value: `${data.sqft} sqft`,
       },
       {
         label: "Bathrooms",
@@ -34,7 +33,7 @@ const PropertyDetails = ({ id }) => {
       },
       {
         label: "Garage Size",
-        value: data.garageSize,
+        value: `${data.garageSize} sqft`,
       },
       {
         label: "Year Built",

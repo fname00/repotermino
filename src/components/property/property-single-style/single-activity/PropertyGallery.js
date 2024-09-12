@@ -2,11 +2,8 @@
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
 import Image from "next/image";
-import listings from "@/data/activity";
 
-const PropertyGallery = ({ id }) => {
-  const data = listings.find((elm) => elm.id == id) || listings[0];
-
+const PropertyGallery = ({ data }) => {
   // Ensure data.images is defined and is an array
   const images = Array.isArray(data.images) ? data.images : [data.image];
 

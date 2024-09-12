@@ -1,144 +1,64 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
-const BookingSidebar = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    note: "",
-    privacyPolicy: false,
-  });
+// Load Stripe outside the component's render to avoid recreating the Stripe object on every render.
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
+const BookingSidebar = ({ voucherDetails }) => {
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+
+    // Call your backend to create the Checkout session.
+    const response = await fetch("/api/checkout_sessions", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        priceId: voucherDetails.priceId,
+        quantity: voucherDetails.totalPersons,
+      }),
     });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add form submission logic here
-    console.log("Form submitted", formData);
+    const session = await response.json();
+
+    // Redirect to the Stripe checkout.
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
   };
 
   return (
-    <div>
-
-      <div className="box box-shadow box-padding">
-        <div>
-          <form
-            id="reservation-form"
-            className="form"
-            action=""
-            method="POST"
-            onSubmit={handleSubmit}
-          >
-            <input
-              type="hidden"
-              name="_token"
-              value=""
-            />
-            <div>
-              <h5>Price breakdown</h5>
-              <ul className="breakdown-checkout p-0 pt-3">
-                <span style={{ color: "#b4b4b4" }}>
-                  Card is empty. Check availability.
-                </span>
-              </ul>
-              <hr />
-              <ul className="breakdown-list subtotal hide">
-                <li>
-                  <div>
-                    <b>
-                      Subtotal (<span id="view_final_count"></span> items)
-                    </b>
-                  </div>
-                  <div>
-                    <b>
-                      <span id="view_final_price"></span> €{" "}
-                    </b>
-                    <span>All taxes and fees included</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-2">
-              <input
-                className="form-control required"
-                name="name"
-                type="text"
-                id="name-input"
-                placeholder="Name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-2">
-              <input
-                className="form-control required"
-                name="email"
-                type="email"
-                id="email-input"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-2">
-              <input
-                className="form-control"
-                name="phone"
-                type="text"
-                id="phone-input"
-                placeholder="Phone number"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-2">
-              <textarea
-                className="form-control"
-                name="note"
-                id="note-textarea"
-                placeholder="Note"
-                value={formData.note}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="checkbox-group mb-3">
-              <input
-                id="reservation-form-privacy-policy-checkbox"
-                type="checkbox"
-                name="privacyPolicy"
-                className="form-control required"
-                checked={formData.privacyPolicy}
-                onChange={handleChange}
-              />
-              <label htmlFor="reservation-form-privacy-policy-checkbox">
-                I agree to the{" "}
-                <a href="" target="_blank">
-                  processing of personal data
-                </a>
-              </label>
-            </div>
-
-
-            <input id="request-parameters" type="hidden" name="packages" value="[]" />
-            <button
-              id="res-submit"
-              type="submit"
-              className="btn"
-              style={{ background: "#26272b" }}
-            >
-              Book and pay
-            </button>
-          </form>
-        </div>
+    <div className="box box-shadow box-padding">
+      <div>
+        <h5>Price breakdown</h5>
+        <ul className="breakdown-checkout p-0 pt-3">
+          {voucherDetails ? (
+            <li>
+              <span>{voucherDetails.productName}</span>
+              <span>{voucherDetails.totalPersons} persons</span>
+              <span>${voucherDetails.totalPrice.toFixed(2)}</span>
+            </li>
+          ) : (
+            <span style={{ color: "#b4b4b4" }}>
+              Cart is empty. Check availability.
+            </span>
+          )}
+        </ul>
+        <hr />
+        <button
+          onClick={handleCheckout}
+          className="btn"
+          style={{ background: "#26272b" }}
+          disabled={!voucherDetails}
+        >
+          Book and pay
+        </button>
       </div>
     </div>
   );

@@ -1,92 +1,123 @@
-// "use client";
+"use client";
+import React, { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import DefaultHeader from "@/components/home/home-v2/Header";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import OverView from "@/components/property/property-single-style/single-activity/OverView";
-import PropertyAddress from "@/components/property/property-single-style/single-activity/PropertyAddress";
-import PropertyDetails from "@/components/property/property-single-style/single-activity/PropertyDetails";
-import PropertyFeaturesAminites from "@/components/property/property-single-style/single-activity/PropertyFeaturesAminites";
-import ProperytyDescriptions from "@/components/property/property-single-style/single-activity/ProperytyDescriptions";
-import PropertyGallery from "@/components/property/property-single-style/single-activity/PropertyGallery";
 import PropertyHeader from "@/components/property/property-single-style/single-activity/PropertyHeader";
-import OtherInArea from "@/components/property/property-single-style/single-activity/OtherInArea"; // Import CustomContact
-export const metadata = {
-  title: "Property Single V2 || Teneryfa.org.pl",
-};
+import PropertyGallery from "@/components/property/property-single-style/single-activity/PropertyGallery";
+import OverView from "@/components/property/property-single-style/single-activity/OverView";
+import ProperytyDescriptions from "@/components/property/property-single-style/single-activity/ProperytyDescriptions";
+import PropertyDetails from "@/components/property/property-single-style/single-activity/PropertyDetails";
+import PropertyAddress from "@/components/property/property-single-style/single-activity/PropertyAddress";
+import OtherInArea from "@/components/property/property-single-style/single-activity/OtherInArea";
 
-const SingleV2 = ({params}) => {
+const SingleV2 = ({ params }) => {
+  const [activityData, setActivityData] = useState(null);
+
+  useEffect(() => {
+    const fetchActivityData = async () => {
+      try {
+        const response = await fetch(`/api/activity/${params.id}`);
+        const data = await response.json();
+        setActivityData(data);
+      } catch (error) {
+        console.error("Failed to fetch activity data:", error);
+      }
+    };
+
+    fetchActivityData();
+  }, [params.id]);
+
+  if (!activityData) {
+    return (
+      <>
+        <DefaultHeader />
+        <MobileMenu />
+        <section className="pt30 pb0 bgc-white">
+          <div className="container">
+            <div className="row">
+              <Skeleton height={60} width="100%" />
+            </div>
+            <div className="row mb30 mt30">
+              <Skeleton height={400} width="100%" />
+            </div>
+            <div className="row mt30">
+              <Skeleton height={200} width="100%" />
+            </div>
+          </div>
+        </section>
+        <section className="pt60 pb90 bgc-f7">
+          <div className="container">
+            <div className="row wrap">
+              <div className="col-lg-8">
+                <Skeleton height={50} width="100%" />
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <Skeleton height={50} width="100%" />
+                  <Skeleton count={3} />
+                </div>
+                <div id="custom-background-input" className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <Skeleton height={50} width="100%" />
+                  <Skeleton count={3} />
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="column">
+                  <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
+                    <Skeleton height={200} width="100%" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="footer-style1 pt60 pb-0">
+          <Footer />
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
-      {/* Main Header Nav */}
       <DefaultHeader />
-      {/* End Main Header Nav */}
-
-      {/* Mobile Nav  */}
       <MobileMenu />
-      {/* End Mobile Nav  */}
-
-      {/* Property All Single V1 */}
       <section className="pt30 pb0 bgc-white">
         <div className="container">
           <div className="row">
-            <PropertyHeader id={params.id} />
+            <PropertyHeader data={activityData} />
           </div>
-          {/* End .row */}
-
           <div className="row mb30 mt30">
-            <PropertyGallery id={params.id} />
+            <PropertyGallery data={activityData} />
           </div>
-          {/* End .row */}
-
           <div className="row mt30">
-            <OverView id={params.id} />
+            <OverView data={activityData} />
           </div>
-          {/* End .row */}
         </div>
-        {/* End .container */}
       </section>
-      {/* End Property All Single V1  */}
-      
       <section className="pt60 pb90 bgc-f7">
         <div className="container">
           <div className="row wrap">
             <div className="col-lg-8">
-              
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">About activity</h4>
-                <ProperytyDescriptions id={params.id} />
-                {/* End property description */}
+                <ProperytyDescriptions data={activityData} />
                 <div className="row">
-                  <PropertyDetails id={params.id}/>
+                  <PropertyDetails data={activityData} />
                 </div>
               </div>
-              {/* End .ps-widget */}
-
               <div id="custom-background-input" className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <div className="row">
-                  <PropertyAddress id={params.id} />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-            </div>
-            {/* End .col-8 */}
-            <div className="col-lg-4">
-              <div className="column">
-                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <OtherInArea id={params.id}/>
+                  <PropertyAddress data={activityData} />
                 </div>
               </div>
             </div>
           </div>
-          {/* End .row */}
         </div>
       </section>
-
-      {/* Start Our Footer */}
       <section className="footer-style1 pt60 pb-0">
         <Footer />
       </section>
-      {/* End Our Footer */}
     </>
   );
 };

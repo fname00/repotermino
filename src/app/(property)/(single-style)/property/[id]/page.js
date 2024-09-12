@@ -1,121 +1,138 @@
-// "use client";
+"use client";
+import { useState, useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
 import DefaultHeader from "@/components/home/home-v2/Header";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import EnergyClass from "@/components/property/property-single-style/common/EnergyClass";
-import FloorPlans from "@/components/property/property-single-style/common/FloorPlans";
-import HomeValueChart from "@/components/property/property-single-style/common/HomeValueChart";
-import InfoWithForm from "@/components/property/property-single-style/common/more-info";
-import NearbySimilarProperty from "@/components/property/property-single-style/common/NearbySimilarProperty";
-import OverView from "@/components/property/property-single-style/single-v2/OverView";
-import PropertyAddress from "@/components/property/property-single-style/common/PropertyAddress";
-import PropertyDetails from "@/components/property/property-single-style/common/PropertyDetails";
-import PropertyFeaturesAminites from "@/components/property/property-single-style/common/PropertyFeaturesAminites";
-import PropertyNearby from "@/components/property/property-single-style/common/PropertyNearby";
-import PropertyVideo from "@/components/property/property-single-style/common/PropertyVideo";
-import PropertyViews from "@/components/property/property-single-style/common/property-view";
-import ProperytyDescriptions from "@/components/property/property-single-style/common/ProperytyDescriptions";
-import ReviewBoxForm from "@/components/property/property-single-style/common/ReviewBoxForm";
-import VirtualTour360 from "@/components/property/property-single-style/common/VirtualTour360";
-import AllReviews from "@/components/property/property-single-style/common/reviews";
-import ContactWithAgent from "@/components/property/property-single-style/single-v2/ContactWithAgent";
-import PropertyGallery from "@/components/property/property-single-style/single-v2/PropertyGallery";
-import MortgageCalculator from "@/components/property/property-single-style/common/MortgageCalculator";
-import WalkScore from "@/components/property/property-single-style/common/WalkScore";
 import PropertyHeader from "@/components/property/property-single-style/single-v2/PropertyHeader";
-import ScheduleForm from "@/components/property/property-single-style/single-v2/ScheduleForm";
-import CustomContact from "@/components/property/property-single-style/common/CustomContact"; // Import CustomContact
-import OtherInArea from "@/components/property/property-single-style/common/OtherInArea"; // Import CustomContact
+import PropertyGallery from "@/components/property/property-single-style/single-v2/PropertyGallery";
+import OverView from "@/components/property/property-single-style/single-v2/OverView";
+import CustomContact from "@/components/property/property-single-style/common/CustomContact";
+import PropertyDetails from "@/components/property/property-single-style/common/PropertyDetails";
+import PropertyAddress from "@/components/property/property-single-style/common/PropertyAddress";
+import PropertyFeaturesAminites from "@/components/property/property-single-style/common/PropertyFeaturesAminites";
+import OtherInArea from "@/components/property/property-single-style/common/OtherInArea";
 
-export const metadata = {
-  title: "Property Single V2 || Teneryfa.org.pl",
-};
+const SingleV2 = ({ params }) => {
+  const [listingData, setListingData] = useState(null);
 
-const SingleV2 = ({params}) => {
+  useEffect(() => {
+    const fetchListingData = async () => {
+      try {
+        const response = await fetch(`/api/listing/${params.id}`);
+        const data = await response.json();
+        setListingData(data);
+      } catch (error) {
+        console.error("Failed to fetch listing data:", error);
+      }
+    };
+
+    fetchListingData();
+  }, [params.id]);
+
+  if (!listingData) {
+    return (
+      <>
+        <DefaultHeader />
+        <MobileMenu />
+        <section className="pt30 pb0 bgc-white">
+          <div className="container">
+            <div className="row">
+              <Skeleton height={60} width={600} />
+            </div>
+            <div className="row mb30 mt0">
+              <Skeleton height={400} />
+            </div>
+            <div className="row mt30">
+              <Skeleton height={200} />
+            </div>
+          </div>
+        </section>
+        <section className="pt60 pb90 bgc-f7">
+          <div className="container">
+            <div className="row wrap">
+              <div className="col-lg-8">
+                <Skeleton height={100} />
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <Skeleton height={50} />
+                  <Skeleton count={3} />
+                </div>
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <Skeleton height={50} />
+                  <Skeleton count={3} />
+                </div>
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <Skeleton height={50} />
+                  <Skeleton count={3} />
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="column">
+                  <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
+                    <Skeleton height={200} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="footer-style1 pt60 pb-0">
+          <Footer />
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
-      {/* Main Header Nav */}
       <DefaultHeader />
-      {/* End Main Header Nav */}
-
-      {/* Mobile Nav  */}
       <MobileMenu />
-      {/* End Mobile Nav  */}
-
-      {/* Property All Single V1 */}
       <section className="pt30 pb0 bgc-white">
         <div className="container">
           <div className="row">
-            <PropertyHeader id={params.id} />
+            <PropertyHeader data={listingData} />
           </div>
-          {/* End .row */}
-
           <div className="row mb30 mt0">
-            <PropertyGallery id={params.id} />
+            <PropertyGallery data={listingData} />
           </div>
-          {/* End .row */}
-
           <div className="row mt30">
-            <OverView id={params.id} />
+            <OverView data={listingData} />
           </div>
-          {/* End .row */}
         </div>
-        {/* End .container */}
       </section>
-      {/* End Property All Single V1  */}
-      
       <section className="pt60 pb90 bgc-f7">
         <div className="container">
           <div className="row wrap">
             <div className="col-lg-8">
-              <CustomContact id={params.id} /> {/* Use CustomContact */}
+              <CustomContact data={listingData} />
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Property Description</h4>
-                <ProperytyDescriptions id={params.id} />
-                {/* End property description */}
-
+                <p>{listingData.description}</p>
                 <h4 className="title fz17 mb30 mt50">Property Details</h4>
-                <div className="row">
-                  <PropertyDetails id={params.id}/>
-                </div>
+                <PropertyDetails data={listingData} />
               </div>
-              {/* End .ps-widget */}
-
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30 mt30">Address</h4>
-                <div className="row">
-                  <PropertyAddress id={params.id} />
-                </div>
+                <PropertyAddress data={listingData} />
               </div>
-              {/* End .ps-widget */}
-
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Features &amp; Amenities</h4>
-                <div className="row">
-                  <PropertyFeaturesAminites id={params.id} />
-                </div>
+                <PropertyFeaturesAminites data={listingData} />
               </div>
-              {/* End .ps-widget */}
             </div>
-            {/* End .col-8 */}
-
             <div className="col-lg-4">
               <div className="column">
                 <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <OtherInArea id={params.id}/>
+                  <OtherInArea data={listingData} />
                 </div>
               </div>
             </div>
           </div>
-          {/* End .row */}
         </div>
       </section>
-
-      {/* Start Our Footer */}
       <section className="footer-style1 pt60 pb-0">
         <Footer />
       </section>
-      {/* End Our Footer */}
     </>
   );
 };

@@ -1,8 +1,6 @@
 import React from "react";
-import listings from "@/data/activity";
 
-const PropertyDescriptions = ({ id }) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
+const PropertyDescriptions = ({ data }) => {
   const description = data.description || "";
 
   const isLongDescription = description.length > 400;

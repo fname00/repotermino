@@ -1,18 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+
+// Load Stripe outside the component's render to avoid recreating the Stripe object on every render.
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const BookingForm = () => {
   const [adultCount, setAdultCount] = useState(1);
   const [youthCount, setYouthCount] = useState(0);
   const [infantCount, setInfantCount] = useState(0);
+  const [maxPersons, setMaxPersons] = useState(null);
+  const [minAdults, setMinAdults] = useState(null);
+  const [kidsAllowed, setKidsAllowed] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [priceId, setPriceId] = useState(null);
+  const productName = "Przelot samolotem";
 
-  const adultPrice = 60;
-  const youthPrice = 45;
-  const infantPrice = 40;
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await fetch(`/api/product/${encodeURIComponent(productName)}`);
+        if (!response.ok) {
+          throw new Error('Product not found');
+        }
+        const data = await response.json();
+
+        console.log('Product data received from API:', data);
+
+        // Extract and set the relevant metadata
+        setMinAdults(Number(data.metadata.min_adult));
+        setMaxPersons(Number(data.metadata.max_person));
+        setKidsAllowed(data.metadata.kids === 'allowed');
+        setPrice(data.price);
+        setPriceId(data.default_price)
+        
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchProductData();
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const handleIncrement = (setter, count) => {
-    if (adultCount + youthCount + infantCount < 5) {
+    if (adultCount + youthCount + infantCount < maxPersons) {
       setter(count + 1);
     }
   };
@@ -24,17 +59,62 @@ const BookingForm = () => {
   };
 
   const totalPersons = adultCount + youthCount + infantCount;
-  const totalPrice = adultCount * adultPrice + youthCount * youthPrice + infantCount * infantPrice;
+  const totalPrice = (adultCount + youthCount + infantCount) * (price || 0); // Use the price from the API
+  const isAvailable =
+    totalPersons >= minAdults &&
+    totalPersons <= maxPersons &&
+    adultCount >= minAdults &&
+    (kidsAllowed || (youthCount === 0 && infantCount === 0));
 
-  const isAvailable = totalPersons >= 2 && totalPersons <= 5 && adultCount >= 1;
+  const handleCheckout = async () => {
+    if (price) {
+      const stripe = await stripePromise;
+
+      // Call your backend to create the Checkout session.
+      const response = await fetch("/api/checkout_sessions", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          priceId: priceId, // Send the price ID from the API
+          quantity: totalPersons, // Pass the number of products
+        }),
+      });
+
+      const session = await response.json();
+
+      // Redirect to the Stripe checkout.
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    }
+  };
+
+  console.log('Form state:', {
+    adultCount,
+    youthCount,
+    infantCount,
+    totalPersons,
+    totalPrice,
+    minAdults,
+    maxPersons,
+    kidsAllowed,
+    isAvailable,
+    loading
+  });
 
   return (
     <div className="row my-3">
       <div className="col-12">
         <h3 className="title font-white">Booking</h3>
-        <p className="title font-white">Select number of poeple and add voucher to cart.</p>
+        <p className="title font-white">Select number of people and add voucher to cart.</p>
         <form className="box box-shadow activity-select">
-          <div className="input-group ">
+          <div className="input-group">
             <label className="input flex param-per-adult custom-input-number">
               <span><b>Adult</b> (Age 12-99)</span>
               <label className="input input-number">
@@ -52,7 +132,7 @@ const BookingForm = () => {
               </label>
             </label>
           </div>
-          <div className="input-group ">
+          <div className="input-group">
             <label className="input flex param-per-youth custom-input-number">
               <span><b>Youth</b> (Age 6-11)</span>
               <label className="input input-number">
@@ -89,15 +169,17 @@ const BookingForm = () => {
             </label>
           </div>
           <div className="total-price font-white custom-total-price">
-            <p><strong>Total Price: ${totalPrice}</strong></p>
+            <p><strong>Total Price: ${totalPrice.toFixed(2)}</strong></p>
           </div>
-          {isAvailable ? (
-            <button id="submit-activity-select-btn" className="btn" type="button">
-              <strong>Add Voucher</strong>
-            </button>
-          ) : (
-            <p className="text-danger font-white"><strong>Add at least 2 people</strong></p>
-          )}
+          <button
+            id="submit-activity-select-btn"
+            className={`btn ${!loading && isAvailable ? "" : "inactive-custom-button"}`}
+            type="button"
+            onClick={handleCheckout} // Add the checkout handler
+            disabled={!loading && !isAvailable}
+          >
+            <strong>Book and Pay</strong>
+          </button>
         </form>
       </div>
       <div id="packages-wrapper" className="col-12"></div>

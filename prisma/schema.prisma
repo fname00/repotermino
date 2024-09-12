@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id           Int      @id @default(autoincrement())
+  image        String
+  images       String[] // Lista URLi obrazków
+  title        String
+  city         String
+  location     String
+  address      String
+  zipCode      String
+  area         String
+  country      String
+  lat          Float
+  long         Float
+  clientPhone  String
+  bed          Int
+  bath         Int
+  garage       Int
+  garageSize   Int
+  sqft         Int
+  propertyType String
+  yearBuilding Int
+  price        String // Można zmienić na Decimal, ale w tym przypadku jest w formacie tekstowym
+  forRent      Boolean
+  tags         String[] // Lista tagów
+  features     String[] // Lista cech
+  description  String
+  dateAdd      DateTime @default(now())
+  holiday      Boolean  @default(false)
+}
+
+model Activity {
+  id           Int      @id @default(autoincrement())
+  image        String
+  images       String[]
+  title        String
+  city         String
+  location     String
+  duration     String
+  price        String
+  discount     String?  // Nullable field for discount
+  forRent      Boolean
+  tags         String[]
+  cancellation String
+  featured     Boolean
+  availability String
+  description  String
+  dateAdd      DateTime @default(now()) // New field to track when the activity was added
+}

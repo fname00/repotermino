@@ -1,9 +1,6 @@
-import listings from "@/data/activity";
 import React from "react";
 
-
-const OverView = ({id}) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
+const OverView = ({ data }) => {
   const overviewData = [
     {
       icon: "flaticon-play",
@@ -30,7 +27,8 @@ const OverView = ({id}) => {
       label: "Guide",
       value: "Included",
     },
-  ]  
+  ];
+
   return (
     <>
       {overviewData.map((item, index) => (

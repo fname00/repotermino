@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Activity" ADD COLUMN     "dateAdd" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "Listing" ADD COLUMN     "holiday" BOOLEAN NOT NULL DEFAULT false;

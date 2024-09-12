@@ -1,7 +1,6 @@
-import listings from "@/data/listings";
 import React from "react";
 
-// Funkcja obliczająca ile czasu temu dodano post
+// Funkcja obliczająca, ile czasu temu dodano post
 const getTimeAgo = (dateAdd) => {
   const currentDate = new Date();
   const postDate = new Date(dateAdd);
@@ -20,10 +19,11 @@ const getTimeAgo = (dateAdd) => {
   }
 };
 
-const PropertyHeader = ({ id }) => {
-  // Pobieranie danych na podstawie id
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
-  
+const PropertyHeader = ({ data }) => {
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
   // Obliczanie, ile czasu temu został dodany post
   const timeAgo = getTimeAgo(data.dateAdd);
 
@@ -34,14 +34,14 @@ const PropertyHeader = ({ id }) => {
           <h2 className="sp-lg-title">{data.title}</h2>
           <div className="pd-meta mb15 d-md-flex align-items-center">
             <p className="text fz15 mb-0 bdrr1 pr10 bdrrn-sm">
-              {data.location} 
+              {data.location}
             </p>
             <a
               className="ff-heading bdrr1  text-thm fz15 pr10 ml10 ml0-sm bdrrn-sm"
               href="#"
             >
               <i className="fas fa-circle fz10 pe-2" />
-              For {data.forRent ? 'rent' : 'sale'}
+              For {data.forRent ? "rent" : "sale"}
             </a>
             <a
               className="ff-heading bdrr1 fz15 pr10 ml10 ml0-sm bdrrn-sm"
@@ -55,7 +55,6 @@ const PropertyHeader = ({ id }) => {
               {data.id}
             </a>
           </div>
-
         </div>
       </div>
       {/* End .col-lg--8 */}
@@ -69,7 +68,9 @@ const PropertyHeader = ({ id }) => {
               </a>
             </div>
             <h3 className="price mb-0">{data.price}</h3>
-            <p className="text space fz15">${(Number(data.price.split('$')[1].split(',').join('')) / data.sqft).toFixed(2)}/sq ft</p>
+            <p className="text space fz15">
+              ${data.price && data.sqft ? (Number(data.price.split('$')[1].split(',').join('')) / data.sqft).toFixed(2) : 'N/A'}/sq ft
+            </p>
           </div>
         </div>
       </div>

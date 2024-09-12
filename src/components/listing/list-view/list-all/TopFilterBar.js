@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 const TopFilterBar = ({
@@ -7,17 +5,17 @@ const TopFilterBar = ({
   colstyle,
   setColstyle,
   pageContentTrac,
+  totalListings,
 }) => {
   return (
     <>
       <div className="col-sm-6">
         <div className="text-center text-sm-start">
           <p className="pagination_page_count mb-0">
-            Showing {pageContentTrac[0]}–
-            {pageContentTrac[2] < pageContentTrac[1]
-              ? pageContentTrac[2]
-              : pageContentTrac[1]}{" "}
-            of {pageContentTrac[2]} results
+            Showing {pageContentTrac[1] < totalListings
+              ? pageContentTrac[1]
+              : totalListings}{" "}
+            of {totalListings} results
           </p>
         </div>
       </div>

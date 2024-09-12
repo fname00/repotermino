@@ -1,21 +1,31 @@
-'use client';
+"use client";
 
-import listings from "@/data/activity"; // Zmiana importu na activity.js
 import React, { useState, useEffect } from 'react';
 import AdvanceFilterModal from '@/components/common/advance-filter-two';
 import TopFilterBar from './TopFilterBar';
 import FeaturedListings from './FeatuerdListings';
 import PaginationTwo from "../../PaginationTwo";
 
-export default function ProperteyFiltering() {
+export default function PropertyFiltering() {
   const [pageNumber, setPageNumber] = useState(1);
   const [colstyle, setColstyle] = useState(false);
   const [pageItems, setPageItems] = useState([]);
   const [pageContentTrac, setPageContentTrac] = useState([]);
 
   useEffect(() => {
-    setPageItems(listings.slice((pageNumber - 1) * 9, pageNumber * 9));
-    setPageContentTrac([((pageNumber - 1) * 9) + 1, pageNumber * 9, listings.length]);
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/activity');  // Adjust your API endpoint as necessary
+        const listings = await response.json();
+
+        setPageItems(listings.slice((pageNumber - 1) * 9, pageNumber * 9));
+        setPageContentTrac([((pageNumber - 1) * 9) + 1, pageNumber * 9, listings.length]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
   }, [pageNumber]);
 
   return (
@@ -27,7 +37,7 @@ export default function ProperteyFiltering() {
         {/* End .row */}
 
         <div className="row">
-          <PaginationTwo pageCapacity={9} data={listings} pageNumber={pageNumber} setPageNumber={setPageNumber} />
+          <PaginationTwo pageCapacity={9} data={pageItems} pageNumber={pageNumber} setPageNumber={setPageNumber} />
         </div>
         {/* End .row */}
       </div>
