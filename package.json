@@ -3,10 +3,10 @@
   "version": "1.7.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build && prisma generate",
+    "dev": "next dev",
     "start": "next start",
-    "lint": "next lint"
+    "prisma": "prisma"
   },
   "dependencies": {
     "@babel/core": "7.0.0",
