@@ -2,7 +2,7 @@ import DefaultHeader from "@/components/home/home-v2/Header";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
 import PropertyFilteringList from "@/components/listing/list-view/list-all/PropertyFilteringList";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata = {
   title: "Buy || Teneryfa.org.pl",
@@ -20,8 +20,10 @@ const ListV1 = () => {
       {/* End Mobile Nav  */}
 
       {/* Property Filtering */}
-      <PropertyFilteringList defaultStatus="Buy" />
-     
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <PropertyFilteringList defaultStatus="Buy" />
+      </Suspense>
       {/* Property Filtering */}
 
       {/* Start Our Footer */}
