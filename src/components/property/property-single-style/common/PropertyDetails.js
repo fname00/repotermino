@@ -1,51 +1,56 @@
+'use client';
+
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const PropertyDetails = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   if (!data) return null;
 
   const columns = [
     [
       {
-        label: "Property ID",
+        label: t('propertyID'), // Translate the label
         value: data.id,
       },
       {
-        label: "Price",
+        label: t('price'), // Translate the label
         value: data.price,
       },
       {
-        label: "Property Size",
+        label: t('propertySize'), // Translate the label
         value: `${data.sqft} sqft`,
       },
       {
-        label: "Bathrooms",
+        label: t('bathrooms'), // Translate the label
         value: data.bath,
       },
       {
-        label: "Bedrooms",
+        label: t('bedrooms'), // Translate the label
         value: data.bed,
       },
     ],
     [
       {
-        label: "Garage",
+        label: t('garage'), // Translate the label
         value: data.garage,
       },
       {
-        label: "Garage Size",
+        label: t('garageSize'), // Translate the label
         value: `${data.garageSize} sqft`,
       },
       {
-        label: "Year Built",
+        label: t('yearBuilt'), // Translate the label
         value: data.yearBuilding,
       },
       {
-        label: "Property Type",
+        label: t('propertyType'), // Translate the label
         value: data.propertyType,
       },
       {
-        label: "Property Status",
-        value: data.forRent ? "For Rent" : "For Sale",
+        label: t('propertyStatus'), // Translate the label
+        value: data.forRent ? t('forRent') : t('forSale'), // Translate the value based on condition
       },
     ],
   ];

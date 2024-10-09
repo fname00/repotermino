@@ -2,13 +2,18 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react"; // Importowanie funkcji signOut
 
 const SidebarDashboard = () => {
   const pathname = usePathname();
 
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/login" }); // Wylogowanie i przekierowanie na stronę logowania
+  };
+
   const sidebarItems = [
     {
-      title: "MAIN",
+      title: "PANEL GŁÓWNY",
       items: [
         {
           href: "/dashboard-home",
@@ -16,59 +21,30 @@ const SidebarDashboard = () => {
           text: "Dashboard",
         },
         {
-          href: "/dashboard-message",
-          icon: "flaticon-chat-1",
-          text: "Message",
-        },
-      ],
-    },
-    {
-      title: "MANAGE LISTINGS",
-      items: [
-        {
           href: "/dashboard-add-property",
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Dodaj nową nieruchomość",
+        },
+        {
+          href: "/dashboard-add-activity",
+          icon: "flaticon-new-tab",
+          text: "Dodaj nową aktywność",
         },
         {
           href: "/dashboard-my-properties",
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "Lista nieruchomości",
         },
         {
-          href: "/dashboard-my-favourites",
-          icon: "flaticon-like",
-          text: "My Favorites",
+          href: "/dashboard-my-activities",
+          icon: "flaticon-home",
+          text: "Lista aktywności",
         },
         {
-          href: "/dashboard-saved-search",
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-        },
-        {
-          href: "/dashboard-reviews",
-          icon: "flaticon-review",
-          text: "Reviews",
-        },
-      ],
-    },
-    {
-      title: "MANAGE ACCOUNT",
-      items: [
-        {
-          href: "/dashboard-my-package",
-          icon: "flaticon-protection",
-          text: "My Package",
-        },
-        {
-          href: "/dashboard-my-profile",
-          icon: "flaticon-user",
-          text: "My Profile",
-        },
-        {
-          href: "/login",
+          href: "#", // Ustawienie href na "#" ponieważ używamy funkcji onClick do wylogowania
           icon: "flaticon-logout",
-          text: "Logout",
+          text: "Wyloguj",
+          onClick: handleLogout, // Dodanie obsługi wylogowania
         },
       ],
     },
@@ -90,8 +66,9 @@ const SidebarDashboard = () => {
               <div key={itemIndex} className="sidebar_list_item">
                 <Link
                   href={item.href}
-                  className={`items-center   ${
-                    pathname == item.href ? "-is-active" : ""
+                  onClick={item.onClick} // Dodanie funkcji onClick dla pozycji wylogowania
+                  className={`items-center ${
+                    pathname === item.href ? "-is-active" : ""
                   } `}
                 >
                   <i className={`${item.icon} mr15`} />

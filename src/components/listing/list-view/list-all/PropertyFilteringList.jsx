@@ -6,6 +6,7 @@ import TopFilterBar from "./TopFilterBar";
 import FeaturedListings from "./FeaturedListings";
 import debounce from "lodash/debounce";
 import { useRouter, useSearchParams } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const router = useRouter();
@@ -33,6 +34,24 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // State to manage locale
+  const [locale, setLocale] = useState(Cookies.get('NEXT_LOCALE') || router.locale);
+
+  useEffect(() => {
+    const handleLocaleChange = () => {
+      const newLocale = Cookies.get('NEXT_LOCALE');
+      if (newLocale && newLocale !== locale) {
+        setLocale(newLocale); // Update the locale state
+      }
+    };
+
+    // Listen for changes to the locale cookie
+    window.addEventListener('cookiechange', handleLocaleChange);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener('cookiechange', handleLocaleChange);
+  }, [locale]);
+
   useEffect(() => {
     const urlSearchQuery = searchParams.get('searchQuery') || '';
     setSearchQuery(urlSearchQuery);
@@ -58,7 +77,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `/api/listings?pageNumber=${pageNumber}&searchQuery=${searchQuery}&listingStatus=${listingStatus}&propertyTypes=${propertyTypes}&priceRange=${priceRange}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location=${location}&squareFeet=${squareFeet}&yearBuild=${yearBuild}&categories=${categories}&currentSortingOption=${currentSortingOption}`
+          `/api/listings?locale=${locale}&pageNumber=${pageNumber}&searchQuery=${searchQuery}&listingStatus=${listingStatus}&propertyTypes=${propertyTypes}&priceRange=${priceRange}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location=${location}&squareFeet=${squareFeet}&yearBuild=${yearBuild}&categories=${categories}&currentSortingOption=${currentSortingOption}`
         );
         const data = await response.json();
 
@@ -89,6 +108,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       yearBuild,
       categories,
       currentSortingOption,
+      locale // Include locale as a dependency
     ]
   );
 

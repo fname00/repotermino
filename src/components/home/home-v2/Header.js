@@ -8,9 +8,28 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useRouter, usePathname } from 'next/navigation'; // Import useRouter and usePathname for navigation
+import i18n from 'i18next'; // Import i18n instance
+import Cookies from 'js-cookie'; // Import js-cookie to handle cookies
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
+  const [currentLocale, setCurrentLocale] = useState(i18n.language); // Add state to keep track of the current language
+  const router = useRouter(); // Initialize useRouter hook
+  const pathname = usePathname(); // Get the current pathname using usePathname
+  const { locale } = router; // Get the current locale from the router
+
+  useEffect(() => {
+    // Check for a saved language in cookies and set it on initial load
+    const savedLocale = Cookies.get('NEXT_LOCALE'); // Get the saved locale from cookies
+    if (savedLocale && savedLocale !== locale) {
+      i18n.changeLanguage(savedLocale); // Change the language in i18next
+      setCurrentLocale(savedLocale); // Update the state to trigger a re-render
+      if (pathname) { // Ensure pathname is defined before using it
+        router.push(pathname, pathname, { locale: savedLocale }); // Update the route to use the saved locale
+      }
+    }
+  }, [locale, pathname]); // Add locale and pathname as dependencies
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -27,16 +46,31 @@ const Header = () => {
     };
   }, []);
 
+  // Define language options for the select component
   const languageOptions = [
-    { value: "en", label: <><img src="/images/gb.svg" alt="English=" width="40" /></> },
-    { value: "es", label: <><img src="/images/es.svg" alt="Spanish" width="40" /></> },
-    { value: "pl", label: <><img src="/images/pl.svg" alt="Polish" width="40" /></> },
+    { value: "en", label: <><img src="/images/gb.svg" alt="English" width="20" /> English</> },
+    { value: "es", label: <><img src="/images/es.svg" alt="Spanish" width="20" /> Spanish</> },
+    { value: "pl", label: <><img src="/images/pl.svg" alt="Polish" width="20" /> Polish</> },
   ];
+
+  // Handle language change
+  const handleLanguageChange = (selectedOption) => {
+    const newLocale = selectedOption.value; // Get the selected language code
+
+    if (newLocale !== locale) { // Only change if the new locale is different
+      Cookies.set('NEXT_LOCALE', newLocale, { expires: 365 }); // Save the new locale in a cookie for 365 days
+      i18n.changeLanguage(newLocale); // Change language in i18next
+      setCurrentLocale(newLocale); // Update the state to trigger a re-render
+      if (pathname) { // Ensure pathname is defined before using it
+        router.push(pathname, pathname, { locale: newLocale }); // Push the new locale to the router
+      }
+    }
+  };
 
   return (
     <>
       <header
-        className={`header-nav nav-homepage-style at-home2  sticky main-menu custom-nav${
+        className={`header-nav nav-homepage-style at-home2 sticky main-menu custom-nav${
           navbar ? "" : ""
         }`}
       >
@@ -86,8 +120,9 @@ const Header = () => {
                     <Select
                       options={languageOptions}
                       className="language-selector"
-                      defaultValue={languageOptions[0]}
+                      value={languageOptions.find(option => option.value === currentLocale)} // Use state for the default value
                       isSearchable={false}
+                      onChange={handleLanguageChange} // Handle change event
                     />
                   </div>
                 </div>

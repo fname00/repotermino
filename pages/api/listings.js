@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   const {
+    locale = 'en', // Default locale is English
     listingStatus = "All",
     propertyTypes = [],
     priceRange = [0, 10000000],
@@ -24,11 +25,28 @@ export default async function handler(req, res) {
     // Fetch listings from the database
     let listings = await prisma.listing.findMany();
 
+    // Translate or filter listings based on locale
+    listings = listings.map(listing => {
+      if (locale === 'pl') {
+        // Transform fields for Polish locale
+        listing.title = listing.title_pl; // Assume title_pl exists in the database
+        listing.description = listing.description_pl; // Assume description_pl exists
+        // Add more fields as necessary
+      } else if (locale === 'es') {
+        // Transform fields for Spanish locale
+        listing.title = listing.title_es; // Assume title_es exists in the database
+        listing.description = listing.description_es; // Assume description_es exists
+        // Add more fields as necessary
+      }
+      // Return the listing with localized content
+      return listing;
+    });
+
     // Apply filters
     if (listingStatus !== "All") {
-      listings = listings.filter(elm => 
-        listingStatus === "Holiday" ? elm.holiday : 
-        (listingStatus === "Buy" ? !elm.forRent : elm.forRent)
+      listings = listings.filter(elm =>
+        listingStatus === "Holiday" ? elm.holiday :
+          (listingStatus === "Buy" ? !elm.forRent : elm.forRent)
       );
     }
     if (propertyTypes.length > 0) {

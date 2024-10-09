@@ -1,27 +1,28 @@
-'use client'
+'use client';
 
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
-const OtherFeatures = ({filterFunctions}) => {
+const OtherFeatures = ({ filterFunctions }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   const featuresLeftColumn = [
-    { label: "Attic" },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
-    { label: "TV Cable" },
-    { label: "Dryer" },
+    { label: t('attic') },
+    { label: t('basketballCourt'), defaultChecked: true },
+    { label: t('airConditioning'), defaultChecked: true },
+    { label: t('lawn'), defaultChecked: true },
+    { label: t('tvCable') },
+    { label: t('dryer') },
   ];
 
   const featuresRightColumn = [
-    { label: "Outdoor Shower" },
-    { label: "Washer" },
-    { label: "Lake view" },
-    { label: "Wine cellar" },
-    { label: "Front yard" },
-    { label: "Refrigerator" },
+    { label: t('outdoorShower') },
+    { label: t('washer') },
+    { label: t('lakeView') },
+    { label: t('wineCellar') },
+    { label: t('frontYard') },
+    { label: t('refrigerator') },
   ];
-
-
 
   return (
     <div className="row">
@@ -30,8 +31,11 @@ const OtherFeatures = ({filterFunctions}) => {
           {featuresLeftColumn.map((feature, index) => (
             <label className="custom_checkbox" key={index}>
               {feature.label}
-              <input checked={filterFunctions?.categories.includes(feature.label)}
-             type="checkbox" onChange={()=>filterFunctions?.handlecategories(feature.label)}  />
+              <input
+                checked={filterFunctions?.categories.includes(feature.label)}
+                type="checkbox"
+                onChange={() => filterFunctions?.handlecategories(feature.label)}
+              />
               <span className="checkmark" />
             </label>
           ))}
@@ -44,8 +48,11 @@ const OtherFeatures = ({filterFunctions}) => {
           {featuresRightColumn.map((feature, index) => (
             <label className="custom_checkbox" key={index}>
               {feature.label}
-              
-              <input type="checkbox" onChange={()=>filterFunctions?.handlecategories(feature.label)}  defaultChecked={feature.defaultChecked} />
+              <input
+                type="checkbox"
+                onChange={() => filterFunctions?.handlecategories(feature.label)}
+                defaultChecked={feature.defaultChecked}
+              />
               <span className="checkmark" />
             </label>
           ))}

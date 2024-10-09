@@ -1,15 +1,17 @@
-"use client";
+'use client';
 
 import React, { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 import Link from "next/link";
 
 const Funfact = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   const funFacts = [
-    { number: 400, text: "Houses" },
-    { number: 200, text: "Rentals" },
-    { number: 1000, text: "Customers" },
+    { number: 400, text: t("houses") },
+    { number: 200, text: t("rentals") },
+    { number: 1000, text: t("customers") },
     // Add more fun facts if needed
   ];
 
@@ -28,7 +30,7 @@ const Funfact = () => {
         </div>
       ))}
       <Link href="#" className="ud-btn btn-thm">
-        See More
+        {t("seeMore")}
         <i className="fal fa-arrow-right-long" />
       </Link>
     </div>

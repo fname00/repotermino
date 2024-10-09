@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import DefaultHeader from "@/components/home/home-v2/Header";
@@ -11,14 +12,21 @@ import ProperytyDescriptions from "@/components/property/property-single-style/s
 import PropertyDetails from "@/components/property/property-single-style/single-activity/PropertyDetails";
 import PropertyAddress from "@/components/property/property-single-style/single-activity/PropertyAddress";
 import OtherInArea from "@/components/property/property-single-style/single-activity/OtherInArea";
+import Cookies from 'js-cookie'; // Import js-cookie for managing cookies
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const SingleV2 = ({ params }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const [activityData, setActivityData] = useState(null);
+
+  // Retrieve the locale from cookies, or fall back to a default if not set
+  const locale = Cookies.get('NEXT_LOCALE') || 'en';
 
   useEffect(() => {
     const fetchActivityData = async () => {
       try {
-        const response = await fetch(`/api/activity/${params.id}`);
+        // Include locale in the API request
+        const response = await fetch(`/api/activity/${params.id}?locale=${locale}`);
         const data = await response.json();
         setActivityData(data);
       } catch (error) {
@@ -27,7 +35,7 @@ const SingleV2 = ({ params }) => {
     };
 
     fetchActivityData();
-  }, [params.id]);
+  }, [params.id, locale]); // Re-fetch data when params.id or locale changes
 
   if (!activityData) {
     return (
@@ -100,7 +108,7 @@ const SingleV2 = ({ params }) => {
           <div className="row wrap">
             <div className="col-lg-8">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">About activity</h4>
+                <h4 className="title fz17 mb30">{t('aboutActivity')}</h4>
                 <ProperytyDescriptions data={activityData} />
                 <div className="row">
                   <PropertyDetails data={activityData} />

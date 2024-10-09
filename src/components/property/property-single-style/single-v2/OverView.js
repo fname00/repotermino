@@ -1,38 +1,43 @@
+'use client';
+
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const OverView = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   const overviewData = [
     {
       icon: "flaticon-bed",
-      label: "Bedroom",
+      label: t("bedroom"), // Use translation for label
       value: data.bed,
     },
     {
       icon: "flaticon-shower",
-      label: "Bath",
+      label: t("bath"), // Use translation for label
       value: data.bath,
     },
     {
       icon: "flaticon-event",
-      label: "Year Built",
+      label: t("yearBuilt"), // Use translation for label
       value: data.yearBuilding,
     },
     {
       icon: "flaticon-garage",
-      label: "Garage",
+      label: t("garage"), // Use translation for label
       value: data.garage,
     },
     {
       icon: "flaticon-expand",
-      label: "Sqft",
+      label: t("sqft"), // Use translation for label
       value: data.sqft,
     },
     {
       icon: "flaticon-home-1",
-      label: "Property Type",
+      label: t("propertyType"), // Use translation for label
       value: data.propertyType,
     },
-  ];  
+  ];
 
   return (
     <>

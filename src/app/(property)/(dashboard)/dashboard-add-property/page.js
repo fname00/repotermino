@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "/pages/api/auth/[...nextauth]"; // Importuj konfigurację NextAuth
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
@@ -9,7 +11,28 @@ export const metadata = {
   title: "Dashboard Add Property || Teneryfa.org.pl",
 };
 
-const DashboardAddProperty = () => {
+const DashboardAddProperty = async () => {
+  const session = await getServerSession(authOptions);
+
+  // Sprawdzenie sesji użytkownika i roli
+  if (!session) {
+    return (
+      <div>
+        <h1>Nie masz dostępu do tej strony</h1>
+        <a href="login">Zaloguj się tutaj</a>
+      </div>
+    );
+  }
+
+  if (session.user.role !== "admin") {
+    return (
+      <div>
+        <h1>Nie masz odpowiednich uprawnień</h1>
+        <a href="/">Powrót do strony głównej</a>
+      </div>
+    );
+  }
+
   return (
     <>
       {/* Main Header Nav */}
@@ -18,7 +41,7 @@ const DashboardAddProperty = () => {
 
       {/* Mobile Nav  */}
       <MobileMenu />
-      {/* End Mobile Nav  */}
+      {/* End Mobile Nav */}
 
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">

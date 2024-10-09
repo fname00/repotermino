@@ -1,4 +1,6 @@
-import DashboardHeader from "@/components/common/DashboardHeader";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "/pages/api/auth/[...nextauth]"; // Import nowej konfiguracji
+import DashboardHeader from "@/components/common/DefaultHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
@@ -11,7 +13,28 @@ export const metadata = {
   title: "Dashboard Home || Teneryfa.org.pl",
 };
 
-const DashboardHome = () => {
+export default async function DashboardHome() {
+  const session = await getServerSession(authOptions);
+
+  // Sprawdzenie sesji użytkownika i roli
+  if (!session) {
+    return (
+      <div>
+        <h1>Nie masz dostępu do tej strony</h1>
+        <a href="login">Zaloguj się tutaj</a>
+      </div>
+    );
+  }
+
+  if (session.user.role !== "admin") {
+    return (
+      <div>
+        <h1>Nie masz odpowiednich uprawnień</h1>
+        <a href="/">Powrót do strony głównej</a>
+      </div>
+    );
+  }
+
   return (
     <>
       {/* Main Header Nav */}
@@ -38,38 +61,16 @@ const DashboardHome = () => {
 
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>Howdy, Ali!</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <h2>Howdy, Adminie!</h2>
+                    <p className="text">Dobrze Cię znowu widzieć!</p>
                   </div>
                 </div>
                 {/* col-lg-12 */}
               </div>
               {/* End .row */}
 
-              <div className="row">
-                <TopStateBlock />
-              </div>
-              {/* End .row */}
-
-              <div className="row">
-                <div className="col-xl-8">
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <div className="row">
-                      <PropertyViews />
-                    </div>
-                  </div>
-                </div>
-                {/* End col-xl-8 */}
-
-                <div className="col-xl-4">
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <h4 className="title fz17 mb25">Recent Activities</h4>
-                    <RecentActivities />
-                  </div>
-                </div>
-                {/* End .col-xl-4 */}
-              </div>
-              {/* End .row */}
+              {/* Inne komponenty, jak RecentActivities, TopStateBlock, PropertyViews */}
+              <Footer />
             </div>
             {/* End .dashboard__content */}
 
@@ -81,6 +82,4 @@ const DashboardHome = () => {
       {/* dashboard_content_wrapper */}
     </>
   );
-};
-
-export default DashboardHome;
+}

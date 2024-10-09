@@ -1,34 +1,38 @@
+'use client';
+
 import React from "react";
 import listings from "@/data/activity";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const PropertyDetails = ({ id }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
 
   const columns = [
     [
       {
         icon: "flaticon-close",
-        label: "Cancellation",
+        label: t('cancellation'), // Use translation key for 'Cancellation'
         value: data.cancellation,
       },
       {
         icon: "flaticon-user",
-        label: "Duration",
+        label: t('duration'), // Use translation key for 'Duration'
         value: data.duration,
       },
       {
         icon: "flaticon-user",
-        label: "Pickup",
-        value: "Pickup Included",
+        label: t('pickup'), // Use translation key for 'Pickup'
+        value: t('pickupIncluded'), // Use translation key for 'Pickup Included'
       },
       {
         icon: "flaticon-user",
-        label: "Guide",
-        value: "Guide Included",
+        label: t('guide'), // Use translation key for 'Guide'
+        value: t('guideIncluded'), // Use translation key for 'Guide Included'
       },
       {
         icon: "flaticon-user",
-        label: "Location",
+        label: t('location'), // Use translation key for 'Location'
         value: data.location,
       },
     ]

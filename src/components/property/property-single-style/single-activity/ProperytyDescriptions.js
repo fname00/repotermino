@@ -1,6 +1,10 @@
+'use client';
+
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const PropertyDescriptions = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const description = data.description || "";
 
   const isLongDescription = description.length > 400;
@@ -37,7 +41,7 @@ const PropertyDescriptions = ({ data }) => {
                   aria-expanded="false"
                   aria-controls="flush-collapseOne"
                 >
-                  Show more
+                  {t('showMore')} {/* Translate 'Show more' */}
                 </button>
               </h2>
             </div>

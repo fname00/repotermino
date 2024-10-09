@@ -1,13 +1,16 @@
-'use client'
+'use client';
 
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const ListingStatus = ({ filterFunctions }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   const options = [
-    { id: "flexRadioDefault3", label: "All", defaultChecked: true },
-    { id: "flexRadioDefault1", label: "Buy" },
-    { id: "flexRadioDefault2", label: "Rent" },
-    { id: "flexRadioDefault4", label: "Holiday" },  // Added Holiday option
+    { id: "flexRadioDefault3", label: t('all'), defaultChecked: true },
+    { id: "flexRadioDefault1", label: t('buy') },
+    { id: "flexRadioDefault2", label: t('rent') },
+    { id: "flexRadioDefault4", label: t('holiday') },  // Translated Holiday option
   ];
 
   return (

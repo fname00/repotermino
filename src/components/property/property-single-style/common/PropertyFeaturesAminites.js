@@ -1,9 +1,10 @@
 import React from "react";
-import listings from "@/data/listings";
 
-const PropertyFeaturesAminites = ({ id }) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
-  const features = data.features || [];
+const PropertyFeaturesAminites = ({ data }) => {
+  // Log the data prop to check its contents
+
+  // Extract features from the data prop
+  const features = data?.features || [];
 
   // Function to split features into chunks of 4
   const chunkArray = (array, chunkSize) => {

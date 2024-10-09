@@ -1,11 +1,15 @@
-"use client";
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
 import ContactInfo from "./ContactInfo";
 import Social from "./Social";
 import ProSidebarContent from "./ProSidebarContent";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const MobileMenu = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <div className="mobilie_header_nav stylehome1">
       <div className="mobile-menu">
@@ -23,7 +27,7 @@ const MobileMenu = () => {
                   width={25}
                   height={9}
                   src="/images/mobile-dark-nav-icon.svg"
-                  alt="mobile icon"
+                  alt={t('mobileIcon')}
                 />
               </a>
               <Link className="mobile_logo" href="/">
@@ -31,7 +35,7 @@ const MobileMenu = () => {
                   width={138}
                   height={44}
                   src="/images/header-logo8.svg"
-                  alt="logo"
+                  alt={t('logo')}
                 />
               </Link>
               <a className="pl25"></a>
@@ -53,15 +57,15 @@ const MobileMenu = () => {
             <div
               className="sidebar-close-icon"
               data-bs-dismiss="offcanvas"
-              aria-label="Close"
+              aria-label={t('close')}
             >
               <span className="far fa-times"></span>
             </div>
-            <h4 className="title">Welcome to Teneryfa.org.pl</h4>
+            <h4 className="title">{t('welcomeToSite', { siteName: 'Teneryfa.org.pl' })}</h4>
           </div>
           {/* End header */}
 
-          <div className="hsidebar-content ">
+          <div className="hsidebar-content">
             <div className="hiddenbar_navbar_content">
               <ProSidebarContent />
               {/* End .hiddenbar_navbar_menu */}
@@ -75,7 +79,7 @@ const MobileMenu = () => {
                 <div className="row pt30 pb30 bdrt1">
                   <div className="col-auto">
                     <div className="social-style-sidebar d-flex align-items-center pl30">
-                      <h6 className="me-4 mb-0">Follow us</h6>
+                      <h6 className="me-4 mb-0">{t('followUs')}</h6>
                       <Social />
                     </div>
                   </div>

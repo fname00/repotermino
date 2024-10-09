@@ -1,5 +1,6 @@
-"use client";
+'use client';
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie"; // Import js-cookie for managing cookies
 import Skeleton from "react-loading-skeleton";
 import DefaultHeader from "@/components/home/home-v2/Header";
 import Footer from "@/components/common/default-footer";
@@ -12,14 +13,19 @@ import PropertyDetails from "@/components/property/property-single-style/common/
 import PropertyAddress from "@/components/property/property-single-style/common/PropertyAddress";
 import PropertyFeaturesAminites from "@/components/property/property-single-style/common/PropertyFeaturesAminites";
 import OtherInArea from "@/components/property/property-single-style/common/OtherInArea";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const SingleV2 = ({ params }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const [listingData, setListingData] = useState(null);
+
+  // Retrieve the locale from cookies, or fall back to default locale
+  const locale = Cookies.get('NEXT_LOCALE') || 'en';
 
   useEffect(() => {
     const fetchListingData = async () => {
       try {
-        const response = await fetch(`/api/listing/${params.id}`);
+        const response = await fetch(`/api/listing/${params.id}?locale=${locale}`); // Include locale in the API request
         const data = await response.json();
         setListingData(data);
       } catch (error) {
@@ -28,7 +34,7 @@ const SingleV2 = ({ params }) => {
     };
 
     fetchListingData();
-  }, [params.id]);
+  }, [params.id, locale]); // Re-fetch data when params.id or locale changes
 
   if (!listingData) {
     return (
@@ -106,17 +112,17 @@ const SingleV2 = ({ params }) => {
             <div className="col-lg-8">
               <CustomContact data={listingData} />
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Property Description</h4>
+                <h4 className="title fz17 mb30">{t('propertyDescription')}</h4>
                 <p>{listingData.description}</p>
-                <h4 className="title fz17 mb30 mt50">Property Details</h4>
+                <h4 className="title fz17 mb30 mt50">{t('propertyDetails')}</h4>
                 <PropertyDetails data={listingData} />
               </div>
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30 mt30">Address</h4>
+                <h4 className="title fz17 mb30 mt30">{t('address')}</h4>
                 <PropertyAddress data={listingData} />
               </div>
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Features &amp; Amenities</h4>
+                <h4 className="title fz17 mb30">{t('featuresAndAmenities')}</h4>
                 <PropertyFeaturesAminites data={listingData} />
               </div>
             </div>

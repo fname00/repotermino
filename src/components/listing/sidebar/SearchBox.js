@@ -1,16 +1,18 @@
-
-'use client'
+'use client';
 
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
-const SearchBox = ({filterFunctions}) => {
+const SearchBox = ({ filterFunctions }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <div className="search_area">
       <input
         type="text"
         className="form-control"
-        placeholder="What are you looking for?"
-        onChange={(e)=>filterFunctions?.setSearchQuery(e.target.value)}
+        placeholder={t('searchPlaceholder')} // Use translation for placeholder text
+        onChange={(e) => filterFunctions?.setSearchQuery(e.target.value)}
       />
       <label>
         <span className="flaticon-search" />

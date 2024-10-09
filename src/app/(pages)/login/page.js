@@ -1,16 +1,36 @@
-import SignIn from "@/components/common/login-signup-modal/SignIn";
+"use client";
+
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
-export const metadata = {
-  title: "Login  || Teneryfa.org.pl",
-};
 
 const Login = () => {
+  // Stan na e-mail i hasło
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (result.ok) {
+      // Przekierowanie na stronę panelu admina po poprawnym zalogowaniu
+      window.location.href = "/dashboard-home";
+    } else {
+      setError("Błędny email lub hasło.");
+    }
+  };
+
   return (
     <>
-      {/* Our Compare Area */}
+      {/* Nasz obszar logowania */}
       <section className="our-compare pt60 pb60">
         <Image
           width={1012}
@@ -31,7 +51,7 @@ const Login = () => {
                       width={138}
                       height={44}
                       className="mb25"
-                      src="/images/header-logo2.svg"
+                      src="/images/header-logo6.svg"
                       alt="logo"
                     />
                   </Link>
@@ -40,7 +60,33 @@ const Login = () => {
                     Sign in with this account across the following sites.
                   </p>
                 </div>
-                <SignIn />
+                {/* Formularz logowania */}
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label>Email:</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Password:</label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="form-control"
+                    />
+                  </div>
+                  {error && <p className="error-text">{error}</p>}
+                  <button type="submit" className="btn btn-primary w-100 mt-3">
+                    Sign In
+                  </button>
+                </form>
               </div>
             </div>
           </div>

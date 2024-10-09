@@ -11,18 +11,21 @@ import Location from "./Location";
 import SquareFeet from "./SquareFeet";
 import YearBuilt from "./YearBuilt";
 import OtherFeatures from "./OtherFeatures";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
-const ListingSidebar = ({filterFunctions}) => {
+const ListingSidebar = ({ filterFunctions }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <div className="list-sidebar-style1">
       <div className="widget-wrapper">
-        <h6 className="list-title">Find your home</h6>
+        <h6 className="list-title">{t('findYourHome')}</h6>
         <SearchBox filterFunctions={filterFunctions} />
       </div>
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Listing Status</h6>
+        <h6 className="list-title">{t('listingStatus')}</h6>
         <div className="radio-element">
           <ListingStatus filterFunctions={filterFunctions} />
         </div>
@@ -30,16 +33,15 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Property Type</h6>
+        <h6 className="list-title">{t('propertyType')}</h6>
         <div className="checkbox-style1">
           <PropertyType filterFunctions={filterFunctions} />
         </div>
       </div>
-      
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Price Range</h6>
+        <h6 className="list-title">{t('priceRange')}</h6>
         {/* Range Slider Desktop Version */}
         <div className="range-slider-style1">
           <PriceSlider filterFunctions={filterFunctions} />
@@ -48,7 +50,7 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Bedrooms</h6>
+        <h6 className="list-title">{t('bedrooms')}</h6>
         <div className="d-flex">
           <Bedroom filterFunctions={filterFunctions} />
         </div>
@@ -56,15 +58,15 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Bathrooms</h6>
+        <h6 className="list-title">{t('bathrooms')}</h6>
         <div className="d-flex">
-          <Bathroom filterFunctions={filterFunctions}  />
+          <Bathroom filterFunctions={filterFunctions} />
         </div>
       </div>
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper advance-feature-modal">
-        <h6 className="list-title">Location</h6>
+        <h6 className="list-title">{t('location')}</h6>
         <div className="form-style2 input-group">
           <Location filterFunctions={filterFunctions} />
         </div>
@@ -72,14 +74,14 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Square Feet</h6>
-        <SquareFeet filterFunctions={filterFunctions}/>
+        <h6 className="list-title">{t('squareFeet')}</h6>
+        <SquareFeet filterFunctions={filterFunctions} />
       </div>
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Year Built</h6>
-        <YearBuilt filterFunctions={filterFunctions}/>
+        <h6 className="list-title">{t('yearBuilt')}</h6>
+        <YearBuilt filterFunctions={filterFunctions} />
       </div>
       {/* End .widget-wrapper */}
 
@@ -96,7 +98,7 @@ const ListingSidebar = ({filterFunctions}) => {
                   aria-expanded="true"
                   aria-controls="collapseOne"
                 >
-                  <span className="flaticon-settings" /> Other Features
+                  <span className="flaticon-settings" /> {t('otherFeatures')}
                 </button>
               </h2>
               <div
@@ -119,20 +121,20 @@ const ListingSidebar = ({filterFunctions}) => {
         <div className="btn-area d-grid align-items-center">
           <button className="ud-btn btn-thm">
             <span className="flaticon-search align-text-top pr10" />
-            Search
+            {t('search')}
           </button>
         </div>
       </div>
       {/* End .widget-wrapper */}
 
       <div className="reset-area d-flex align-items-center justify-content-between">
-        <div onClick={()=>filterFunctions.resetFilter()} className="reset-button cursor" href="#">
+        <div onClick={() => filterFunctions.resetFilter()} className="reset-button cursor" href="#">
           <span className="flaticon-turn-back" />
-          <u>Reset all filters</u>
+          <u>{t('resetAllFilters')}</u>
         </div>
         <a className="reset-button" href="#">
           <span className="flaticon-favourite" />
-          <u>Save Search</u>
+          <u>{t('saveSearch')}</u>
         </a>
       </div>
     </div>

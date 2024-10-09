@@ -3,8 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
-
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 const FeaturedListings = ({ data, colstyle }) => {
+  const [favorites, setFavorites] = useState([]);
+
+  // Load favorites from cookies on initial render
+  useEffect(() => {
+    const favoriteItems = Cookies.get("favorites");
+    if (favoriteItems) {
+      setFavorites(JSON.parse(favoriteItems));
+    }
+  }, []);
+
+  // Save favorites to cookies whenever it changes
+  useEffect(() => {
+    Cookies.set("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = (listingId) => {
+    if (favorites.includes(listingId)) {
+      setFavorites(favorites.filter((id) => id !== listingId));
+    } else {
+      setFavorites([...favorites, listingId]);
+    }
+  };
   if (!data || data.length === 0) {
     // Render skeletons if data is not available
     return (
@@ -253,7 +276,10 @@ const FeaturedListings = ({ data, colstyle }) => {
                   <a href="#">
                     <span className="flaticon-new-tab" />
                   </a>
-                  <a href="#">
+                  <a 
+                    onClick={() => toggleFavorite(listing.id)}
+                    style={{ color: favorites.includes(listing.id) ? "red" : "black" }}
+                  >
                     <span className="flaticon-like" />
                   </a>
                 </div>

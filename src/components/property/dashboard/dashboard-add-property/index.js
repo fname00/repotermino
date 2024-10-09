@@ -20,7 +20,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item1"
             aria-selected="true"
           >
-            1. Description
+            1. Opis
           </button>
           <button
             className="nav-link fw600"
@@ -44,7 +44,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item3"
             aria-selected="false"
           >
-            3. Location
+            3. Lokalizacja
           </button>
           <button
             className="nav-link fw600"
@@ -56,7 +56,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item4"
             aria-selected="false"
           >
-            4. Detail
+            4. Szczegóły
           </button>
           <button
             className="nav-link fw600"
@@ -68,7 +68,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item5"
             aria-selected="false"
           >
-            5. Amenities
+            5. Udogodnienia
           </button>
         </div>
       </nav>
@@ -82,7 +82,7 @@ const AddPropertyTabContent = () => {
           aria-labelledby="nav-item1-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Property Description</h4>
+            <h4 className="title fz17 mb30">Opis nieruchomości</h4>
             <PropertyDescription />
           </div>
         </div>

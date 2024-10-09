@@ -1,7 +1,10 @@
+'use client';
+
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 // Funkcja obliczająca, ile czasu temu dodano post
-const getTimeAgo = (dateAdd) => {
+const getTimeAgo = (dateAdd, t) => {
   const currentDate = new Date();
   const postDate = new Date(dateAdd);
 
@@ -9,23 +12,25 @@ const getTimeAgo = (dateAdd) => {
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
   if (diffInDays < 30) {
-    return `${diffInDays} days ago`;
+    return t('daysAgo', { count: diffInDays });
   } else if (diffInDays < 365) {
     const diffInMonths = Math.floor(diffInDays / 30);
-    return `${diffInMonths} months ago`;
+    return t('monthsAgo', { count: diffInMonths });
   } else {
     const diffInYears = Math.floor(diffInDays / 365);
-    return `${diffInYears} years ago`;
+    return t('yearsAgo', { count: diffInYears });
   }
 };
 
 const PropertyHeader = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   if (!data) {
-    return <p>Loading...</p>;
+    return <p>{t('loading')}</p>;
   }
 
   // Obliczanie, ile czasu temu został dodany post
-  const timeAgo = getTimeAgo(data.dateAdd);
+  const timeAgo = getTimeAgo(data.dateAdd, t);
 
   return (
     <>
@@ -37,11 +42,11 @@ const PropertyHeader = ({ data }) => {
               {data.location}
             </p>
             <a
-              className="ff-heading bdrr1  text-thm fz15 pr10 ml10 ml0-sm bdrrn-sm"
+              className="ff-heading bdrr1 text-thm fz15 pr10 ml10 ml0-sm bdrrn-sm"
               href="#"
             >
               <i className="fas fa-circle fz10 pe-2" />
-              For {data.forRent ? "rent" : "sale"}
+              {t(data.forRent ? 'forRent' : 'forSale')}
             </a>
             <a
               className="ff-heading bdrr1 fz15 pr10 ml10 ml0-sm bdrrn-sm"
@@ -69,7 +74,9 @@ const PropertyHeader = ({ data }) => {
             </div>
             <h3 className="price mb-0">{data.price}</h3>
             <p className="text space fz15">
-              ${data.price && data.sqft ? (Number(data.price.split('$')[1].split(',').join('')) / data.sqft).toFixed(2) : 'N/A'}/sq ft
+              {t('pricePerSqFt', {
+                pricePerSqFt: data.price && data.sqft ? (Number(data.price.split('$')[1].split(',').join('')) / data.sqft).toFixed(2) : 'N/A'
+              })}
             </p>
           </div>
         </div>

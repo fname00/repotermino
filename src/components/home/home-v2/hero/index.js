@@ -1,16 +1,20 @@
+'use client'
+
 import AdvanceFilterModal from "@/components/common/advance-filter";
 import HeroContent from "./HeroContent";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const Hero = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <>
       <div className="inner-banner-style2 text-center position-relative">
-        
         <h2 className="hero-title" data-aos="fade-up" data-aos-delay="150">
-          Find Your Dream Home
+          {t('findYourDreamHome')}
         </h2>
         <p className="hero-text fz15" data-aos="fade-up" data-aos-delay="250">
-          Let’s find a home that’s perfect for you
+          {t('findPerfectHome')}
         </p>
         <HeroContent />
       </div>

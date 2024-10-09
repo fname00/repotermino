@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 // Load Stripe outside the component's render to avoid recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const BookingForm = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const [adultCount, setAdultCount] = useState(1);
   const [youthCount, setYouthCount] = useState(0);
   const [infantCount, setInfantCount] = useState(0);
@@ -16,7 +18,7 @@ const BookingForm = () => {
   const [price, setPrice] = useState(null);
   const [loading, setLoading] = useState(true);
   const [priceId, setPriceId] = useState(null);
-  const productName = "Przelot samolotem";
+  const productName = t("flightTour");
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -34,7 +36,7 @@ const BookingForm = () => {
         setMaxPersons(Number(data.metadata.max_person));
         setKidsAllowed(data.metadata.kids === 'allowed');
         setPrice(data.price);
-        setPriceId(data.default_price)
+        setPriceId(data.default_price);
         
         setLoading(false);
       } catch (error) {
@@ -44,7 +46,7 @@ const BookingForm = () => {
     };
 
     fetchProductData();
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, [productName]); // Include productName to re-fetch if it changes
 
   const handleIncrement = (setter, count) => {
     if (adultCount + youthCount + infantCount < maxPersons) {
@@ -59,7 +61,7 @@ const BookingForm = () => {
   };
 
   const totalPersons = adultCount + youthCount + infantCount;
-  const totalPrice = (adultCount + youthCount + infantCount) * (price || 0); // Use the price from the API
+  const totalPrice = (adultCount + youthCount + infantCount) * (price || 0);
   const isAvailable =
     totalPersons >= minAdults &&
     totalPersons <= maxPersons &&
@@ -70,21 +72,19 @@ const BookingForm = () => {
     if (price) {
       const stripe = await stripePromise;
 
-      // Call your backend to create the Checkout session.
       const response = await fetch("/api/checkout_sessions", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          priceId: priceId, // Send the price ID from the API
-          quantity: totalPersons, // Pass the number of products
+          priceId: priceId,
+          quantity: totalPersons,
         }),
       });
 
       const session = await response.json();
 
-      // Redirect to the Stripe checkout.
       const result = await stripe.redirectToCheckout({
         sessionId: session.id,
       });
@@ -111,12 +111,12 @@ const BookingForm = () => {
   return (
     <div className="row my-3">
       <div className="col-12">
-        <h3 className="title font-white">Booking</h3>
-        <p className="title font-white">Select number of people and add voucher to cart.</p>
+        <h3 className="title font-white">{t('booking')}</h3>
+        <p className="title font-white">{t('selectNumberOfPeople')}</p>
         <form className="box box-shadow activity-select">
           <div className="input-group">
             <label className="input flex param-per-adult custom-input-number">
-              <span><b>Adult</b> (Age 12-99)</span>
+              <span><b>{t('adult')}</b> {t('ageRangeAdult')}</span>
               <label className="input input-number">
                 <span
                   className={adultCount === 1 ? "disable" : ""}
@@ -134,7 +134,7 @@ const BookingForm = () => {
           </div>
           <div className="input-group">
             <label className="input flex param-per-youth custom-input-number">
-              <span><b>Youth</b> (Age 6-11)</span>
+              <span><b>{t('youth')}</b> {t('ageRangeYouth')}</span>
               <label className="input input-number">
                 <span
                   className={youthCount === 0 ? "disable" : ""}
@@ -152,7 +152,7 @@ const BookingForm = () => {
           </div>
           <div className="input-group">
             <label className="input flex param-per-infant custom-input-number">
-              <span><b>Infant</b> (Age 5 and younger)</span>
+              <span><b>{t('infant')}</b> {t('ageRangeInfant')}</span>
               <label className="input input-number">
                 <span
                   className={infantCount === 0 ? "disable" : ""}
@@ -169,16 +169,16 @@ const BookingForm = () => {
             </label>
           </div>
           <div className="total-price font-white custom-total-price">
-            <p><strong>Total Price: ${totalPrice.toFixed(2)}</strong></p>
+            <p><strong>{t('totalPrice')}: ${totalPrice.toFixed(2)}</strong></p>
           </div>
           <button
             id="submit-activity-select-btn"
             className={`btn ${!loading && isAvailable ? "" : "inactive-custom-button"}`}
             type="button"
-            onClick={handleCheckout} // Add the checkout handler
+            onClick={handleCheckout}
             disabled={!loading && !isAvailable}
           >
-            <strong>Book and Pay</strong>
+            <strong>{t('bookAndPay')}</strong>
           </button>
         </form>
       </div>

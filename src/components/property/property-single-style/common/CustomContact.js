@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const CustomContact = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const [showPhone, setShowPhone] = useState(false);
 
   return (
@@ -13,10 +15,10 @@ const CustomContact = ({ data }) => {
           onClick={() => setShowPhone(!showPhone)}
         >
           <i className="fas fa-phone-alt pe-2" />
-          {showPhone ? data.clientPhone : "View Phone"}
+          {showPhone ? data.clientPhone : t('viewPhone')} {/* Translated 'View Phone' */}
         </button>
         <button className="btn btn-secondary mb10 custom-contact-button">
-          Contact Agent
+          {t('contactAgent')} {/* Translated 'Contact Agent' */}
         </button>
       </div>
     </div>

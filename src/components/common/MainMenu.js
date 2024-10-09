@@ -1,3 +1,5 @@
+'use client';
+
 import {
   blogItems,
   listingItems,
@@ -7,8 +9,10 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const MainMenu = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
   const pathname = usePathname();
   const [topMenu, setTopMenu] = useState("");
   const [submenu, setSubmenu] = useState("");
@@ -48,39 +52,38 @@ const MainMenu = () => {
       return "menuActive";
     }
   };
+
   return (
     <ul className="ace-responsive-menu bdrr1">
-
       <li className="megamenu_style dropitem">
         <a className="list-item" href="/buy">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
-            Buy
+            {t('buy')}
           </span>
         </a>
       </li>
       <li className="megamenu_style dropitem">
         <a className="list-item" href="/rent">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
-            Rent
+            {t('rent')}
           </span>
         </a>
       </li>
       <li className="megamenu_style dropitem">
         <a className="list-item" href="/sale">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
-            Sale
+            {t('sale')}
           </span>
         </a>
       </li>
       <li className="megamenu_style dropitem">
         <a className="list-item" href="/activity">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
-            Activity
+            {t('activity')}
           </span>
         </a>
       </li>
       {/* End listings */}
-
     </ul>
   );
 };

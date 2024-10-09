@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       take: 3, // Fetch only 3 other listings
     });
 
-    console.log('Fetched other listings:', listings); // Log to verify
+
     res.status(200).json(listings);
   } catch (error) {
     console.error('Failed to fetch other listings:', error); // Log error

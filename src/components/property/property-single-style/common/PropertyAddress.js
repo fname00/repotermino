@@ -1,12 +1,17 @@
+'use client';
+
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const PropertyAddress = ({ data }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <>
-      <div className={`col-md-6 col-xl-4 "offset-xl-2" : ""}`}>
+      <div className={`col-md-6 col-xl-4 ${data.city ? "offset-xl-2" : ""}`}>
         <div className="d-flex justify-content-between">
           <div className="pd-list">
-            <p className="fw600 mb10 ff-heading dark-color">City</p>
+            <p className="fw600 mb10 ff-heading dark-color">{t('city')}</p>
           </div>
           <div className="pd-list">
             <p className="text mb10">{data.city}</p>

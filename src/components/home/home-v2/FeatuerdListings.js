@@ -1,12 +1,16 @@
-"use client";
+'use client';
+
 import listings from "@/data/activity";
 import Image from "next/image";
 import Link from "next/link";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const FeaturedListings = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
     <>
       <Swiper
@@ -46,18 +50,18 @@ const FeaturedListings = () => {
                     height={248}
                     className="w-100 custom-featured cover"
                     src={listing.image}
-                    alt="listings"
+                    alt={t('listings')} // Translation for alt text
                   />
                   <div className="sale-sticker-wrap">
                     {!listing.forRent && (
                       <div className="list-tag fz12">
                         <span className="flaticon-electricity me-2" />
-                        FEATURED
+                        {t('featured')}
                       </div>
                     )}
                   </div>
                   <div className="list-price">
-                {listing.price} {listing.forRent ? "/ mo" : ""}
+                    {listing.price} {listing.forRent ? t('perMonth') : ""}
                   </div>
                 </div>
                 <div className="list-content">
@@ -69,18 +73,18 @@ const FeaturedListings = () => {
                   <p className="list-text">{listing.location}</p>
                   <div className="list-meta d-flex align-items-center">
                     <a href="#">
-                      <span className="flaticon-bed" /> {listing.bed} bed
+                      <span className="flaticon-bed" /> {listing.bed} {t('bed')}
                     </a>
                     <a href="#">
-                      <span className="flaticon-shower" /> {listing.bath} bath
+                      <span className="flaticon-shower" /> {listing.bath} {t('bath')}
                     </a>
                     <a href="#">
-                      <span className="flaticon-expand" /> {listing.sqft} sqft
+                      <span className="flaticon-expand" /> {listing.sqft} {t('squareMeter')}
                     </a>
                   </div>
                   <hr className="mt-2 mb-2" />
                   <div className="list-meta2 d-flex justify-content-between align-items-center">
-                    <span className="for-what">{listing.forRent ? "For Rent" : "For Sale"}</span>
+                    <span className="for-what">{listing.forRent ? t('forRent') : t('forSale')}</span>
                   </div>
                 </div>
               </div>

@@ -23,6 +23,16 @@ const SecondMenu = () => {
   return (
     <ul className="ace-responsive-menu">
       <li className="visible_list dropitem">
+        <Link className="list-item" href="/favorites">
+          <span className={handleActive("/favorites") ? "title menuActive" : "title"}>
+            Favorites
+          </span>
+        </Link>
+      </li>
+      {/* End favorites Item */}
+
+
+      <li className="visible_list dropitem">
         <Link className="list-item" href="/ebook">
           <span className={handleActive("/ebook") ? "title menuActive" : "title"}>
             Ebook
