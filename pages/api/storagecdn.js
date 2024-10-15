@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 
 const prisma = new PrismaClient();
-export const maxDuration = 300;
+
 // Funkcja generująca losowy ciąg alfanumeryczny
 function generateRandomString(length) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -14,7 +14,7 @@ function generateRandomString(length) {
   }
   return result;
 }
-
+export const maxDuration = 300;
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Only GET requests are allowed' });
