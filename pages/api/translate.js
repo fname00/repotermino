@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       where: {
         translated: false,
       },
-      take: 10, // Limit the result to 10 listings
+      take: 1, // Limit the result to 10 listings
     });
 
     console.log(`Found ${listings.length} listings to translate.`);
