@@ -65,7 +65,10 @@ const DashboardMyProperties = async () => {
                 <div className="col-xxl-3">
                   <div className="dashboard_title_area">
                     <h2>My Properties</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <ul className="text">Lista to-do:
+                      <li>1. Wyświetlanie i wyszukiwanie listingów</li>
+                      <li>2. Usuwanie listingów bez edytowania</li>
+                    </ul>
                   </div>
                 </div>
                 <div className="col-xxl-9">

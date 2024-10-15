@@ -1,10 +1,10 @@
 import React from "react";
 
 const PropertyFeaturesAminites = ({ data }) => {
-  // Log the data prop to check its contents
-
-  // Extract features from the data prop
-  const features = data?.features || [];
+  // Extract features from the data prop and split into an array
+  const features = data?.features 
+    ? data.features.split(',').map(feature => feature.trim()) // Split by comma and trim whitespace
+    : [];
 
   // Function to split features into chunks of 4
   const chunkArray = (array, chunkSize) => {

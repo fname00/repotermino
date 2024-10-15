@@ -26,7 +26,7 @@ const Footer = () => {
               <ContactMeta />
 
               <div className="social-widget">
-                <h6 className="text-white mb20">Follow us on social media</h6>
+                <h6 className="text-white mb20">Follow us!</h6>
                 <Social />
               </div>
             </div>

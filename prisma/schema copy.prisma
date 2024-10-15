@@ -1,0 +1,100 @@
+// This is your Prisma schema file
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id              Int      @id @default(autoincrement())
+  image           String
+  images          String[] // List of image URLs
+  title           String
+  title_en        String?  // English title
+  title_pl        String?  // Polish title
+  title_es        String?  // Spanish title
+  city            String
+  location        String
+  location_en     String?  // English location
+  location_pl     String?  // Polish location
+  location_es     String?  // Spanish location
+  address         String
+  zipCode         String
+  area            String
+  country         String
+  lat             Float
+  long            Float
+  clientPhone     String
+  bed             Int
+  bath            Int
+  garage          Int
+  garageSize      Int
+  sqft            Int
+  propertyType    String
+  propertyType_en String?  // English property type
+  propertyType_pl String?  // Polish property type
+  propertyType_es String?  // Spanish property type
+  yearBuilding    Int
+  price           String // Consider changing to Decimal if necessary
+  forRent         Boolean
+  tags            String[]
+  features        String[]
+  features_en     String[] // English features
+  features_pl     String[] // Polish features
+  features_es     String[] // Spanish features
+  description     String
+  description_en  String?  // English description
+  description_pl  String?  // Polish description
+  description_es  String?  // Spanish description
+  dateAdd         DateTime @default(now())
+  holiday         Boolean  @default(false)
+}
+
+model Activity {
+  id              Int      @id @default(autoincrement())
+  image           String
+  images          String[]
+  title           String
+  title_en        String?  // English title
+  title_pl        String?  // Polish title
+  title_es        String?  // Spanish title
+  city            String
+  location        String
+  location_en     String?  // English location
+  location_pl     String?  // Polish location
+  location_es     String?  // Spanish location
+  duration        String
+  duration_en     String?  // English duration
+  duration_pl     String?  // Polish duration
+  duration_es     String?  // Spanish duration
+  price           String
+  discount        String?  // Nullable field for discount
+  forRent         Boolean
+  tags            String[]
+  cancellation    String
+  cancellation_en String?  // English cancellation policy
+  cancellation_pl String?  // Polish cancellation policy
+  cancellation_es String?  // Spanish cancellation policy
+  featured        Boolean
+  availability    String
+  description     String
+  description_en  String?  // English description
+  description_pl  String?  // Polish description
+  description_es  String?  // Spanish description
+  dateAdd         DateTime @default(now())
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String?
+  email          String   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String
+  role           String   @default("user") // Pole określające rolę użytkownika
+
+  @@map(name: "users")
+}

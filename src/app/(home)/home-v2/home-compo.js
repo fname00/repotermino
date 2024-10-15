@@ -55,7 +55,6 @@ const Home_V2 = () => {
             <div className="col-lg-9">
               <div className="main-title2">
                 <h2 className="title">{t('discoverFeaturedListings')}</h2>
-                <p className="paragraph">{t('listingsDescription')}</p>
               </div>
             </div>
             <div className="col-lg-3">

@@ -72,12 +72,17 @@ const PropertyHeader = ({ data }) => {
                 <span className="flaticon-like" />
               </a>
             </div>
-            <h3 className="price mb-0">{data.price}</h3>
+            <h3 className="price mb-0">{data.price} €</h3>
             <p className="text space fz15">
-              {t('pricePerSqFt', {
-                pricePerSqFt: data.price && data.sqft ? (Number(data.price.split('$')[1].split(',').join('')) / data.sqft).toFixed(2) : 'N/A'
-              })}
-            </p>
+            {t('pricePerSqFt', {
+              pricePerSqFt: data.price && data.sqft 
+                ? new Intl.NumberFormat('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  }).format(data.price / data.sqft) // Format as currency
+                : 'N/A'
+            })}
+          </p>
           </div>
         </div>
       </div>

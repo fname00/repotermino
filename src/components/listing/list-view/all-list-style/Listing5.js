@@ -57,7 +57,7 @@ const Listing5 = () => {
                   </a>
                 </div>
                 <div className="list-price">
-                  {listing.price} / <span>mo</span>
+                  {listing.price} €/ <span>mo</span>
                 </div>
               </div>
             </div>

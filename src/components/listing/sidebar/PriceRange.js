@@ -1,17 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import Slider, { Range } from "rc-slider";
+import Slider from "rc-slider";
 
 const PriceRange = ({ filterFunctions }) => {
   const [price, setPrice] = useState([20, 15000000]);
 
-  // price range handler
-
-  // price range handler
+  // Price range handler
   const handleOnChange = (value) => {
-    setPrice(value);
+    setPrice(value); // Update local state
+  };
 
-    filterFunctions?.handlepriceRange([value[0] || 0, value[1]]);
+  // Triggered when the user stops moving the slider
+  const handleAfterChange = (value) => {
+    filterFunctions?.handlepriceRange([value[0] || 0, value[1]]); // Call API with final values
   };
 
   return (
@@ -26,7 +27,8 @@ const PriceRange = ({ filterFunctions }) => {
             filterFunctions?.priceRange[0],
             filterFunctions?.priceRange[1],
           ]}
-          onChange={(value) => handleOnChange(value)}
+          onChange={handleOnChange} // Call on every change
+          onAfterChange={handleAfterChange} // Call after user stops changing
           id="slider"
         />
         <div className="d-flex align-items-center">

@@ -42,7 +42,7 @@ const Listing6 = () => {
 
             <div className="list-content">
               <div className="list-price">
-                {listing.price} / <span>mo</span>
+                {listing.price} €/ <span>mo</span>
               </div>
               <h6 className="list-title my-1">
                 <Link href={`/property/${listing.id}`}>{listing.title}</Link>
@@ -55,7 +55,7 @@ const Listing6 = () => {
                   <span className="flaticon-shower mr5" /> {listing.bath} bath
                 </a>
                 <a href="#">
-                  <span className="flaticon-expand mr5" /> {listing.sqft} sqft
+                  <span className="flaticon-expand mr5" /> {listing.sqft} m2
                 </a>
               </div>
             </div>

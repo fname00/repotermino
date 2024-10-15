@@ -46,7 +46,7 @@ const PropertyHeader = ({ id }) => {
             </a>
             <a className="text ml20 fz15" href="#">
               <i className="flaticon-expand pe-2 align-text-top" />
-              {data.sqft} sqft
+              {data.sqft} m2
             </a>
           </div>
         </div>

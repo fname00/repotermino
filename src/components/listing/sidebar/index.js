@@ -79,42 +79,8 @@ const ListingSidebar = ({ filterFunctions }) => {
       </div>
       {/* End .widget-wrapper */}
 
-      <div className="widget-wrapper">
-        <h6 className="list-title">{t('yearBuilt')}</h6>
-        <YearBuilt filterFunctions={filterFunctions} />
-      </div>
-      {/* End .widget-wrapper */}
 
-      <div className="widget-wrapper">
-        <div className="feature-accordion">
-          <div className="accordion" id="accordionExample">
-            <div className="accordion-item border-none">
-              <h2 className="accordion-header" id="headingOne">
-                <button
-                  className="accordion-button border-none p-0 after-none feature-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  <span className="flaticon-settings" /> {t('otherFeatures')}
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                className="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body p-0 mt15">
-                  <OtherFeatures filterFunctions={filterFunctions} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper mb20">

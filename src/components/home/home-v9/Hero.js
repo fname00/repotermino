@@ -113,7 +113,7 @@ const Hero = () => {
                         <div className="listing-style1 at-home9-hero banner-content">
                           <div className="list-content">
                             <div className="list-price bgc-thm">
-                              ${item.price} / <span>mo</span>
+                              ${item.price} €/ <span>mo</span>
                             </div>
                             <h6 className="list-title">
                               <a href="page-property-single-v1.html">
@@ -132,7 +132,7 @@ const Hero = () => {
                               </a>
                               <a href="#">
                                 <span className="flaticon-expand" />
-                                {item.sqft} sqft
+                                {item.sqft} m2
                               </a>
                             </div>
                             <hr className="mt-2 mb-2" />

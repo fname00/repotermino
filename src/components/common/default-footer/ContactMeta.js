@@ -3,12 +3,12 @@ import React from "react";
 const ContactMeta = () => {
   const contactInfoList = [
     {
-      title: "Total Free Customer Care",
+      title: "Whats app",
       phone: "+(0) 123 050 945 02",
       phoneLink: "tel:+012305094502", // Changed phoneLink to tel: URI
     },
     {
-      title: "Need Live Support?",
+      title: "Email",
       mail: "hi@gmail.com",
       mailLink: "mailto:hi@gmail.com", // Changed mailLink to direct email address
     },

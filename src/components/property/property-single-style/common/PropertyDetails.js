@@ -16,11 +16,7 @@ const PropertyDetails = ({ data }) => {
       },
       {
         label: t('price'), // Translate the label
-        value: data.price,
-      },
-      {
-        label: t('propertySize'), // Translate the label
-        value: `${data.sqft} sqft`,
+        value: `${data.price} €`, // Append euro symbol to the price
       },
       {
         label: t('bathrooms'), // Translate the label
@@ -33,16 +29,12 @@ const PropertyDetails = ({ data }) => {
     ],
     [
       {
+        label: t('propertySize'), // Translate the label
+        value: `${data.sqft} m2`,
+      },
+      {
         label: t('garage'), // Translate the label
-        value: data.garage,
-      },
-      {
-        label: t('garageSize'), // Translate the label
-        value: `${data.garageSize} sqft`,
-      },
-      {
-        label: t('yearBuilt'), // Translate the label
-        value: data.yearBuilding,
+        value: data.garage ? t("yes") : t("no"), // Use translation for Yes/No
       },
       {
         label: t('propertyType'), // Translate the label

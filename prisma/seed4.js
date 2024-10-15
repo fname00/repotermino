@@ -4,27 +4,32 @@ const bcrypt = require("bcrypt");
 const prisma = new PrismaClient();
 
 async function main() {
-  const hashedPassword = await bcrypt.hash("haslo", 10); // Zmień "twoje_haslo_admina" na wybrane hasło
+  try {
+    const hashedPassword = await bcrypt.hash("", 10); // Change "haslo" to your desired admin password
 
-  await prisma.user.upsert({
-    where: { email: "123@123.com" }, // Zmień na e-mail administratora
-    update: {},
-    create: {
-      name: "Administrator",
-      email: "1234@123.com", // Zmień na e-mail administratora
-      hashedPassword: hashedPassword,
-      role: "admin", // Przypisz rolę "admin"
-    },
-  });
+    await prisma.user.create({
+      data: {
+        name: "Administrator",
+        email: "toka.poland@gmail.com", // Change to admin email
+        hashedPassword: hashedPassword,
+        role: "admin", // Assign role as "admin"
+      },
+    });
 
-  console.log("Administrator został dodany do bazy danych.");
+    console.log("Administrator został dodany do bazy danych.");
+  } catch (error) {
+    if (error.code === 'P2002') {
+      console.error("User already exists.");
+    } else {
+      console.error("An error occurred:", error);
+    }
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
   });

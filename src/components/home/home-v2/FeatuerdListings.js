@@ -61,7 +61,7 @@ const FeaturedListings = () => {
                     )}
                   </div>
                   <div className="list-price">
-                    {listing.price} {listing.forRent ? t('perMonth') : ""}
+                    {listing.price} €{listing.forRent ? t('perMonth') : ""}
                   </div>
                 </div>
                 <div className="list-content">

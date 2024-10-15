@@ -37,7 +37,7 @@ const FeaturedListings = ({ data, colstyle }) => {
               </div>
 
               <div className="list-price">
-                {listing.price} {listing.forRent ? "/ mo" : ""}
+                {listing.price} €{listing.forRent ? "/ mo" : ""}
               </div>
             </div>
             <div className="list-content">
@@ -53,7 +53,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                   <span className="flaticon-shower" /> {listing.bath} bath
                 </a>
                 <a href="#">
-                  <span className="flaticon-expand" /> {listing.sqft} sqft
+                  <span className="flaticon-expand" /> {listing.sqft} m2
                 </a>
               </div>
               <p className="list-text2">

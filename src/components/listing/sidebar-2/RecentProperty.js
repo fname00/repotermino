@@ -21,7 +21,7 @@ const RecentProperty = () => {
           </div>
           <div className="news-content flex-shrink-1 ms-3">
             <h5 className="title mb0">
-              {listing.price} /<span className="fz15">mo</span>
+              {listing.price} €/<span className="fz15">mo</span>
             </h5>
             <p className="new-text mb0 fz14">House on the Northridge</p>
             <div className="list-meta">

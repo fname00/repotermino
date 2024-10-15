@@ -18,14 +18,9 @@ const OverView = ({ data }) => {
       value: data.bath,
     },
     {
-      icon: "flaticon-event",
-      label: t("yearBuilt"), // Use translation for label
-      value: data.yearBuilding,
-    },
-    {
       icon: "flaticon-garage",
       label: t("garage"), // Use translation for label
-      value: data.garage,
+      value: data.garage ? t("yes") : t("no"), // Use translation for Yes/No
     },
     {
       icon: "flaticon-expand",

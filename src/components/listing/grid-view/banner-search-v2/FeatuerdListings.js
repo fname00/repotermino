@@ -46,7 +46,7 @@ const FeaturedListings = ({data,colstyle}) => {
 
               <div className="d-flex justify-content-between align-items-center">
                 <div className="list-price">
-                  {listing.price} / <span>mo</span>
+                  {listing.price} €/ <span>mo</span>
                 </div>
                 <div className="list-meta2 d-flex align-items-center">
                   <a href="#" className="mr10">

@@ -3,7 +3,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 
-const UploadPhotoGallery = () => {
+const UploadPhotoGallery = ({ onImagesChange }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
 
@@ -15,6 +15,7 @@ const UploadPhotoGallery = () => {
       reader.onload = (e) => {
         newImages.push(e.target.result);
         setUploadedImages(newImages);
+        onImagesChange(newImages);  // Pass the new images to the parent component
       };
       reader.readAsDataURL(file);
     }
@@ -31,7 +32,6 @@ const UploadPhotoGallery = () => {
   };
 
   const handleButtonClick = () => {
-    // Programmatically trigger the hidden file input
     fileInputRef.current.click();
   };
 
@@ -39,6 +39,7 @@ const UploadPhotoGallery = () => {
     const newImages = [...uploadedImages];
     newImages.splice(index, 1);
     setUploadedImages(newImages);
+    onImagesChange(newImages);  // Update the parent component after deletion
   };
 
   return (
@@ -53,7 +54,8 @@ const UploadPhotoGallery = () => {
         </div>
         <h4 className="title fz17 mb10">Upload/Drag photos of your property</h4>
         <p className="text mb25">
-          Photos must be JPEG or PNG format and at least 2048x768
+          Photos must be JPEG or PNG format.
+          First photo will be used as main photo.
         </p>
         <label className="ud-btn btn-white">
           Browse Files

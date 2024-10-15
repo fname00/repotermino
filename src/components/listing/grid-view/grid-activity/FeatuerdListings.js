@@ -48,7 +48,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                 </div>
                 <div className="grid-price">
                   <span className="price-label">From</span><br></br>
-                  <strong className="price-value">{listing.price}</strong><br></br>
+                  <strong className="price-value">{listing.price} €</strong><br></br>
                   <span className="price-label">per person</span>
                 </div>
               </div>

@@ -1,35 +1,39 @@
+'use client';
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const MenuWidget = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   const menuSections = [
     {
-      title: "Popular Search",
+      title: t("popular_search"), // Translation key for the title
       links: [
-        { label: "Apartment for Rent", href: "#" },
-        { label: "Apartment Low to High", href: "#" },
-        { label: "Offices for Buy", href: "#" },
-        { label: "Offices for Rent", href: "#" },
+        { label: t("villa_in_tenerife"), href: "#" }, // Translation key for each label
+        { label: t("apartment_in_tenerife"), href: "#" },
+        { label: t("best_offers"), href: "#" },
+        { label: t("hot"), href: "#" },
       ],
     },
     {
-      title: "Quick Links",
+      title: t("quick_links"),
       links: [
-        { label: "Terms of Use", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Pricing Plans", href: "#" },
-        { label: "Our Services", href: "#" },
-        { label: "Contact Support", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "FAQs", href: "#" },
+        { label: t("terms_of_use"), href: "#" },
+        { label: t("privacy_policy"), href: "#" },
+        { label: t("about1"), href: "/about" },
+        { label: t("our_services"), href: "/sale" },
+        { label: t("contact_support"), href: "/contact" },
+        { label: t("careers"), href: "/cv" },
+        { label: t("faqs"), href: "/faq" },
       ],
     },
     {
-      title: "Discover",
+      title: t("discover"),
       links: [
-        { label: "Tenerife", href: "#" },
-        { label: "Fuertaventura", href: "#" },
-        { label: "Gran Canaria", href: "#" },
-        { label: "Lanzarote", href: "#" },
+        { label: t("tenerife"), href: "/teneryfa" },
+        { label: t("fuertaventura"), href: "/fuerteventura" },
+        { label: t("gran_canaria"), href: "/grancanaria" },
+        { label: t("lanzarote1"), href: "/lanzarote" },
       ],
     },
   ];

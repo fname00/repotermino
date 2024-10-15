@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "/pages/api/auth/[...nextauth]"; // Import nowej konfiguracji
-import DashboardHeader from "@/components/common/DefaultHeader";
+import DashboardHeader from "@/components/home/home-v2/Header";
 import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
@@ -61,8 +61,16 @@ export default async function DashboardHome() {
 
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>Howdy, Adminie!</h2>
-                    <p className="text">Dobrze Cię znowu widzieć!</p>
+                    <h2>Dashboard</h2>
+                    <ul className="text">Lista to-do:
+                      <li>1. Dodawanie aktywności</li>
+                      <li>2. Lista aktywności</li>
+                      <li>3. Zablokowanie API Post tylko dla Administratora</li>
+                      <li>4. Ustawienie CRON dla pozostałych</li>
+                    </ul>
+                    <ul className="text">W przyszłości:
+
+                    </ul>
                   </div>
                 </div>
                 {/* col-lg-12 */}

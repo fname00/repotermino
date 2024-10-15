@@ -22,7 +22,7 @@ const ProductSingle = () => {
               </a>
               <a href="#">
                 <span className="flaticon-expand" />
-                {product.sqft} sqft
+                {product.sqft} m2
               </a>
             </div>
             <Link  href={`/single-v1/${product.id}`} className="btn mt15 fz15">

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "/pages/api/auth/[...nextauth]"; // Importuj konfigurację NextAuth
-import DashboardHeader from "@/components/common/DashboardHeader";
+import DashboardHeader from "@/components/home/home-v2/Header";
 import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
@@ -63,7 +63,10 @@ const DashboardAddProperty = async () => {
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>Add New Property</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <ul className="text">Lista to-do:
+                      <li>1. Z upload plik przesyłany na CDN zwrotne linki umieszane w DB</li>
+                      <li>2. Stylizacja dodawnia features</li>
+                    </ul>
                   </div>
                 </div>
               </div>

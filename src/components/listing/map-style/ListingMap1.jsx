@@ -266,7 +266,7 @@ export default function ListingMap1() {
                     </div>
 
                     <div className="list-price">
-                      {getLocation.price} / <span>mo</span>
+                      {getLocation.price} €/ <span>mo</span>
                     </div>
                   </div>
                   <div className="list-content">

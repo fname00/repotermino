@@ -9,49 +9,41 @@ datasource db {
 }
 
 model Listing {
-  id              Int      @id @default(autoincrement())
-  image           String
-  images          String[] // List of image URLs
-  title           String
-  title_en        String?  // English title
-  title_pl        String?  // Polish title
-  title_es        String?  // Spanish title
-  city            String
-  location        String
-  location_en     String?  // English location
-  location_pl     String?  // Polish location
-  location_es     String?  // Spanish location
-  address         String
-  zipCode         String
-  area            String
-  country         String
-  lat             Float
-  long            Float
-  clientPhone     String
-  bed             Int
-  bath            Int
-  garage          Int
-  garageSize      Int
-  sqft            Int
-  propertyType    String
-  propertyType_en String?  // English property type
-  propertyType_pl String?  // Polish property type
-  propertyType_es String?  // Spanish property type
-  yearBuilding    Int
-  price           String // Consider changing to Decimal if necessary
-  forRent         Boolean
-  tags            String[]
-  features        String[]
-  features_en     String[] // English features
-  features_pl     String[] // Polish features
-  features_es     String[] // Spanish features
-  description     String
-  description_en  String?  // English description
-  description_pl  String?  // Polish description
-  description_es  String?  // Spanish description
-  dateAdd         DateTime @default(now())
-  holiday         Boolean  @default(false)
+  id               Int      @id @default(autoincrement())
+  title            String   @default("Real estate") // Default title
+  city             String   @default("No information provided") // Default city
+  location         String   @default("No information provided") // Default location
+  country          String   @default("No information provided") // Default country
+  bed              Int      @default(0) // Default bedrooms
+  bath             Int      @default(0) // Default bathrooms
+  garage           Boolean  @default(false) // Default no garage
+  storage          Boolean  @default(false) // Default no storage
+  sqft             Int      @default(0) // Default area
+  propertyType     String   @default("Unknown") // Default property type
+  price            Decimal  @db.Decimal(15, 2) @default(0.00) // Default price
+  forRent          Boolean? @default(false) // Default not for rent
+  features         String   @default("No features provided") // Default features
+  description      String   @default("No description provided") // Default description
+  dateAdd          DateTime @default(now()) // Date added
+  image            String   @default("/path/to/default/image.png") // Default image URL
+  images           String[] @default(["/images/listings/default.jpg", "/images/listings/default.jpg"]) // Default array of images
+  pictures         String   @default("/path/to/default/image.png") // Default pictures
+  holiday          Boolean  @default(false) // Default not holiday
+  published        Boolean  @default(false) // Default not published
+  translated       Boolean  @default(false) // Default not translated
+  link             String   @unique // Original link to the listing
+  description_en   String   @default("No description provided") // Default English description
+  description_es   String   @default("No description provided") // Default Spanish description
+  description_pl   String   @default("No description provided") // Default Polish description
+  features_en      String   @default("No features provided") // Default English features
+  features_es      String   @default("No features provided") // Default Spanish features
+  features_pl      String   @default("No features provided") // Default Polish features
+  title_en         String   @default("Real estate") // Default English title
+  title_es         String   @default("Real estate") // Default Spanish title
+  title_pl         String   @default("Real estate") // Default Polish title
 }
+
+
 
 model Activity {
   id              Int      @id @default(autoincrement())

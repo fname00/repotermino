@@ -24,9 +24,9 @@ const PropertyAddress = ({ data }) => {
         <iframe
           className="position-relative bdrs12 mt30 h250"
           loading="lazy"
-          src={`https://maps.google.com/maps?q=${data.address},${data.city}&t=m&z=14&output=embed&iwloc=near`}
-          title={data.address}
-          aria-label={data.address}
+          src={`https://maps.google.com/maps?q=${data.location}&t=m&z=14&output=embed&iwloc=near`}
+          title={data.location}
+          aria-label={data.location}
         />
       </div>
       {/* End col */}
