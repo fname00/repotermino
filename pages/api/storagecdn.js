@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   }
 
   const bunnyStorageZone = 'tenerife';
-  const bunnyApiKey = '5449eb98-6cf5-42ec-a56db87b08ee-4ccd-42ba';
+  const bunnyApiKey = process.env.BUNNY;
   const bunnyRegion = ''; // Leave empty if using default region
   const baseUrl = bunnyRegion ? `${bunnyRegion}.storage.bunnycdn.com` : `storage.bunnycdn.com`;
 
