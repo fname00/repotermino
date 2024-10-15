@@ -17,7 +17,7 @@ function generateRandomString(length) {
 
 // Konfiguracja maksymalnego czasu trwania funkcji API
 export const config = {
-  maxDuration: 300, // Możesz ustawić czas do maksymalnie 60 sekund
+  maxDuration: 300, // Maksymalny czas działania funkcji
 };
 
 export default async function handler(req, res) {
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
   const bunnyStorageZone = 'tenerife';
   const bunnyApiKey = process.env.BUNNY;
-  const bunnyRegion = ''; // Leave empty if using default region
+  const bunnyRegion = ''; // Zostaw puste, jeśli używasz domyślnego regionu
   const baseUrl = bunnyRegion ? `${bunnyRegion}.storage.bunnycdn.com` : `storage.bunnycdn.com`;
 
   try {
@@ -42,63 +42,64 @@ export default async function handler(req, res) {
       take: 10,
     });
 
-    for (const listing of listings) {
-      const { id, pictures } = listing;
+    // Używamy Promise.all do równoległego przetwarzania listingów
+    await Promise.all(
+      listings.map(async (listing) => {
+        const { id, pictures } = listing;
 
-      // Rozdziel zdjęcia w kolumnie pictures
-      const pictureLinks = pictures.split(',');
+        // Rozdziel zdjęcia w kolumnie pictures
+        const pictureLinks = pictures.split(',');
 
-      // Zmienna na nowe linki po wysłaniu do Bunny.net
-      let updatedLinks = [];
-      let mainImage = '';
+        // Przetwarzanie obrazów równolegle z Promise.all
+        const uploadedLinks = await Promise.all(
+          pictureLinks.map(async (picture, index) => {
+            const trimmedPicture = picture.trim();
 
-      // Wysłanie zdjęć do Bunny.net i nazwanie ich wg losowego ciągu znaków + {id}
-      for (let i = 0; i < pictureLinks.length; i++) {
-        const picture = pictureLinks[i].trim();
+            // Generuj losowy ciąg znaków i dodaj {id} na końcu
+            const randomString = generateRandomString(20);
+            const newFileName = `${randomString}${id}${index + 1}`;
 
-        // Generuj losowy ciąg znaków i dodaj {id} na końcu
-        const randomString = generateRandomString(20);
-        const newFileName = `${randomString}${id}${i + 1}`;
+            // Pobierz obraz jako strumień bajtów
+            const imageResponse = await axios.get(trimmedPicture, {
+              responseType: 'arraybuffer',
+            });
+            const imageBuffer = imageResponse.data;
 
-        // Pobierz obraz jako strumień bajtów
-        const imageResponse = await axios.get(picture, { responseType: 'arraybuffer' });
-        const imageBuffer = imageResponse.data;
+            // Konstruowanie odpowiedniego URL dla Bunny.net
+            const bunnyUrl = `https://${baseUrl}/${bunnyStorageZone}/${newFileName}`;
 
-        // Konstruowanie odpowiedniego URL dla Bunny.net
-        const bunnyUrl = `https://${baseUrl}/${bunnyStorageZone}/${newFileName}`;
+            // Prześlij obraz do Bunny.net za pomocą PUT
+            const uploadResponse = await axios.put(bunnyUrl, imageBuffer, {
+              headers: {
+                AccessKey: bunnyApiKey,
+                'Content-Type': 'application/octet-stream',
+              },
+            });
 
-        // Prześlij obraz do Bunny.net za pomocą PUT
-        const uploadResponse = await axios.put(bunnyUrl, imageBuffer, {
-          headers: {
-            AccessKey: bunnyApiKey,
-            'Content-Type': 'application/octet-stream',
+            if (uploadResponse.status === 201) {
+              // Stwórz nowy link do zdjęcia po wysłaniu do Bunny.net
+              return `https://teneryfa.b-cdn.net/${newFileName}`;
+            } else {
+              console.error(`Failed to upload image ${newFileName}`);
+              return null;
+            }
+          })
+        );
+
+        // Zaktualizowanie kolumn w bazie danych dla danego rekordu
+        const mainImage = uploadedLinks[0] || '';
+        const validUploadedLinks = uploadedLinks.filter((link) => link !== null);
+
+        await prisma.listing.update({
+          where: { id },
+          data: {
+            image: mainImage, // główne zdjęcie
+            images: validUploadedLinks, // wszystkie zdjęcia
+            published: true,
           },
         });
-
-        if (uploadResponse.status === 201) {
-          // Stwórz nowy link do zdjęcia po wysłaniu do Bunny.net
-          const newLink = `https://teneryfa.b-cdn.net/${newFileName}`;
-          updatedLinks.push(newLink);
-
-          // Pierwsze zdjęcie staje się głównym obrazem
-          if (i === 0) {
-            mainImage = newLink;
-          }
-        } else {
-          console.error(`Failed to upload image ${newFileName}`);
-        }
-      }
-
-      // Zaktualizowanie kolumn w bazie danych dla danego rekordu
-      await prisma.listing.update({
-        where: { id },
-        data: {
-          image: mainImage, // główne zdjęcie
-          images: updatedLinks, // wszystkie zdjęcia
-          published: true,
-        },
-      });
-    }
+      })
+    );
 
     // Zwrócenie statusu OK po zakończeniu
     res.status(200).json({ message: 'Listings updated successfully' });
