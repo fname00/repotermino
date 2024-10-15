@@ -9,15 +9,15 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json', // Correct path to translation files
     },
-    lng: 'en', // Default language
-    fallbackLng: 'en', // Fallback language
+    lng: 'pl', // Default language
+    fallbackLng: 'pl', // Fallback language
     ns: ['common'], // Namespaces
     defaultNS: 'common',
     interpolation: {
       escapeValue: false, // React already escapes content
     },
     react: {
-      useSuspense: false, // Disable suspense for SSR
+      useSuspense: true, // Enable suspense
     },
   });
 

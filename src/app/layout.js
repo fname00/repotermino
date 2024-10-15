@@ -7,21 +7,19 @@ import "aos/dist/aos.css";
 import "../../public/scss/main.scss";
 import "rc-slider/assets/index.css";
 import { DM_Sans, Poppins } from "next/font/google";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";  // Import Suspense from React
 import I18nProvider from './providers/I18nProvider'; // Import the I18nProvider component
 
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
 
-// DM_Sans font
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--body-font-family",
 });
 
-// Poppins font
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -44,7 +42,10 @@ export default function RootLayout({ children }) {
       >
         {/* Wrap the application with I18nProvider */}
         <I18nProvider>
-          <div className="wrapper ovh">{children}</div>
+          {/* Suspense ensures translations are ready before rendering children */}
+          <Suspense fallback={<div>Loading translations...</div>}>
+            <div className="wrapper ovh">{children}</div>
+          </Suspense>
           <ScrollToTop />
         </I18nProvider>
       </body>
