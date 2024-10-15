@@ -34,13 +34,20 @@ export default async function handler(req, res) {
     // Pobierz 10 rekordów, gdzie published jest false
     const listings = await prisma.listing.findMany({
       where: {
-        published: true,
+        published: false,
         pictures: {
           startsWith: 'https://',
         },
       },
-      take: 10,
+      take:  parseInt(process.env.CDNTAKE, 10),
     });
+
+    // Wyświetlenie pobranych listingów do debugowania
+    console.log('Listingi wybrane do przetworzenia:', listings.map(listing => ({
+      id: listing.id,
+      title: listing.title,
+      pictures: listing.pictures,
+    })));
 
     // Używamy Promise.all do równoległego przetwarzania listingów
     await Promise.all(
@@ -50,6 +57,8 @@ export default async function handler(req, res) {
         // Rozdziel zdjęcia w kolumnie pictures
         const pictureLinks = pictures.split(',');
 
+        console.log(`Przetwarzanie zdjęć dla listing ID: ${id}`);
+
         // Przetwarzanie obrazów równolegle z Promise.all
         const uploadedLinks = await Promise.all(
           pictureLinks.map(async (picture, index) => {
@@ -58,6 +67,8 @@ export default async function handler(req, res) {
             // Generuj losowy ciąg znaków i dodaj {id} na końcu
             const randomString = generateRandomString(20);
             const newFileName = `${randomString}${id}${index + 1}`;
+
+            console.log(`Przesyłanie zdjęcia: ${trimmedPicture} jako ${newFileName}`);
 
             // Pobierz obraz jako strumień bajtów
             const imageResponse = await axios.get(trimmedPicture, {
@@ -77,10 +88,11 @@ export default async function handler(req, res) {
             });
 
             if (uploadResponse.status === 201) {
+              console.log(`Zdjęcie zostało pomyślnie przesłane: ${newFileName}`);
               // Stwórz nowy link do zdjęcia po wysłaniu do Bunny.net
               return `https://teneryfa.b-cdn.net/${newFileName}`;
             } else {
-              console.error(`Failed to upload image ${newFileName}`);
+              console.error(`Nie udało się przesłać zdjęcia ${newFileName}`);
               return null;
             }
           })
