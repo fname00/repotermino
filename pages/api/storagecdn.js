@@ -14,14 +14,19 @@ function generateRandomString(length) {
   }
   return result;
 }
-export const maxDuration = 300;
+
+// Konfiguracja maksymalnego czasu trwania funkcji API
+export const config = {
+  maxDuration: 300, // Możesz ustawić czas do maksymalnie 60 sekund
+};
+
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Only GET requests are allowed' });
   }
 
   const bunnyStorageZone = 'tenerife';
-  const bunnyApiKey = process.env.BUNNY;
+  const bunnyApiKey = '5449eb98-6cf5-42ec-a56db87b08ee-4ccd-42ba';
   const bunnyRegion = ''; // Leave empty if using default region
   const baseUrl = bunnyRegion ? `${bunnyRegion}.storage.bunnycdn.com` : `storage.bunnycdn.com`;
 
@@ -29,12 +34,12 @@ export default async function handler(req, res) {
     // Pobierz 10 rekordów, gdzie published jest false
     const listings = await prisma.listing.findMany({
       where: {
-        published: false,
+        published: true,
         pictures: {
           startsWith: 'https://',
         },
       },
-      take: 1000,
+      take: 10,
     });
 
     for (const listing of listings) {
