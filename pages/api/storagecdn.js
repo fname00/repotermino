@@ -39,7 +39,7 @@ export default async function handler(req, res) {
           startsWith: 'https://',
         },
       },
-      take:  parseInt(process.env.CDNTAKE, 300),
+      take:  parseInt(process.env.CDNTAKE, 10),
     });
 
     // Wyświetlenie pobranych listingów do debugowania
