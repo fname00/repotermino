@@ -26,6 +26,16 @@ export default async function handler(req, res) {
         featured: true,
         availability: true,
         description: true,
+        maxPersons: true,        // New field
+        minAdults: true,         // New field
+        maxAdults: true,         // New field
+        minKids: true,           // New field
+        maxKids: true,           // New field
+        minYouth: true,          // New field
+        maxYouth: true,          // New field
+        discountAdults: true,    // New field
+        discountKids: true,      // New field
+        discountYouth: true,     // New field
         // Conditionally include localized fields based on the requested locale
         ...(locale === 'en' && { 
           title_en: true, 

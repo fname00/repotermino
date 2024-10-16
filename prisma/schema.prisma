@@ -46,38 +46,50 @@ model Listing {
 
 
 model Activity {
-  id              Int      @id @default(autoincrement())
-  image           String
-  images          String[]
-  title           String
-  title_en        String?  // English title
-  title_pl        String?  // Polish title
-  title_es        String?  // Spanish title
-  city            String
-  location        String
-  location_en     String?  // English location
-  location_pl     String?  // Polish location
-  location_es     String?  // Spanish location
-  duration        String
-  duration_en     String?  // English duration
-  duration_pl     String?  // Polish duration
-  duration_es     String?  // Spanish duration
-  price           String
-  discount        String?  // Nullable field for discount
-  forRent         Boolean
-  tags            String[]
-  cancellation    String
-  cancellation_en String?  // English cancellation policy
-  cancellation_pl String?  // Polish cancellation policy
-  cancellation_es String?  // Spanish cancellation policy
-  featured        Boolean
-  availability    String
-  description     String
-  description_en  String?  // English description
-  description_pl  String?  // Polish description
-  description_es  String?  // Spanish description
-  dateAdd         DateTime @default(now())
+  id               Int      @id @default(autoincrement())
+  image            String   @default("/path/to/default/image.png") // Default image
+  images           String[] @default(["/images/activities/default.jpg", "/images/activities/default.jpg"]) // Default array of images
+  pictures         String   @default("/path/to/default/image.png") // Default pictures
+  title            String   @default("Activity") // Default title
+  title_en         String   @default("Activity") // Default English title
+  title_pl         String   @default("Activity") // Default Polish title
+  title_es         String   @default("Activity") // Default Spanish title
+  city             String   @default("No information provided") // Default city
+  location         String   @default("No information provided") // Default location
+  location_en      String   @default("No information provided") // Default English location
+  location_pl      String   @default("No information provided") // Default Polish location
+  location_es      String   @default("No information provided") // Default Spanish location
+  duration         String   @default("No duration provided") // Default duration
+  duration_en      String   @default("No duration provided") // Default English duration
+  duration_pl      String   @default("No duration provided") // Default Polish duration
+  duration_es      String   @default("No duration provided") // Default Spanish duration
+  price            Decimal  @db.Decimal(15, 2) @default(0.00) // Default price
+  discount         Decimal? @db.Decimal(15, 2) // Nullable discount, Decimal type
+  maxPersons       Int      @default(0)  // Maximum number of persons
+  minAdults        Int      @default(0)  // Minimum number of adults
+  maxAdults        Int      @default(0)  // Maximum number of adults
+  minKids          Int      @default(0)  // Minimum number of kids
+  maxKids          Int      @default(0)  // Maximum number of kids
+  minYouth         Int      @default(0)  // Minimum number of youth
+  maxYouth         Int      @default(0)  // Maximum number of youth
+  discountAdults   Decimal  @db.Decimal(5, 2) @default(0.00)  // Discount for adults in percentage
+  discountKids     Decimal  @db.Decimal(5, 2) @default(0.00)  // Discount for kids in percentage
+  discountYouth    Decimal  @db.Decimal(5, 2) @default(0.00)  // Discount for youth in percentage
+  forRent          Boolean  @default(false) // Default not for rent
+  tags             String[] @default([]) // Default empty tags array
+  cancellation     String   @default("No cancellation policy provided") // Default cancellation policy
+  cancellation_en  String   @default("No cancellation policy provided") // Default English cancellation policy
+  cancellation_pl  String   @default("No cancellation policy provided") // Default Polish cancellation policy
+  cancellation_es  String   @default("No cancellation policy provided") // Default Spanish cancellation policy
+  featured         Boolean  @default(false) // Default not featured
+  availability     String   @default("No availability information") // Default availability information
+  description      String   @default("No description provided") // Default description
+  description_en   String   @default("No description provided") // Default English description
+  description_pl   String   @default("No description provided") // Default Polish description
+  description_es   String   @default("No description provided") // Default Spanish description
+  dateAdd          DateTime @default(now()) // Date added
 }
+
 
 model User {
   id             Int      @id @default(autoincrement())
