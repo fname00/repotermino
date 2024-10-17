@@ -40,11 +40,11 @@ const About = () => {
       {/* End Breadcrumb Sections */}
 
       {/* Our About Area */}
-      <section className="our-about pb90">
+      <section className="our-about mt10 pt20 pb90">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
             <div className="col-lg-12">
-              <h1 className="text mb25">
+              <h1 className="text text-center mb25">
                 {t('contact.h1')} {/* Translation of the first description */}
               </h1>
               <p className="text mb20">
@@ -53,19 +53,19 @@ const About = () => {
               <p className="text mb20">
                 {t('contact.p2')} {/* Translation of the second description */}
               </p>
-              <h1 className="text mb25">
+              <h1 className="text text-center mb25">
                 {t('contact.h12')} {/* Translation of the first description */}
               </h1>
-              <p className="text mb20">
+              <p className="text text-center mb20">
                 {t('contact.p3')} {/* Translation of the second description */}
               </p>
-              <h1 className="text mb25">
+              <h1 className="text text-center mb25">
                 {t('contact.h13')} {/* Translation of the first description */}
               </h1>
-              <p className="text mb20">
+              <p className="text text-center mb20">
                 {t('contact.p4')} {/* Translation of the second description */}
               </p>
-              <p className="text mb20">
+              <p className="text text-center mb20">
                 {t('contact.p5')} {/* Translation of the second description */}
               </p>
             </div>

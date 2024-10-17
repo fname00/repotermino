@@ -45,6 +45,7 @@ const PropertyDescription = () => {
   };
 
   const handleImagesChange = (images) => {
+    console.log("Zdjęcia:", images); // Logowanie przekazywanych zdjęć
     setFormData({ ...formData, images });
   };
     // Function to add a feature to the list
@@ -60,37 +61,43 @@ const PropertyDescription = () => {
       setFeaturesList((prev) => prev.filter((_, i) => i !== index));
     };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-      // Convert features list to a string in the format "1. feature, 2. feature, etc."
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      // Dodaj logowanie, aby sprawdzić, czy zdjęcia są w `formData`
+      console.log("Wysyłane dane formularza:", formData);
+    
+      // Konwertujemy listę cech (features) na odpowiedni format
       const formattedFeatures = featuresList
         .map((feature, index) => `${index + 1}. ${feature}`)
         .join(", ");
-  
+    
       const formDataWithFeatures = {
         ...formData,
-        features: formattedFeatures, // Attach formatted features to form data
+        features: formattedFeatures, // Dołączamy cechy do formData
       };
-    try {
-      const res = await fetch("/api/create_listings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await res.json();
-      if (result.success) {
-        alert("Listing created successfully!");
-      } else {
-        alert("Failed to create listing.");
+    
+      try {
+        const res = await fetch("/api/create_listings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataWithFeatures), // Uwzględniamy zdjęcia i cechy
+        });
+    
+        const result = await res.json();
+        if (result.success) {
+          alert("Listing created successfully!");
+        } else {
+          alert("Failed to create listing.");
+        }
+      } catch (error) {
+        console.error("Error creating listing:", error);
+        alert("An error occurred while creating the listing.");
       }
-    } catch (error) {
-      console.error("Error creating listing:", error);
-      alert("An error occurred while creating the listing.");
-    }
-  };
+    };
+    
 
   return (
     <form className="form-style1" onSubmit={handleSubmit}>
@@ -270,7 +277,7 @@ const PropertyDescription = () => {
               />
               <button
                 type="button"
-                className="btn btn-primary ms-3"
+                className="ml10 mr100 ud-btn btn-white"
                 onClick={addFeature}
               >
                 +
@@ -282,7 +289,7 @@ const PropertyDescription = () => {
                 <li class="ju12" key={index}>
                   <button
                     type="button"
-                    className="btn btn-danger btn-sm ms-2"
+                    className="btn"
                     onClick={() => removeFeature(index)}
                   >
                     x

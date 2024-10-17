@@ -42,6 +42,7 @@ const SingleV2 = ({ params }) => {
         <DefaultHeader />
         <MobileMenu />
         <section className="pt30 pb0 bgc-white">
+
           <div className="container">
             <div className="row">
               <Skeleton height={60} width={600} />

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "/pages/api/auth/[...nextauth]"; // Importuj konfigurację NextAuth
-import DashboardHeader from "@/components/common/DashboardHeader";
+import DashboardHeader from "@/components/home/home-v2/Header";
 import MobileMenu from "@/components/common/mobile-menu";
 import Pagination from "@/components/property/Pagination";
 import Footer from "@/components/property/dashboard/Footer";

@@ -24,7 +24,7 @@ const ActivityClient = () => {
       <section className="activity-banner-style2 p0">
         <div className="home-style2">
           <div className="container maxw1600">
-            <div className="home2-activity-banner bdrs12">
+            <div className="home2-activity-banner">
               <div className="row">
                 <div className="col-xl-10 mx-auto">
                   <div className="inner-banner-style2 text-center position-relative">

@@ -39,6 +39,7 @@ const Cta = () => {
             height={365}
             src="/images/aircraft.jpg"
             alt="element"
+            className="bdrs12"
           />
         </div>
         <div className="container">

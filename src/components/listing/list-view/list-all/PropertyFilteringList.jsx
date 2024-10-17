@@ -29,7 +29,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const [bedrooms, setBedrooms] = useState(0);
   const [bathrooms, setBathrooms] = useState(0);
   const [location, setLocation] = useState("All Cities");
-  const [squareFeet, setSquareFeet] = useState([]);
+  const [squareFeet, setSquirefeet] = useState([]);
   const [yearBuild, setYearBuild] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,7 +44,9 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
         setLocale(newLocale); // Update the locale state
       }
     };
-
+    const handlesquirefeet = (elm) => {
+      setSquirefeet(elm);
+    };
     // Listen for changes to the locale cookie
     window.addEventListener('cookiechange', handleLocaleChange);
 
@@ -73,7 +75,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
   }, [searchParams, router]);
 
   const fetchListings = useCallback(
-    debounce(async (pageNumber, searchQuery) => {
+    debounce(async (pageNumber, searchQuery, resetData = false) => {
       setIsLoading(true);
       try {
         const response = await fetch(
@@ -88,7 +90,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
           }
         } else {
           setNoListings(false);
-          setFilteredData((prevData) => [...prevData, ...data.data]);
+          setFilteredData((prevData) => resetData ? data.data : [...prevData, ...data.data]);
         }
         setTotalListings(data.total);
       } catch (error) {
@@ -124,6 +126,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
     setPageNumber(1);
     setHasMore(true);
     setNoListings(false);
+    fetchListings(1, searchQuery, true); // Pass true to reset data when a new query is entered
     updateURL(searchQuery);
   }, [
     listingStatus,
@@ -184,7 +187,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   handlebedrooms: setBedrooms,
                   handlebathrooms: setBathrooms,
                   handlelocation: setLocation,
-                  handlesquareFeet: setSquareFeet,
+                  handlesquirefeet: setSquirefeet,
                   handleyearBuild: setYearBuild,
                   handlecategories: (elm) =>
                     setCategories((pre) =>
@@ -201,7 +204,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                     setBedrooms(0);
                     setBathrooms(0);
                     setLocation("All Cities");
-                    setSquareFeet([]);
+                    setSquirefeet([]);
                     setYearBuild([0, 2050]);
                     setCategories([]);
                     setCurrentSortingOption("Newest");
@@ -272,7 +275,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                     handlebedrooms: setBedrooms,
                     handlebathrooms: setBathrooms,
                     handlelocation: setLocation,
-                    handlesquareFeet: setSquareFeet,
+                    handlesquirefeet: setSquirefeet,
                     handleyearBuild: setYearBuild,
                     handlecategories: (elm) =>
                       setCategories((pre) =>
@@ -289,7 +292,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                       setBedrooms(0);
                       setBathrooms(0);
                       setLocation("All Cities");
-                      setSquareFeet([]);
+                      setSquirefeet([]);
                       setYearBuild([0, 2050]);
                       setCategories([]);
                       setCurrentSortingOption("Newest");

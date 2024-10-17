@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   const {
-    locale = 'en', // Default locale is English
+    locale = 'pl', // Default locale is English
     listingStatus = "All",
     propertyTypes = [],
-    priceRange = [0, 1000000],
+    priceRange = [0, 2000000],
     bedrooms = 0,
     bathrooms = 0,
     location = "All Cities",
@@ -88,9 +88,13 @@ export default async function handler(req, res) {
     }
     
     if (squirefeet.length === 2) {
-      listings = listings.filter(elm => elm.sqft >= squirefeet[0] && elm.sqft <= squirefeet[1]);
+      const minSqft = parseInt(squirefeet[0], 10); // Convert to integer
+      const maxSqft = parseInt(squirefeet[1], 10); // Convert to integer
+    
+      listings = listings.filter(elm => elm.sqft >= minSqft && elm.sqft <= maxSqft);
     }
-    if (yearBuild.length === 2) {
+
+    if (yearBuild.length === 2) {dashboard
       listings = listings.filter(elm => elm.yearBuilding >= yearBuild[0] && elm.yearBuilding <= yearBuild[1]);
     }
 

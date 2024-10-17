@@ -63,10 +63,6 @@ const DashboardAddProperty = async () => {
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>Add New Property</h2>
-                    <ul className="text">Lista to-do:
-                      <li>1. Z upload plik przesyłany na CDN zwrotne linki umieszane w DB</li>
-                      <li>2. Stylizacja dodawnia features</li>
-                    </ul>
                   </div>
                 </div>
               </div>

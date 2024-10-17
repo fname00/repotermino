@@ -25,9 +25,9 @@ model Listing {
   features         String   @default("No features provided") // Default features
   description      String   @default("No description provided") // Default description
   dateAdd          DateTime @default(now()) // Date added
-  image            String   @default("/path/to/default/image.png") // Default image URL
+  image            String   @default("/images/listings/default.jpg") // Default image URL
   images           String[] @default(["/images/listings/default.jpg", "/images/listings/default.jpg"]) // Default array of images
-  pictures         String   @default("/path/to/default/image.png") // Default pictures
+  pictures         String   @default("/images/listings/default.jpg") // Default pictures
   holiday          Boolean  @default(false) // Default not holiday
   published        Boolean  @default(false) // Default not published
   translated       Boolean  @default(false) // Default not translated
@@ -47,9 +47,9 @@ model Listing {
 
 model Activity {
   id               Int      @id @default(autoincrement())
-  image            String   @default("/path/to/default/image.png") // Default image
+  image            String   @default("/images/listings/default.jpg") // Default image
   images           String[] @default(["/images/activities/default.jpg", "/images/activities/default.jpg"]) // Default array of images
-  pictures         String   @default("/path/to/default/image.png") // Default pictures
+  pictures         String   @default("/images/listings/default.jpg") // Default pictures
   title            String   @default("Activity") // Default title
   title_en         String   @default("Activity") // Default English title
   title_pl         String   @default("Activity") // Default Polish title

@@ -34,16 +34,17 @@ const FeaturedListings = ({ data, colstyle }) => {
       <>
         {[...Array(3)].map((_, index) => (
           <div
-            className={` ${colstyle ? "col-sm-4 col-lg-4" : "col-sm-12"}  `}
+            className={` ${colstyle ? "col-sm-4 col-lg-4 skeleton-pulse" : "col-sm-12 skeleton-pulse"}  `}
             key={index}
           >
+            
             <div
               className={
                 colstyle
                   ? "listing-style1"
                   : "listing-style1 listCustom listing-type"
               }
-            >
+            >      
               <div className="list-thumb">
                 <Skeleton height={253} width={"100%"} />
                 <div className="sale-sticker-wrap">
@@ -68,7 +69,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                 <p className="list-text2">
                   <Skeleton count={2} width={"100%"} height={20} />
                 </p>
-                <hr className="mt-2 mb-2" />
+
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <Skeleton width={80} height={20} />
                   <div className="icons d-flex align-items-center">
@@ -110,7 +111,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                 <p className="list-text2">
                   <Skeleton count={2} width={"100%"} height={20} />
                 </p>
-                <hr className="mt-2 mb-2" />
+
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <Skeleton width={80} height={20} />
                   <div className="icons d-flex align-items-center">
@@ -152,7 +153,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                 <p className="list-text2">
                   <Skeleton count={2} width={"100%"} height={20} />
                 </p>
-                <hr className="mt-2 mb-2" />
+
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <Skeleton width={80} height={20} />
                   <div className="icons d-flex align-items-center">
@@ -194,7 +195,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                 <p className="list-text2">
                   <Skeleton count={2} width={"100%"} height={20} />
                 </p>
-                <hr className="mt-2 mb-2" />
+
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <Skeleton width={80} height={20} />
                   <div className="icons d-flex align-items-center">
@@ -242,9 +243,13 @@ const FeaturedListings = ({ data, colstyle }) => {
                   </div>
                 )}
               </div>
-
               <div className="list-price">
-                {listing.price} €{listing.forRent ? "/ mo" : ""}
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'EUR',
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                }).format(listing.price)}{listing.forRent ? " / mo" : ""}
               </div>
             </div>
             <div className="list-content">
@@ -270,10 +275,7 @@ const FeaturedListings = ({ data, colstyle }) => {
                   {listing.forRent ? "For Rent" : "For Sale"}
                 </span>
                 <div className="icons d-flex align-items-center">
-                  <a href="#">
-                    <span className="flaticon-fullscreen" />
-                  </a>
-                  <a href="#">
+                  <a href={`/property/${listing.id}`} target="_blank" rel="noopener noreferrer">
                     <span className="flaticon-new-tab" />
                   </a>
                   <a 

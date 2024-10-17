@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const HeroContent = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-
+  const { t } = useTranslation('common');
   const handleSearch = () => {
     router.push(`/all?searchQuery=${encodeURIComponent(searchQuery)}`);
   };
@@ -23,7 +24,7 @@ const HeroContent = () => {
                     className="custom-form form-control"
                     type="text"
                     name="search"
-                    placeholder="Enter Keyword"
+                    placeholder= {t('EnterKeyword')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />

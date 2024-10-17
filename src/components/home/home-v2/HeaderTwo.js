@@ -42,7 +42,7 @@ const Header = () => {
                       <Image
                         width={138}
                         height={44}
-                        src="/images/header-logo8.svg"
+                        src="/images/logo-b.png"
                         alt="Header Logo"
                       />
                     </Link>

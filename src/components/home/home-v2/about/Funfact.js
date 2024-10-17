@@ -9,9 +9,9 @@ const Funfact = () => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
 
   const funFacts = [
-    { number: 400, text: t("houses") },
+    { number: 600, text: t("houses") },
     { number: 200, text: t("rentals") },
-    { number: 1000, text: t("customers") },
+    { number: 20, text: t("yearsofwork") },
     // Add more fun facts if needed
   ];
 

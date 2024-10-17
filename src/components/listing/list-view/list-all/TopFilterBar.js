@@ -12,10 +12,17 @@ const TopFilterBar = ({
       <div className="col-sm-6">
         <div className="text-center text-sm-start">
           <p className="pagination_page_count mb-0">
-            Showing {pageContentTrac[1] < totalListings
-              ? pageContentTrac[1]
-              : totalListings}{" "}
-            of {totalListings} results
+            {totalListings < 11
+              ? `Showing ${
+                  pageContentTrac[1] < totalListings
+                    ? pageContentTrac[1]
+                    : totalListings
+                }`
+              : `Showing ${
+                  pageContentTrac[1] < totalListings
+                    ? pageContentTrac[1]
+                    : totalListings
+                } of ${totalListings} results`}
           </p>
         </div>
       </div>

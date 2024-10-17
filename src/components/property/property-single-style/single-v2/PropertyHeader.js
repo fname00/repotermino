@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next"; // Import useTranslation hook
+import { useEffect, useState} from "react";
+import Cookies from "js-cookie";
 
 // Funkcja obliczająca, ile czasu temu dodano post
 const getTimeAgo = (dateAdd, t) => {
@@ -24,7 +26,28 @@ const getTimeAgo = (dateAdd, t) => {
 
 const PropertyHeader = ({ data }) => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+  const [favorites, setFavorites] = useState([]);
 
+  // Load favorites from cookies on initial render
+  useEffect(() => {
+    const favoriteItems = Cookies.get("favorites");
+    if (favoriteItems) {
+      setFavorites(JSON.parse(favoriteItems));
+    }
+  }, []);
+
+  // Save favorites to cookies whenever it changes
+  useEffect(() => {
+    Cookies.set("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = (listingId) => {
+    if (favorites.includes(listingId)) {
+      setFavorites(favorites.filter((id) => id !== listingId));
+    } else {
+      setFavorites([...favorites, listingId]);
+    }
+  };
   if (!data) {
     return <p>{t('loading')}</p>;
   }
@@ -68,11 +91,21 @@ const PropertyHeader = ({ data }) => {
         <div className="single-property-content">
           <div className="property-action text-lg-end">
             <div className="d-flex mb20 mb10-md align-items-center justify-content-lg-end">
-              <a className="icon mr10" href="#">
-                <span className="flaticon-like" />
-              </a>
+            <a 
+                    onClick={() => toggleFavorite(data.id)}
+                    style={{ color: favorites.includes(data.id) ? "red" : "black" }}
+                  >
+                    <span className="flaticon-like" />
+                  </a>
             </div>
-            <h3 className="price mb-0">{data.price} €</h3>
+            <h3 className="price mb-0">
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              }).format(data.price)}
+            </h3>
             <p className="text space fz15">
             {t('pricePerSqFt', {
               pricePerSqFt: data.price && data.sqft 

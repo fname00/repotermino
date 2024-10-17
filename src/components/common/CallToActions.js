@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 const CallToActions = () => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
+    
     <section className="our-cta pt0">
       <div className="cta-banner bgc-f7 mx-auto maxw1600 pt120 pt60-md pb120 pb60-md bdrs12 position-relative mx20-lg">
         <div className="img-box-5">
@@ -29,9 +32,9 @@ const CallToActions = () => {
           <div className="row align-items-center">
             <div className="col-lg-7 col-xl-6 " data-aos="fade-right">
               <div className="cta-style1">
-                <h2 className="cta-title">Need help? Talk to our expert.</h2>
+                <h2 className="cta-title">{t('needhelp')}</h2>
                 <p className="cta-text mb-0">
-                  Talk to our experts or Browse through more properties.
+                  {t('talktoexp')}
                 </p>
               </div>
             </div>

@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const SecondMenu = () => {
   const pathname = usePathname();
   const [topMenu, setTopMenu] = useState("");
-
+  const { t } = useTranslation('common');
   useEffect(() => {
     if (pathname.split("/")[1] === "blog-list-v2") {
       setTopMenu("blog");
@@ -25,7 +26,7 @@ const SecondMenu = () => {
       <li className="visible_list dropitem">
         <Link className="list-item" href="/favorites">
           <span className={handleActive("/favorites") ? "title menuActive" : "title"}>
-            Favorites
+            {t('Favorites')}
           </span>
         </Link>
       </li>
@@ -44,7 +45,7 @@ const SecondMenu = () => {
       <li className="visible_list dropitem">
         <Link className="list-item" href="/about">
           <span className={handleActive("/about") ? "title menuActive" : "title"}>
-            About
+             {t('About')}
           </span>
         </Link>
       </li>

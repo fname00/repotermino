@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
         {/* Wrap the application with I18nProvider */}
         <I18nProvider>
           {/* Suspense ensures translations are ready before rendering children */}
-          <Suspense fallback={<div>Loading translations...</div>}>
+          <Suspense fallback={<div></div>}>
             <div className="wrapper ovh">{children}</div>
           </Suspense>
           <ScrollToTop />

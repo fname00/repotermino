@@ -27,26 +27,19 @@ const About = () => {
       <MobileMenu />
       {/* End Mobile Nav  */}
 
-      {/* Hero Banner */}
-      <section className="our-about p-0">
+      {/* Breadcrumb Sections */}
+      <section className="breadcumb-section23 p-0">
         <div className="container">
-          <div className="row" data-aos="fade-up" data-aos-delay="300">
+          <div className="row">
             <div className="col-lg-12">
-                <div className="about-page-img">
-                    <Image
-                        src="/images/about/hero.jpg" // Zastąp 'hero.jpg' nazwą pliku
-                        alt={t('about.hero.alt')}
-                        width={1206} // Dopasuj szerokość
-                        height={515} // Dopasuj wysokość
-                        priority
-                        className="w-100 custom-400px cover"
-                    />
+              <div className="breadcumb-style1">
+                {/* Placeholder for breadcrumb */}
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* End Hero Banner */}
+      {/* End Breadcrumb Sections */}
 
       {/* About Section */}
       <section className="about-section py-5">
@@ -154,18 +147,7 @@ const About = () => {
       {/* Closing Banner */}
       <section className="closing-banner py-5">
         <div className="container">
-          <div className="row" data-aos="fade-up" data-aos-delay="300">
-            <div className="col-lg-12">
-              <Image
-                src="/images/about/banner3.jpg" // Zastąp 'banner3.jpg' nazwą pliku
-                alt={t('about.banner3.alt')}
-                width={1206} // Dopasuj szerokość
-                height={515} // Dopasuj wysokość
-                priority
-                className="w-100 custom-400px cover"
-              />
-            </div>
-          </div>
+
           <div className="row">
             <div className="col-12 text-center py-5">
               <p>{t('about.section5.text')}</p>

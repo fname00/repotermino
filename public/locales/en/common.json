@@ -1,11 +1,11 @@
 {
-  "book a trip": "BOOK YOUR TRIP",
+  "book a trip": "Book your trip",
   "welcome": "Welcome to our website!",
-  "appreciation": "Thank you for using our services! Confirmation will be sent to email address {{customerEmail}}.",
+  "appreciation": "Thank you for using our services! Confirmation will be sent to the email address {{customerEmail}}.",
   "questions": "If you have any questions, please contact <a href=\"mailto:orders@example.com\">orders@example.com</a> .",
   "findYourDreamHome": "Find your dream home",
   "findPerfectHome": "Find the perfect home for you",
-  "buy": "Buy",
+  "buy": "Cup",
   "rent": "Rent",
   "sale": "Sale",
   "activity": "Activity",
@@ -33,6 +33,7 @@
   "houses": "Houses",
   "rentals": "Rent",
   "customers": "Customers",
+  "yearsofwork": "Years of experience",
   "seeMore": "See more",
   "mobileIcon": "mobile icon",
   "logo": "logo",
@@ -105,7 +106,7 @@
   "city": "City",
   "propertyID": "Property ID",
   "price": "Cena",
-  "propertySize": "Property Size",
+  "propertySize": "Property size",
   "garageSize": "Garage size",
   "propertyStatus": "Property Status",
   "otherListingsIn": "Other offers in",
@@ -167,7 +168,7 @@
     "h12": "Contact details",
     "h13": "We are waiting for your contact"
   },
-  "teneryfa_title": "Tenerife - Discover paradise on Earth",
+  "teneryfa_title": "Tenerife - Discover Paradise on Earth",
   "teneryfa_description1": "Planning a trip to Tenerife? Want to learn all about travel formalities? Download our ebook and discover all the necessary information that will help you organize your dream vacation. Be sure that you are prepared for every situation - from documents, through regulations, to local customs.",
   "teneryfa_description2": "Download the ebook and start fulfilling your dreams today!",
   "download_ebook": "Download eBook",
@@ -300,5 +301,51 @@
   "fuertaventura": "Fuerteventura",
   "gran_canaria": "Gran Canaria",
   "lanzarote1": "Lanzarote",
-  "about1": "The nas"
+  "about1": "The nas",
+  "thankYouTitle": "Thank you for your purchase!",
+  "thankYouMessage": "Your order has been successfully completed.",
+  "contactMessage": "If you have questions or need help, please contact us:",
+  "whatsapp": "WhatsApp",
+  "callUs": "Call us",
+  "emailUs": "Write to us",
+  "EnterKeyword": "Enter keyword",
+  "backToHome": "Return to the main page",
+  "Favorites": "Favorite",
+  "About": "The nas",
+  "nofavorites": "No favorites. Browse offers!",
+  "yourfavorites": "Your favorite offers",
+  "contactsale": {
+    "form": {
+      "title": "Contact us",
+      "li1": "Phone number: +48 123 456 789",
+      "li2": "Email: kontakt@example.com",
+      "h5": "Contact Information",
+      "description": "If you have any questions, please contact us using the form below."
+    },
+    "team": {
+      "alt": "Photo",
+      "h3": "Find out how we can help you in this process and what benefits come from working with our company.",
+      "description": "In our company, which specializes in the real estate market in Tenerife. We are a team of experienced professionals who are passionate about property management, offering services with a guarantee of security and professionalism. Our goal is to provide support at every stage of the sales process, allowing our clients to realize their dreams of the perfect property. We understand that decisions related to buying or selling can be complicated, which is why we are here to make this process easier and more accessible. We offer assistance with financing, allowing our clients to find favorable solutions. With our currency services, you can be sure that financial management will be convenient and safe. We not only support our clients in real estate transactions, but also help them discover the charms of Tenerife. We offer information on local attractions and activities that can be used during your vacation - from water sports, to hiking on picturesque trails, to discovering local culture and cuisine. Our offer is comprehensive, allowing you to focus on what is most important - realizing your dreams of a property in Tenerife and enjoying this beautiful place to the fullest. We are here to make sure your interests are in good hands."
+    },
+    "offer": {
+      "h3": "WE OFFER",
+      "description": "We offer the perfect sales options to fit your needs.",
+      "1description": "Real estate management with a guarantee of professionalism and security. ",
+      "2description": "With us you don&#39;t have to worry about finances - you will always find favorable solutions. ",
+      "3description": "Our mortgage services provide support at every stage of the transaction. ",
+      "4description": "Use currency services that provide favorable rates and security."
+    },
+    "features": {
+      "h3": "Why is it worth working with us?",
+      "li1": "Real estate is a sector that is constantly developing and attracts the attention of many investors and people looking for their place on earth. Our company, thanks to experience and professional knowledge, successfully operates in this market, offering comprehensive services related to the purchase, sale and rental of real estate. ",
+      "li2": "We are currently seeing an increase in interest in purchasing real estate, which is confirmed by our numerous transactions in recent months. Clients appreciate our approach – we offer not only professional advice, but also detailed market analyses, which allows them to make informed decisions. Thanks to our efforts, many people have found their dream apartments and houses, which is evidence of our effectiveness. ",
+      "li3": "Real estate sales are another area where we achieve significant results. Our marketing strategies, including professional photos and detailed descriptions, attract crowds of potential buyers. Thanks to the negotiation skills of our team, we have managed to complete many transactions on favorable terms, which brings satisfaction to both sellers and buyers.",
+      "li4": "Real estate rental is another segment in which our company achieves success. We notice a growing demand for apartments for rent, which makes our offer very popular. Thanks to a professional approach to each client and detailed advice on lease agreements, we can ensure safety and comfort for both landlords and tenants. ",
+      "li5": "As the real estate market evolves, our company constantly adapts to the changing needs of our clients. Working with us is a guarantee of professionalism, efficiency and satisfaction with the transactions carried out. Observing the growing demand, we are convinced that our services contribute to positive changes in the real estate market, and our achievements are a testament to our determination and commitment to the industry."
+    },
+    "closing": {
+      "alt": "Closing Banner",
+      "description": "Our company is constantly developing its activity on the real estate market, offering not only apartments and houses, but also hotel rentals and the organization of tourist attractions. Thanks to a wide selection of facilities - from intimate guesthouses to luxury hotels - we can adapt the offer to various needs of customers. We cooperate with local attractions, which allows us to create packages that combine accommodation with unique experiences, such as trips or tastings. Our approach is based on understanding the expectations of customers, which translates into high guest satisfaction. By combining hotel rental with the offer of attractions and the sale of real estate, we support the local economy and attract tourists. We are convinced that our activity contributes to the growth of interest in the region and builds a positive image of our brand."
+    }
+  }
 }

@@ -15,31 +15,31 @@ const ExploreCities = () => {
     },
     {
       id: 2,
-      name: "Gran Canaria",
+      name: "Los Cristianos",
       image: "/images/listings/city-grancanaria.jpg",
       number: 8,
     },
     {
       id: 3,
-      name: "Lanzarote",
+      name: "San Eugenio Alto",
       image: "/images/listings/city-lanzarote.jpg",
       number: 15,
     },
     {
       id: 4,
-      name: "Fuerteventura",
+      name: "Las Américas",
       image: "/images/listings/city-fuerteventura.jpg",
       number: 10,
     },
     {
       id: 5,
-      name: "La Palma",
+      name: "Madroñal",
       image: "/images/listings/city-lapalma.jpg",
       number: 12,
     },
     {
       id: 6,
-      name: "La Gomera",
+      name: "Costa del Silencio",
       image: "/images/listings/city-lagomera.jpg",
       number: 8,
     },
@@ -77,7 +77,7 @@ const ExploreCities = () => {
         {cities.map((city) => (
           <SwiperSlide key={city.id}>
             <div className="item">
-              <Link href="/all">
+              <Link href= {`/all?searchQuery=${encodeURIComponent(city.name)}`}>
                 <div className="feature-style2 mb30">
                   <div id="custom-main-city" className="feature-img">
                     <Image

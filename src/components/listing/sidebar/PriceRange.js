@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Slider from "rc-slider";
 
 const PriceRange = ({ filterFunctions }) => {
-  const [price, setPrice] = useState([20, 15000000]);
+  const [price, setPrice] = useState([20, 2000000]);
 
   // Price range handler
   const handleOnChange = (value) => {
@@ -21,7 +21,7 @@ const PriceRange = ({ filterFunctions }) => {
         <Slider
           range
           formatLabel={() => ``}
-          max={15000000}
+          max={2000000}
           min={0}
           defaultValue={[
             filterFunctions?.priceRange[0],

@@ -9,17 +9,15 @@ const MenuWidget = () => {
     {
       title: t("popular_search"), // Translation key for the title
       links: [
-        { label: t("villa_in_tenerife"), href: "#" }, // Translation key for each label
-        { label: t("apartment_in_tenerife"), href: "#" },
-        { label: t("best_offers"), href: "#" },
-        { label: t("hot"), href: "#" },
+        { label: t("villa_in_tenerife"), href: "/all?searchQuery=villa" }, // Translation key for each label
+        { label: t("apartment_in_tenerife"), href: "/all?searchQuery=flat" },
+        { label: t("best_offers"), href: "/all?searchQuery=villa" },
+        { label: t("hot"), href: "/all?searchQuery=villa" },
       ],
     },
     {
       title: t("quick_links"),
       links: [
-        { label: t("terms_of_use"), href: "#" },
-        { label: t("privacy_policy"), href: "#" },
         { label: t("about1"), href: "/about" },
         { label: t("our_services"), href: "/sale" },
         { label: t("contact_support"), href: "/contact" },

@@ -7,12 +7,22 @@ const PropertyType = ({ filterFunctions }) => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
 
   const options = [
-    { label: "houses" },    // Use lowercase keys for consistency in translation files
+    { label: "houses" },    
     { label: "apartments", defaultChecked: true },
     { label: "office" },
     { label: "villa" },
+    { label: "shop" },
+    { label: "studio" },
+    { label: "land" },
+    { label: "parking" },
+    { label: "building" },
+    { label: "flat" },
+    { label: "bungalow" },
+    { label: "country house" },
+    { label: "penthouse" },
+    { label: "duplex" },
   ];
-
+  
   return (
     <>
       <label className="custom_checkbox">

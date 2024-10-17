@@ -24,37 +24,49 @@ export default async function handler(req, res) {
         published,
         link,
       } = req.body;
-    // Function to generate random 20-character string
-    const generateRandomString = (length) => {
+
+      // Function to generate random 20-character string
+      const generateRandomString = (length) => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
         for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
         }
         return result;
-    };
-    const link_random = generateRandomString(20);
-    const garageValue = garage > 0;
+      };
+
+      const link_random = generateRandomString(20);
+      const garageValue = garage > 0;
+
+      // Convert string values to integers where needed
+      const bedValue = parseInt(bed, 10) || 0;
+      const bathValue = parseInt(bath, 10) || 0;
+      const sqftValue = parseInt(sqft, 10) || 0;
+      const priceValue = parseFloat(price) || 0.00;
+
+      // Get the first image or set a default value
+      const mainImage = images && images.length > 0 ? images[0] : "/images/listings/default.jpg";
 
       // Create a new listing in the database
       const newListing = await prisma.listing.create({
         data: {
-          title: title || "Real estate", // Default value if none provided
+          title: title || "Real estate",
           city: city || "No information provided",
           location: location || "No information provided",
           country: country || "No information provided",
-          bed: bed || 0,
-          bath: bath || 0,
+          bed: bedValue, // Ensure `bed` is an integer
+          bath: bathValue, // Ensure `bath` is an integer
           garage: garageValue || false,
           storage: storage || false,
-          sqft: sqft || 0,
+          sqft: sqftValue, // Ensure `sqft` is an integer
           propertyType: propertyType || "Unknown",
-          price: price || 0.00,
+          price: priceValue, // Ensure `price` is a float
           forRent: forRent || false,
           description: description || "No description provided",
           features: features || "No features provided",
           images: images || ["/images/listings/default.jpg", "/images/listings/default.jpg"],
-          published: published || false,
+          image: mainImage, // Save the first image as a separate column
+          published: true,
           link: link || link_random,
         },
       });

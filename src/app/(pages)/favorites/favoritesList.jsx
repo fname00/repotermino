@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import FeaturedListings from "@/components/listing/list-view/list-all/FeaturedListings";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const FavoritesList = () => {
   const [favorites, setFavorites] = useState([]);
   const [favoriteListings, setFavoriteListings] = useState([]);
-
+  const { t } = useTranslation('common');
   // Load favorite IDs from cookies on initial render
   useEffect(() => {
     const favoriteItems = Cookies.get("favorites");
@@ -70,7 +71,7 @@ const FavoritesList = () => {
           fontWeight: 'bold', // Bold text
           textAlign: 'center', // Centered text
         }}>
-          No favorites yet. Start adding some!
+          {t('nofavorites')}
         </p>
       </div>
     );
@@ -79,7 +80,7 @@ const FavoritesList = () => {
   return (
     <section className="pt10 pb90 bgc-f7">
       <div className="container">
-        <h2>Your Favorite Listings</h2>
+        <h2>{t('yourfavorites')}</h2>
         <div className="row mt15">
           <FeaturedListings colstyle={true} data={favoriteListings} />
         </div>

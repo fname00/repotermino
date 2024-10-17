@@ -1,23 +1,43 @@
 "use client";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
-import Image from "next/image";
+import axios from "axios";
 
 const UploadPhotoGallery = ({ onImagesChange }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
-
-  const handleUpload = (files) => {
+  const bunnyApiKey = process.env.NEXT_PUBLIC_BUNNY;
+  const handleUpload = async (files) => {
     const newImages = [...uploadedImages];
+    console.log("Uploading files:", files); // Sprawdzenie, czy pliki są prawidłowo odbierane
 
     for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        newImages.push(e.target.result);
-        setUploadedImages(newImages);
-        onImagesChange(newImages);  // Pass the new images to the parent component
-      };
-      reader.readAsDataURL(file);
+      try {
+        const randomFileName = `${Date.now()}-${file.name}`;
+        const bunnyUrl = `https://storage.bunnycdn.com/tenerife/${randomFileName}`;
+        console.log("Sending to Bunny.net:", bunnyUrl); // Logowanie URL przesyłania
+
+        // Pobranie pliku jako ArrayBuffer (surowy strumień bajtów)
+        const fileBuffer = await file.arrayBuffer();
+
+        // Wysyłanie pliku jako strumień bajtów do Bunny.net
+        const response = await axios.put(bunnyUrl, fileBuffer, {
+          headers: {
+            AccessKey: bunnyApiKey,
+            'Content-Type': 'application/octet-stream',
+          },
+        });
+
+        console.log("Response from Bunny.net:", response); // Logowanie odpowiedzi z Bunny.net
+
+        if (response.status === 201) {
+          const imageUrl = `https://teneryfa.b-cdn.net/${randomFileName}`;
+          newImages.push(imageUrl);
+          setUploadedImages(newImages);
+          onImagesChange(newImages); // Przekazanie nowych zdjęć do komponentu nadrzędnego
+        }
+      } catch (error) {
+        console.error("Error uploading image to Bunny.net:", error.response || error.message); // Logowanie błędów
+      }
     }
   };
 
@@ -39,7 +59,7 @@ const UploadPhotoGallery = ({ onImagesChange }) => {
     const newImages = [...uploadedImages];
     newImages.splice(index, 1);
     setUploadedImages(newImages);
-    onImagesChange(newImages);  // Update the parent component after deletion
+    onImagesChange(newImages); // Aktualizacja po usunięciu zdjęcia
   };
 
   return (
@@ -65,7 +85,7 @@ const UploadPhotoGallery = ({ onImagesChange }) => {
             type="file"
             multiple
             className="ud-btn btn-white"
-            onChange={(e) => handleUpload(e.target.files)}
+            onChange={(e) => handleUpload(e.target.files)} // Logowanie i obsługa dodania zdjęć
             style={{ display: "none" }}
           />
         </label>
@@ -76,7 +96,7 @@ const UploadPhotoGallery = ({ onImagesChange }) => {
         {uploadedImages.map((imageData, index) => (
           <div className="col-2" key={index}>
             <div className="profile-img mb20 position-relative">
-              <Image
+              <img
                 width={212}
                 height={194}
                 className="w-100 bdrs12 cover"
@@ -89,16 +109,9 @@ const UploadPhotoGallery = ({ onImagesChange }) => {
                 title="Delete Image"
                 onClick={() => handleDelete(index)}
                 type="button"
-                data-tooltip-id={`delete-${index}`}
               >
                 <span className="fas fa-trash-can" />
               </button>
-
-              <ReactTooltip
-                id={`delete-${index}`}
-                place="right"
-                content="Delete Image"
-              />
             </div>
           </div>
         ))}
