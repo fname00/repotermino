@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useRef } from "react";
 import axios from "axios";
-
+import Image from "next/image";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 const UploadPhotoGallery = ({ onImagesChange }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);

@@ -20,6 +20,8 @@
   "listings": "Oferty",
   "featured": "POLECANE",
   "perMonth": "/ mc",
+  "needhelp": "Potrzebujesz pomocy? Porozmawiaj z ekspertem.",
+  "talktoexp": " Porozmawiaj z profesjonalistą.",
   "bed": "łóżko",
   "bath": "łazienka",
   "squareMeter": "m2",
@@ -382,5 +384,19 @@
         "alt": "Baner zamknięcia",
         "description": "Nasza firma nieustannie rozwija swoją działalność na rynku nieruchomości, oferując nie tylko mieszkania i domy, ale także wynajem hoteli oraz organizację atrakcji turystycznych. Dzięki szerokiemu wyborowi obiektów – od kameralnych pensjonatów po luksusowe hotele – możemy dostosować ofertę do różnych potrzeb klientów. Współpracujemy z lokalnymi atrakcjami, co pozwala nam tworzyć pakiety, łączące zakwaterowanie z unikalnymi doświadczeniami, takimi jak wycieczki czy degustacje. Nasze podejście opiera się na zrozumieniu oczekiwań klientów, co przekłada się na wysoką satysfakcję gości. Dzięki połączeniu wynajmu hoteli z ofertą atrakcji oraz sprzedażą nieruchomości, wspieramy lokalną gospodarkę i przyciągamy turystów. Jesteśmy przekonani, że nasza działalność przyczynia się do wzrostu zainteresowania regionem i buduje pozytywny wizerunek naszej marki."
       }
-    }
+    },
+    "houses": "Domy",
+    "apartments": "Apartamenty",
+    "office": "Biuro",
+    "villa": "Willa",
+    "shop": "Sklep",
+    "studio": "Studio",
+    "land": "Działka",
+    "parking": "Parking",
+    "building": "Budynek",
+    "flat": "Mieszkanie",
+    "bungalow": "Bungalow",
+    "country house": "Dom na wsi",
+    "penthouse": "Penthouse",
+    "duplex": "Dupleks"
 }

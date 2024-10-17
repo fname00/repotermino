@@ -7,8 +7,6 @@ const PropertyType = ({ filterFunctions }) => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
 
   const options = [
-    { label: "houses" },    
-    { label: "apartments", defaultChecked: true },
     { label: "office" },
     { label: "villa" },
     { label: "shop" },

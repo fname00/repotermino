@@ -3606,10 +3606,7 @@ section.pt0.pb90.bgc-f7.custom_top_activity > div{
     display: flex;
     height: 75vh;
 }
-@media (max-width: 767.98px) {
-    .home-banner-style2 .home-style2 {
-    }
-}
+
 .custom-search2{
     width:100% !important;
 }
@@ -9887,7 +9884,7 @@ input:focus-visible {
 
 .selection input[type="radio"]:checked ~ label {
     border: 2px solid #181a20;
-    outlinie: transparent;
+    outline: transparent;
     z-index: 1;
 }
 

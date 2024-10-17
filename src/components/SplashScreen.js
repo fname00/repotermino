@@ -1,11 +1,11 @@
 // components/SplashScreen.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import anime from 'animejs';
 
 const SplashScreen = ({ finishLoading }) => {
   useEffect(() => {
     const loader = anime.timeline({
-      complete: () => finishLoading(),
+      complete: () => finishLoading()
     });
 
     loader.add({
