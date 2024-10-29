@@ -86,9 +86,9 @@ const Header = () => {
                     href="tel:+012305094502"
                   >
                     <i className="far fa-phone fz16 me-2 pl10 "></i>{" "}
-                    <span className="custom-number d-none d-xl-block">
-                      2 911 098 7654
-                    </span>
+                    <a href="tel:+48 779 985 6875" className="custom-number d-none d-xl-block">
+                    +48 779 985 6875
+                    </a>
                   </a>
                 </div>
               </div>

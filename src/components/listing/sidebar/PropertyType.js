@@ -5,21 +5,21 @@ import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const PropertyType = ({ filterFunctions }) => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
-
   const options = [
-    { label: "office" },
-    { label: "villa" },
-    { label: "shop" },
-    { label: "studio" },
-    { label: "land" },
-    { label: "parking" },
-    { label: "building" },
-    { label: "flat" },
-    { label: "bungalow" },
-    { label: "country house" },
-    { label: "penthouse" },
-    { label: "duplex" },
+    { label: "villa", value: "villa" },
+    { label: "penthouse", value: "penthouse" },
+    { label: "duplex", value: "duplex" },
+    { label: "flat", value: "flat" },
+    { label: "bungalow", value: "bungalow" },
+    { label: "country house", value: "country-house" },
+    { label: "building", value: "building" },
+    { label: "land", value: "land" },
+    { label: "studio", value: "studio" },
+    { label: "office", value: "office" },
+    { label: "shop", value: "shop" },
+    { label: "parking", value: "parking" },
   ];
+  
   
   return (
     <>

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     searchQuery = "",
     pageNumber = 1,
     pageSize = 12,
-    currentSortingOption = "Newest",
+    currentSortingOption = "Price High",
   } = req.query;
 
   try {

@@ -43,7 +43,7 @@ const Contact = () => {
                   {t('contactsale.form.title')}
                 </h4>
                 <ul>
-                    <li>{t('contactsale.form.li1')}</li>
+                    <li>{t('contactsale.form.li1')}<a href="tel:+34605376399"> +34 605376399</a></li>
                     <li>{t('contactsale.form.li2')}</li>
                 </ul>
                 <h5 className="pt10">{t('contactsale.form.h5')}</h5>

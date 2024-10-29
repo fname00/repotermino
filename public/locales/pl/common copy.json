@@ -7,10 +7,11 @@
   "findPerfectHome": "Znajdź dom idealny dla siebie",
   "buy": "Kup",
   "rent": "Wynajem",
+
   "sale": "Sprzedaż",
   "activity": "Aktywność",
   "all": "Wszystko",
-  "holiday": "Wakacje",
+  "holiday": "Atrakcje",
   "discoverFeaturedListings": "Odkryj nasze wyróżnione oferty",
   "listingsDescription": "Aliquam lacinia diam quis lacus euismod",
   "seeAllProperties": "Zobacz wszystkie nieruchomości",
@@ -354,8 +355,8 @@
     "contactsale": {
       "form": {
         "title": "Skontaktuj się z nami",
-        "li1": "Numer telefonu: +48 123 456 789",
-        "li2": "Email: kontakt@example.com",
+        "li1": "Numer telefonu:",
+        "li2": "Email: kontakt@teneryfa.org.pl",
         "h5": "Informacje o kontakcie",
         "description": "Jeśli masz jakiekolwiek pytania, skontaktuj się z nami za pomocą poniższego formularza."
       },
@@ -389,7 +390,7 @@
     "apartments": "Apartamenty",
     "office": "Biuro",
     "villa": "Willa",
-    "shop": "Sklep",
+    "shop": "Biznes",
     "studio": "Studio",
     "land": "Działka",
     "parking": "Parking",

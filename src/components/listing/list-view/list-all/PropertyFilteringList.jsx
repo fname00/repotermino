@@ -13,7 +13,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const searchParams = useSearchParams();
   
   const [filteredData, setFilteredData] = useState([]);
-  const [currentSortingOption, setCurrentSortingOption] = useState("Newest");
+  const [currentSortingOption, setCurrentSortingOption] = useState("Price High");
   const [totalListings, setTotalListings] = useState(0);
   
   const [pageNumber, setPageNumber] = useState(1);
@@ -56,24 +56,42 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
 
   useEffect(() => {
     const urlSearchQuery = searchParams.get('searchQuery') || '';
-    setSearchQuery(urlSearchQuery);
-  }, [searchParams]);
-
-  const updateURL = useCallback((newSearchQuery) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    const urlPropertyType = searchParams.get('propertyType')?.split(',') || []; // Read propertyType as an array
+    const urlPropertyStatus = searchParams.get('propertyStatus') || "All"; // Read propertyStatus from URL or default to "All"
     
+    setSearchQuery(urlSearchQuery);
+    setPropertyTypes(urlPropertyType);
+    setListingStatus(urlPropertyStatus);
+  }, [searchParams]);
+  
+  
+  const updateURL = useCallback((newSearchQuery, newPropertyTypes, newPropertyStatus) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+  
     if (newSearchQuery) {
       current.set('searchQuery', newSearchQuery);
     } else {
       current.delete('searchQuery');
     }
-    
+  
+    if (newPropertyTypes && newPropertyTypes.length > 0) {
+      current.set('propertyType', newPropertyTypes.join(',')); // Set propertyType as a comma-separated string
+    } else {
+      current.delete('propertyType');
+    }
+  
+    if (newPropertyStatus && newPropertyStatus !== "All") {
+      current.set('propertyStatus', newPropertyStatus);
+    } else {
+      current.delete('propertyStatus');
+    }
+  
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    
+  
     router.push(`${window.location.pathname}${query}`);
   }, [searchParams, router]);
-
+  
   const fetchListings = useCallback(
     debounce(async (pageNumber, searchQuery, resetData = false) => {
       setIsLoading(true);
@@ -127,7 +145,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
     setHasMore(true);
     setNoListings(false);
     fetchListings(1, searchQuery, true); // Pass true to reset data when a new query is entered
-    updateURL(searchQuery);
+    updateURL(searchQuery, propertyTypes, listingStatus);
   }, [
     listingStatus,
     propertyTypes,
@@ -143,6 +161,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
     fetchListings,
     updateURL,
   ]);
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -170,7 +189,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       <section className="pt10 pb90 bgc-f7">
         <div className="container">
           <div className="row gx-xl-5">
-            <div className="col-lg-2 d-none d-lg-block">
+            <div className="col-lg-3 d-none d-lg-block">
               <ListingSidebar
                 filterFunctions={{
                   handlelistingStatus: (elm) =>
@@ -207,7 +226,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                     setSquirefeet([]);
                     setYearBuild([0, 2050]);
                     setCategories([]);
-                    setCurrentSortingOption("Newest");
+                    setCurrentSortingOption("Price High");
                     setSearchQuery("");
                     updateURL("");
                   },
@@ -242,7 +261,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
               </button>
             </div>
             <div
-              className="offcanvas offcanvas-start p-0"
+              className="offcanvas offcanvas-start p-0 maxwidth75vw"
               tabIndex="-1"
               id="listingSidebarFilter"
               aria-labelledby="listingSidebarFilterLabel"
@@ -295,7 +314,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                       setSquirefeet([]);
                       setYearBuild([0, 2050]);
                       setCategories([]);
-                      setCurrentSortingOption("Newest");
+                      setCurrentSortingOption("Price High");
                       setSearchQuery("");
                     },
                     priceRange,
@@ -315,7 +334,8 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
             </div>
             {/* End mobile filter sidebar */}
 
-            <div className="col-lg-10">
+            <div className="col-lg-9">
+            {/*
               <div className="row align-items-center mb20">
                 <TopFilterBar
                   pageContentTrac={[
@@ -329,7 +349,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   totalListings={totalListings}
                 />
               </div>
-
+            */}
               {noListings ? (
                 <div className="row mt15">
                   <div className="col-12">

@@ -12,7 +12,7 @@ import PaginationTwo from "../../PaginationTwo";
 export default function PropertyFilteringBannerTwo() {
     const [filteredData, setFilteredData] = useState([]);
 
-    const [currentSortingOption, setCurrentSortingOption] = useState('Newest')
+    const [currentSortingOption, setCurrentSortingOption] = useState('Price High')
 
     const [sortedFilteredData, setSortedFilteredData] = useState([]);
         const [pageNumber, setPageNumber] = useState(1)
@@ -48,7 +48,7 @@ export default function PropertyFilteringBannerTwo() {
       setSquirefeet([])
       setyearBuild([0,2050])
       setCategories([])
-      setCurrentSortingOption('Newest')
+      setCurrentSortingOption('Price High')
      document.querySelectorAll(".filterInput").forEach(function(element) {
       element.value = null;
   });
@@ -228,7 +228,7 @@ export default function PropertyFilteringBannerTwo() {
 
     useEffect(() => {
       setPageNumber(1)
-      if (currentSortingOption == 'Newest') {
+      if (currentSortingOption == 'Price High') {
         const sorted = [...filteredData].sort((a,b)=>a.yearBuilding - b.yearBuilding)
         setSortedFilteredData(sorted)
        
