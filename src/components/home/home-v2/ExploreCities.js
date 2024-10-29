@@ -9,6 +9,34 @@ import "swiper/swiper-bundle.min.css";
 const ExploreCities = () => {
   const [villas, setVillas] = useState([]);
   const [loading, setLoading] = useState(true);
+    const [slidesPerView, setSlidesPerView] = useState(1);
+  
+    useEffect(() => {
+      const updateSlidesPerView = () => {
+        const width = window.innerWidth;
+  
+        if (width >= 1200) {
+          setSlidesPerView(4);
+        } else if (width >= 1024) {
+          setSlidesPerView(3);
+        } else if (width >= 768) {
+          setSlidesPerView(2);
+        } else {
+          setSlidesPerView(1);
+        }
+      };
+  
+      // Initial call to set the correct slidesPerView
+      updateSlidesPerView();
+  
+      // Update on resize
+      window.addEventListener('resize', updateSlidesPerView);
+  
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener('resize', updateSlidesPerView);
+      };
+    }, []);
   const formatPrice = (price) => {
     return new Intl.NumberFormat('pl-PL', {
       style: 'decimal',
@@ -38,7 +66,7 @@ const ExploreCities = () => {
   if (loading) {
     return (
       <div className="skeleton-container-001">
-        {[...Array(4)].map((_, index) => (
+        {[...Array(slidesPerView)].map((_, index) => (
           <div key={index} className="skeleton-item-001 skeleton-pulse">
             <div className="skeleton-image-001"></div>
             <div className="skeleton-title-001"></div>
@@ -47,7 +75,7 @@ const ExploreCities = () => {
         ))}
       </div>
     );
-  }
+  };
   
   
   return (

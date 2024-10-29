@@ -33,9 +33,9 @@ const About = () => {
             />
           </div>
           <VideoBox />
-          <div className="img-box-10 position-relative">
+          {/*<div className="img-box-10 position-relative">
             <ProductSingle />
-          </div>
+          </div>*/}
         </div>
       </div>
       {/* End col */}

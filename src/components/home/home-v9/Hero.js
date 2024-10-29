@@ -17,7 +17,7 @@ const Hero = () => {
       ),
       description:
         "From as low as $10 per day with limited time offer discounts.",
-      title: "Equestrian Family Home",
+      title: "",
       location: "New York City, CA, USA",
       bed: "1",
       bath: "2",

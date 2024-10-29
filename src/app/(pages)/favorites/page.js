@@ -4,7 +4,7 @@ import MobileMenu from "@/components/common/mobile-menu";
 import FavoritesList from "@/app/(pages)/favorites/favoritesList"; // Import the FavoritesList component
 
 export const metadata = {
-  title: "Favourites || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 const FavoritesPage = () => {

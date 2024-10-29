@@ -1,7 +1,7 @@
 import FaqComponent from './faq';  // Fix the import, capitalize
 
 export const metadata = {
-  title: "Faq  || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 const Faq = () => {

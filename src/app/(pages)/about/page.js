@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "About || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 import AboutComponent from './aboutcomponent';  // Fix the import, capitalize

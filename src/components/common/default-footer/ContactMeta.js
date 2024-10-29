@@ -4,13 +4,13 @@ const ContactMeta = () => {
   const contactInfoList = [
     {
       title: "Whats app",
-      phone: "+(0) 123 050 945 02",
-      phoneLink: "tel:+012305094502", // Changed phoneLink to tel: URI
+      phone: "+48 779 985 6875",
+      phoneLink: "tel:+48 779 985 6875", // Changed phoneLink to tel: URI
     },
     {
       title: "Email",
-      mail: "hi@gmail.com",
-      mailLink: "mailto:hi@gmail.com", // Changed mailLink to direct email address
+      mail: "kontakt@teneryfa.org.pl",
+      mailLink: "mailto:kontakt@teneryfa.org.pl", // Changed mailLink to direct email address
     },
   ];
 

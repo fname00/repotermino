@@ -16,7 +16,7 @@ import Agents from "@/components/home/home-v10/Agents";
 import BannerSlider from "@/components/home/home-v10/BannerSlider";
 
 export const metadata = {
-  title: "Home v10 || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 const Home_V10 = () => {

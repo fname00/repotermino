@@ -21,7 +21,7 @@ const PropertyTypeModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content">
+      <div style={{ width: 'fit-content'}} className="modal-content">
         <h2 style={{ textAlign: 'center' }}>{t('buy')}</h2>
         <ul>
         <li onClick={() => handleLinkClick('/buy')}>{t('all')}</li>

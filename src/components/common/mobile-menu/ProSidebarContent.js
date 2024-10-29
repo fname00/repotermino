@@ -3,88 +3,86 @@ import { isParentActive } from "@/utilis/isMenuActive";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import PropertyTypeModal from "../PropertyTypeModal";
+import ListingTypeModal from "../ListingTypeModal";
 
 const ProSidebarContent = () => {
   const path = usePathname();
+  const { t } = useTranslation('common');
+  const [isPropertyModalOpen, setIsPropertyModalOpen] = useState(false);
+  const [isListingModalOpen, setIsListingModalOpen] = useState(false);
+
+  const openPropertyModal = () => {
+    setIsPropertyModalOpen(true);
+  };
+
+  const closePropertyModal = () => {
+    setIsPropertyModalOpen(false);
+  };
+
+  const openListingModal = () => {
+    setIsListingModalOpen(true);
+  };
+
+  const closeListingModal = () => {
+    setIsListingModalOpen(false);
+  };
+
+  const handleActive = (link) => {
+    if (link.split("/")[1] === path.split("/")[1]) {
+      return "menuActive";
+    }
+  };
 
   return (
-    <Sidebar width="100%" backgroundColor="#fff" className="my-custom-class">
-      <Menu>
-        {mobileMenuItems.map((item, index) => {
-          // Check if the item has a subMenu
-          if (item.subMenu && item.subMenu.length > 0) {
-            return (
-              <SubMenu
-                key={index}
-                className={isParentActive(item.subMenu, path) ? "active" : ""}
-                label={item.label}
-              >
-                {item.subMenu.map((subItem, subIndex) => {
-                  if (subItem.subMenu && subItem.subMenu.length > 0) {
-                    return (
-                      <SubMenu
-                        key={subIndex}
-                        label={subItem.label}
-                        className={
-                          isParentActive(subItem.subMenu, path) ? "active" : ""
-                        }
-                      >
-                        {subItem.subMenu.map((nestedItem, nestedIndex) => (
-                          <MenuItem
-                            key={nestedIndex}
-                            component={
-                              <Link
-                                className={
-                                  nestedItem.path === path ? "active" : ""
-                                }
-                                href={nestedItem.path}
-                              />
-                            }
-                          >
-                            {nestedItem.label}
-                          </MenuItem>
-                        ))}
-                      </SubMenu>
-                    );
-                  } else {
-                    return (
-                      <MenuItem
-                        key={subIndex}
-                        component={
-                          <Link
-                            className={
-                              subItem.path === path ? "active" : ""
-                            }
-                            href={subItem.path}
-                          />
-                        }
-                      >
-                        {subItem.label}
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </SubMenu>
-            );
-          } else {
-            // Render a simple MenuItem if no subMenu
-            return (
-              <MenuItem
-                key={index}
-                component={
-                  <Link
-                    className={item.path === path ? "active" : ""}
-                    href={item.path}
-                  />
-                }
-              >
-                {item.label}
-              </MenuItem>
-            );
-          }
-        })}
-      </Menu>
-    </Sidebar>
+    <>
+      <Sidebar width="100%" backgroundColor="#fff" className="my-custom-class">
+        <Menu>
+          <MenuItem
+            className="megamenu_style dropitem"
+            onClick={openPropertyModal}
+            style={{ cursor: "pointer" }}
+          >
+            <span className={"title"}>{t("buy")}</span>
+          </MenuItem>
+
+          <MenuItem
+            className="megamenu_style dropitem"
+            onClick={openListingModal}
+            style={{ cursor: "pointer" }}
+          >
+            <span className={"title"}>{t("rent")}</span>
+          </MenuItem>
+
+          <MenuItem component={<Link href="/sale" />} className={"megamenu_style dropitem"}>
+            <span className={"title"}>{t("sale")}</span>
+          </MenuItem>
+
+          <MenuItem component={<Link href="/activity" />} className={"megamenu_style dropitem"}>
+            <span className={"title"}>{t("activity")}</span>
+          </MenuItem>
+
+          <MenuItem component={<Link href="/buy?propertyType=shop" />} className="visible_list dropitem">
+            <span className={handleActive("/buy?propertyType=shop") ? "title menuActive" : "title"}>
+              {t("Buybusinsess")}
+            </span>
+          </MenuItem>
+
+          <MenuItem component={<Link href="/about" />} className="visible_list dropitem">
+            <span className={handleActive("/about") ? "title menuActive" : "title"}>
+              {t("About")}
+            </span>
+          </MenuItem>
+        </Menu>
+      </Sidebar>
+
+      {/* Render the property modal */}
+      <PropertyTypeModal isOpen={isPropertyModalOpen} onClose={closePropertyModal} />
+      {/* Render the listing modal */}
+      <ListingTypeModal isOpen={isListingModalOpen} onClose={closeListingModal} />
+    </>
   );
 };
 

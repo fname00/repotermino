@@ -14,7 +14,7 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata = {
-  title: "Agency Single || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 const AgencySingle = ({params}) => {

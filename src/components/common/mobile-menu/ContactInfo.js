@@ -4,15 +4,15 @@ const ContactInfo = () => {
   const contactInfo = [
     {
       id: 1,
-      title: "Total Free Customer Care",
-      phone: "+(0) 123 050 945 02",
-      phoneHref: "tel:+012305094502", // Updated phoneHref to use "tel" URI
+      title: "",
+      phone: "+48 779 985 6875",
+      phoneHref: "tel:+48 779 985 6875", // Updated phoneHref to use "tel" URI
     },
     {
       id: 2,
-      title: "Need Live Support?",
-      email: "hi@gmail.com",
-      emailHref: "mailto:hi@gmail.com", // Updated emailHref to use "mailto" URI
+      title: "",
+      email: "kontakt@teneryfa.org.pl",
+      emailHref: "mailto:kontakt@teneryfa.org.pl", // Updated emailHref to use "mailto" URI
     },
   ];
 

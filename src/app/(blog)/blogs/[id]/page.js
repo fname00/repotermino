@@ -13,7 +13,7 @@ import MobileMenu from "@/components/common/mobile-menu";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Blog Single  || Teneryfa.org.pl",
+  title: "Teneryfa.org.pl",
 };
 
 const BlogSingle = ({params}) => {
