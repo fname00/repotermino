@@ -6,7 +6,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
-const ExploreCities = () => {
+const ExploreNewDev = () => {
   const [villas, setVillas] = useState([]);
   const [loading, setLoading] = useState(true);
     const [slidesPerView, setSlidesPerView] = useState(1);
@@ -47,7 +47,7 @@ const ExploreCities = () => {
   useEffect(() => {
     const fetchVillas = async () => {
       try {
-        const response = await fetch('/api/listings?locale=pl&pageNumber=1&searchQuery=&listingStatus=Buy&propertyTypes=villa&priceRange=0,10000000&bedrooms=0&bathrooms=0&location=All%20Cities&squareFeet=&yearBuild=&categories=&currentSortingOption=Price%20High'); // Adjust the query params as needed
+        const response = await fetch('/api/listings?locale=pl&pageNumber=1&searchQuery=&listingStatus=Buy&propertyTypes=land&priceRange=0,10000000&bedrooms=0&bathrooms=0&location=All%20Cities&squareFeet=&yearBuild=&categories=&currentSortingOption=Price%20High'); // Adjust the query params as needed
         const data = await response.json();
 
         // Sort villas by price in descending order
@@ -83,11 +83,11 @@ const ExploreCities = () => {
       spaceBetween={30}
       modules={[Navigation, Pagination]}
       navigation={{
-        nextEl: ".cities_next__active",
-        prevEl: ".cities_prev__active",
+        nextEl: ".newdev_next__active",
+        prevEl: ".newdev_prev__active",
       }}
       pagination={{
-        el: ".cities_pagination__active",
+        el: ".newdev_pagination__active",
         clickable: true,
       }}
       breakpoints={{
@@ -132,4 +132,4 @@ const ExploreCities = () => {
   );
 };
 
-export default ExploreCities;
+export default ExploreNewDev;

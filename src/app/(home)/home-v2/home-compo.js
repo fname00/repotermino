@@ -7,6 +7,8 @@ import Agents from "@/components/home/home-v2/Agents";
 import ApartmentType from "@/components/home/home-v2/ApartmentType";
 import Explore from "@/components/home/home-v2/Explore";
 import ExploreCities from "@/components/home/home-v2/ExploreCities";
+import ExploreNewDev from "@/components/home/home-v2/ExploreNewDev";
+import BusinessForSale from "@/components/home/home-v2/BusinessForSale";
 import FeaturedListings from "@/components/home/home-v2/FeatuerdListings";
 import Header from "@/components/home/home-v2/Header";
 import Testimonial from "@/components/home/home-v2/Testimonial";
@@ -49,7 +51,7 @@ const Home_V2 = () => {
       {/* End Home Banner Style V2 */}
 
 
-      {/* Property Cities */}
+      {/* Property newdev */}
       <section className="pt40 pb90 pb50-md">
         <div className="container">
           <div className="row justify-content-between align-items-center">
@@ -59,8 +61,60 @@ const Home_V2 = () => {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
+                <h2 className="title">{t('explorenewdev')}</h2>
+              </div>
+            </div>
+            {/* End header */}
+
+            <div className="col-auto mb30">
+              <div className="row align-items-center justify-content-center">
+                <div className="col-auto">
+                  <button className="newdev_prev__active swiper_button">
+                    <i className="far fa-arrow-left-long" />
+                  </button>
+                </div>
+                {/* End prev */}
+
+                <div className="col-auto">
+                  <div className="pagination swiper--pagination newdev_pagination__active" />
+                </div>
+                {/* End pagination */}
+
+                <div className="col-auto">
+                  <button className="newdev_next__active swiper_button">
+                    <i className="far fa-arrow-right-long" />
+                  </button>
+                </div>
+                {/* End Next */}
+              </div>
+            </div>
+            {/* End .col for navigation and pagination */}
+          </div>
+          {/* End .row */}
+
+          <div className="row">
+            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+              <div className="property-city-slider">
+                <ExploreNewDev />
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+          </div>
+      </section>
+
+
+ {/* Property Cities */}
+ <section className="pt40 pb90 pb50-md">
+        <div className="container">
+          <div className="row justify-content-between align-items-center">
+            <div className="col-auto">
+              <div
+                className="main-title"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
                 <h2 className="title">{t('exploreCities')}</h2>
-                <p className="paragraph">{t('searchByCity')}</p>
               </div>
             </div>
             {/* End header */}
@@ -91,6 +145,8 @@ const Home_V2 = () => {
           </div>
           {/* End .row */}
 
+
+
           <div className="row">
             <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
               <div className="property-city-slider">
@@ -99,6 +155,63 @@ const Home_V2 = () => {
             </div>
           </div>
           {/* End .row */}
+
+
+
+     </div>
+      </section>
+
+
+ {/* Property business */}
+ <section className="pt40 pb90 pb50-md">
+        <div className="container">
+          <div className="row justify-content-between align-items-center">
+            <div className="col-auto">
+              <div
+                className="main-title"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <h2 className="title">{t('explorebusiness')}</h2>
+              </div>
+            </div>
+            {/* End header */}
+
+            <div className="col-auto mb30">
+              <div className="row align-items-center justify-content-center">
+                <div className="col-auto">
+                  <button className="business_prev__active swiper_button">
+                    <i className="far fa-arrow-left-long" />
+                  </button>
+                </div>
+                {/* End prev */}
+
+                <div className="col-auto">
+                  <div className="pagination swiper--pagination business_pagination__active" />
+                </div>
+                {/* End pagination */}
+
+                <div className="col-auto">
+                  <button className="business_next__active swiper_button">
+                    <i className="far fa-arrow-right-long" />
+                  </button>
+                </div>
+                {/* End Next */}
+              </div>
+            </div>
+            {/* End .col for navigation and pagination */}
+          </div>
+          {/* End .row */}
+          <div className="row">
+            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+              <div className="property-city-slider">
+                <BusinessForSale />
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+
+
         </div>
       </section>
       {/* End property cities */}
