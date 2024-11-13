@@ -5,8 +5,8 @@ const ContactInfo = () => {
     {
       id: 1,
       title: "",
-      phone: "+48 779 985 6875",
-      phoneHref: "tel:+48 779 985 6875", // Updated phoneHref to use "tel" URI
+      phone: "+44 779 985 6875",
+      phoneHref: "tel:+44 779 985 6875", // Updated phoneHref to use "tel" URI
     },
     {
       id: 2,
