@@ -24,8 +24,8 @@ export default function PropertyFiltering() {
         const response = await fetch(`/api/activity?locale=${locale}`); // Include locale in the API request
         const listings = await response.json();
 
-        setPageItems(listings.slice((pageNumber - 1) * 9, pageNumber * 9));
-        setPageContentTrac([((pageNumber - 1) * 9) + 1, pageNumber * 9, listings.length]);
+        setPageItems(listings.slice((pageNumber - 1) * 20, pageNumber * 20));
+        setPageContentTrac([((pageNumber - 1) * 20) + 1, pageNumber * 20, listings.length]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -42,9 +42,6 @@ export default function PropertyFiltering() {
         </div>
         {/* End .row */}
 
-        <div className="row">
-          <PaginationTwo pageCapacity={9} data={pageItems} pageNumber={pageNumber} setPageNumber={setPageNumber} />
-        </div>
         {/* End .row */}
       </div>
       {/* End .container */}
