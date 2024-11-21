@@ -57,7 +57,7 @@ const NearbySimilarProperty = () => {
                     )}
                   </div>
                   <div className="list-price">
-                    {new Intl.NumberFormat('en-US', {
+                    {new Intl.NumberFormat('pl-PL', {
                       style: 'currency',
                       currency: 'EUR',
                       minimumFractionDigits: 2,

@@ -74,9 +74,9 @@ export default async function handler(req, res) {
       location: locale === 'en' ? activity.location_en || activity.location :
                 locale === 'pl' ? activity.location_pl || activity.location :
                 locale === 'es' ? activity.location_es || activity.location : activity.location,
-      duration: locale === 'en' ? activity.duration_en || activity.duration :
-                locale === 'pl' ? activity.duration_pl || activity.duration :
-                locale === 'es' ? activity.duration_es || activity.duration : activity.duration,
+      duration: locale === 'en' ? activity.duration || activity.duration :
+                locale === 'pl' ? activity.duration || activity.duration :
+                locale === 'es' ? activity.duration || activity.duration : activity.duration,
       cancellation: locale === 'en' ? activity.cancellation_en || activity.cancellation :
                     locale === 'pl' ? activity.cancellation_pl || activity.cancellation :
                     locale === 'es' ? activity.cancellation_es || activity.cancellation : activity.cancellation,

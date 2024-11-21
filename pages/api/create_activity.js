@@ -66,7 +66,7 @@ export default async function handler(req, res) {
           title: title || "Activity",
           city: city || "No information provided",
           location: location || "No information provided",
-          duration: duration || "No duration provided",
+          duration: duration,
           price: priceValue,
           discount: discountValue,
           maxPersons: maxPersonsValue,

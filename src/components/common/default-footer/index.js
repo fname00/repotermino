@@ -24,11 +24,6 @@ const Footer = () => {
                 />
               </Link>
               <ContactMeta />
-
-              <div className="social-widget">
-                <h6 className="text-white mb20">Follow us!</h6>
-                <Social />
-              </div>
             </div>
           </div>
           {/* End .col-lg-5 */}
@@ -44,9 +39,6 @@ const Footer = () => {
         {/* End .row */}
       </div>
       {/* End .container */}
-
-      <Copyright />
-      {/* End copyright */}
     </>
   );
 };

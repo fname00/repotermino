@@ -8,7 +8,6 @@ import MobileMenu from "@/components/common/mobile-menu";
 import PropertyHeader from "@/components/property/property-single-style/single-v2/PropertyHeader";
 import PropertyGallery from "@/components/property/property-single-style/single-v2/PropertyGallery";
 import OverView from "@/components/property/property-single-style/single-v2/OverView";
-import CustomContact from "@/components/property/property-single-style/common/CustomContact";
 import PropertyDetails from "@/components/property/property-single-style/common/PropertyDetails";
 import PropertyAddress from "@/components/property/property-single-style/common/PropertyAddress";
 import PropertyFeaturesAminites from "@/components/property/property-single-style/common/PropertyFeaturesAminites";
@@ -102,16 +101,17 @@ const SingleV2 = ({ params }) => {
           <div className="row mb30 mt0">
             <PropertyGallery data={listingData} />
           </div>
+          {/*
           <div className="row mt30">
             <OverView data={listingData} />
           </div>
+          */}
         </div>
       </section>
       <section className="pt60 pb90 bgc-f7">
         <div className="container">
           <div className="row wrap">
             <div className="col-lg-8">
-              <CustomContact data={listingData} />
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">{t('propertyDescription')}</h4>
                 <p>{listingData.description}</p>
@@ -122,10 +122,11 @@ const SingleV2 = ({ params }) => {
                 <h4 className="title fz17 mb30 mt30">{t('address')}</h4>
                 <PropertyAddress data={listingData} />
               </div>
+              {/*
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">{t('featuresAndAmenities')}</h4>
                 <PropertyFeaturesAminites data={listingData} />
-              </div>
+              </div>*/}
             </div>
             <div className="col-lg-4">
               <div className="column">

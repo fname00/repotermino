@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   const {
-    locale = 'pl', // Default locale is English
+    locale = 'pl', // Default locale is Polish
     listingStatus = "All",
     propertyTypes = [],
     priceRange = [0, 2000000],
@@ -16,6 +16,7 @@ export default async function handler(req, res) {
     yearBuild = [0, 2050],
     categories = [],
     searchQuery = "",
+    garage = [], // Zmienione na tablicę
     pageNumber = 1,
     pageSize = 12,
     currentSortingOption = "Price High",
@@ -67,11 +68,12 @@ export default async function handler(req, res) {
       );
     }
     if (categories.length > 0) {
-      listings = listings.filter(elm => categories.every(cat => elm.features.includes(cat)));w
+      listings = listings.filter(elm => categories.every(cat => elm.features.includes(cat)));
     }
     if (location !== "All Cities") {
       listings = listings.filter(elm => elm.city === location);
     }
+
     // Parse price range into an array of numbers
     const parsedPriceRange = Array.isArray(priceRange) 
       ? priceRange.map(Number) 
@@ -94,21 +96,37 @@ export default async function handler(req, res) {
       listings = listings.filter(elm => elm.sqft >= minSqft && elm.sqft <= maxSqft);
     }
 
-    if (yearBuild.length === 2) {dashboard
+    if (yearBuild.length === 2) { // Poprawka usunięta `dashboard`
       listings = listings.filter(elm => elm.yearBuilding >= yearBuild[0] && elm.yearBuilding <= yearBuild[1]);
     }
 
-  // Apply sorting
-  listings.sort((a, b) => {
-    if (currentSortingOption === "Newest") {
-      return b.yearBuilding - a.yearBuilding;
-    } else if (currentSortingOption.trim() === "Price Low") {
-      return a.price - b.price; // Direct integer comparison
-    } else if (currentSortingOption.trim() === "Price High") {
-      return b.price - a.price; // Direct integer comparison
+    // Obsługa filtra garage jako tablicy
+    if (Array.isArray(garage) && garage.length > 0) {
+      listings = listings.filter(elm => {
+        // Sprawdź, czy każda wartość w tablicy garage jest spełniona
+        return garage.every(item => {
+          if (item === 'garage') {
+            return elm.garage === true;
+          }
+          if (item === 'storage') {
+            return elm.storage === true;
+          }
+          return true; // Ignoruj nieznane wartości
+        });
+      });
     }
-    return 0; // Default case, no sorting
-  });
+
+    // Apply sorting
+    listings.sort((a, b) => {
+      if (currentSortingOption === "Newest") {
+        return b.yearBuilding - a.yearBuilding;
+      } else if (currentSortingOption.trim() === "Price Low") {
+        return a.price - b.price; // Direct integer comparison
+      } else if (currentSortingOption.trim() === "Price High") {
+        return b.price - a.price; // Direct integer comparison
+      }
+      return 0; // Default case, no sorting
+    });
 
     // Pagination
     const paginatedListings = listings.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);

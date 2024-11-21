@@ -27,13 +27,14 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const [propertyTypes, setPropertyTypes] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 10000000]);
   const [bedrooms, setBedrooms] = useState(0);
+  const [mark, setMark] = useState([]);
   const [bathrooms, setBathrooms] = useState(0);
   const [location, setLocation] = useState("All Cities");
   const [squareFeet, setSquirefeet] = useState([]);
   const [yearBuild, setYearBuild] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [garage, setGarage] = useState([])
   // State to manage locale
   const [locale, setLocale] = useState(Cookies.get('NEXT_LOCALE') || router.locale);
 
@@ -97,7 +98,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `/api/listings?locale=${locale}&pageNumber=${pageNumber}&searchQuery=${searchQuery}&listingStatus=${listingStatus}&propertyTypes=${propertyTypes}&priceRange=${priceRange}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location=${location}&squareFeet=${squareFeet}&yearBuild=${yearBuild}&categories=${categories}&currentSortingOption=${currentSortingOption}`
+          `/api/listings?locale=${locale}&pageNumber=${pageNumber}&searchQuery=${searchQuery}&listingStatus=${listingStatus}&propertyTypes=${propertyTypes}&priceRange=${priceRange}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&location=${location}&squareFeet=${squareFeet}&yearBuild=${yearBuild}&categories=${categories}&currentSortingOption=${currentSortingOption}&garage=${garage}`
         );
         const data = await response.json();
 
@@ -122,13 +123,15 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
       propertyTypes,
       priceRange,
       bedrooms,
+      garage,
       bathrooms,
       location,
       squareFeet,
       yearBuild,
       categories,
       currentSortingOption,
-      locale // Include locale as a dependency
+      locale, // Include locale as a dependency
+      //mark
     ]
   );
 
@@ -158,6 +161,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
     categories,
     currentSortingOption,
     searchQuery,
+    // mark,
     fetchListings,
     updateURL,
   ]);
@@ -194,6 +198,20 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                 filterFunctions={{
                   handlelistingStatus: (elm) =>
                     setListingStatus((pre) => (pre === elm ? "All" : elm)),
+                  handleMark: (markOption) => { // Dodana funkcja handleMark
+                    setMark((prevMarks) =>
+                      prevMarks.includes(markOption)
+                        ? prevMarks.filter((mark) => mark !== markOption)
+                        : [...prevMarks, markOption]
+                    );
+                  },
+                  handleGarage: (garageOption) => { // Dodana funkcja handlegarage
+                    setGarage((prevGarages) =>
+                      prevGarages.includes(garageOption)
+                        ? prevGarages.filter((garage) => garage !== garageOption)
+                        : [...prevGarages, garageOption]
+                    );
+                  },
                   handlepropertyTypes: (elm) =>
                     setPropertyTypes((pre) =>
                       elm === "All"
@@ -218,6 +236,8 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                     ),
                   resetFilter: () => {
                     setListingStatus("All");
+                    setMark([]);
+                    setGarage([]);
                     setPropertyTypes([]);
                     setPriceRange([0, 10000000]);
                     setBedrooms(0);
@@ -232,11 +252,13 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   },
                   priceRange,
                   listingStatus,
+                  mark,
                   propertyTypes,
                   bedrooms,
                   bathrooms,
                   location,
                   squareFeet,
+                  garage,
                   yearBuild,
                   categories,
                   setPropertyTypes,
@@ -282,6 +304,20 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   filterFunctions={{
                     handlelistingStatus: (elm) =>
                       setListingStatus((pre) => (pre === elm ? "All" : elm)),
+                    handleMark: (markOption) => { // Dodana funkcja handleMark
+                      setMark((prevMarks) =>
+                        prevMarks.includes(markOption)
+                          ? prevMarks.filter((mark) => mark !== markOption)
+                          : [...prevMarks, markOption]
+                      );
+                    },
+                    handleGarage: (garageOption) => { // Dodana funkcja handlegarage
+                      setGarage((prevGarages) =>
+                        prevGarages.includes(garageOption)
+                          ? prevGarages.filter((garage) => garage !== garageOption)
+                          : [...prevGarages, garageOption]
+                      );
+                    },
                     handlepropertyTypes: (elm) =>
                       setPropertyTypes((pre) =>
                         elm === "All"
@@ -306,6 +342,8 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                       ),
                     resetFilter: () => {
                       setListingStatus("All");
+                      setMark([]);
+                      setGarage([]);
                       setPropertyTypes([]);
                       setPriceRange([0, 10000000]);
                       setBedrooms(0);
@@ -319,11 +357,13 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                     },
                     priceRange,
                     listingStatus,
+                    mark,
                     propertyTypes,
                     bedrooms,
                     bathrooms,
                     location,
                     squareFeet,
+                    garage,
                     yearBuild,
                     categories,
                     setPropertyTypes,

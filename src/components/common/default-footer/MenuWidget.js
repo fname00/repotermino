@@ -6,33 +6,46 @@ const MenuWidget = () => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
 
   const menuSections = [
-    {
-      title: t("popular_search"), // Translation key for the title
+    //{
+    //  title: t("popular_search"), // Translation key for the title
+    //  links: [
+    //    { label: t("villa_in_tenerife"), href: "/all?searchQuery=villa" }, // Translation key for each label
+    //    { label: t("apartment_in_tenerife"), href: "/all?searchQuery=flat" },
+    //    { label: t("best_offers"), href: "/all?searchQuery=villa" },
+    //    { label: t("hot"), href: "/all?searchQuery=villa" },
+    //  ],
+    //},
+    //{
+    //  title: t("quick_links"),
+    //  links: [
+    //    { label: t("about1"), href: "/about" },
+    //    { label: t("our_services"), href: "/sale" },
+    //    { label: t("contact_support"), href: "/contact" },
+    //    { label: t("careers"), href: "/cv" },
+    //   { label: t("faqs"), href: "/faq" },
+    //  ],
+    //},
+    //{
+    //  title: t("discover"),
+    //  links: [
+    //    { label: t("tenerife"), href: "/teneryfa" },
+    //    { label: t("fuertaventura"), href: "/fuerteventura" },
+    //    { label: t("gran_canaria"), href: "/grancanaria" },
+    //   { label: t("lanzarote1"), href: "/lanzarote" },
+    // ],
+    //},
+
+    //tlumacz
+        {
+      title: t("zakładki"),
       links: [
-        { label: t("villa_in_tenerife"), href: "/all?searchQuery=villa" }, // Translation key for each label
-        { label: t("apartment_in_tenerife"), href: "/all?searchQuery=flat" },
-        { label: t("best_offers"), href: "/all?searchQuery=villa" },
-        { label: t("hot"), href: "/all?searchQuery=villa" },
-      ],
-    },
-    {
-      title: t("quick_links"),
-      links: [
-        { label: t("about1"), href: "/about" },
-        { label: t("our_services"), href: "/sale" },
-        { label: t("contact_support"), href: "/contact" },
-        { label: t("careers"), href: "/cv" },
-        { label: t("faqs"), href: "/faq" },
-      ],
-    },
-    {
-      title: t("discover"),
-      links: [
-        { label: t("tenerife"), href: "/teneryfa" },
-        { label: t("fuertaventura"), href: "/fuerteventura" },
-        { label: t("gran_canaria"), href: "/grancanaria" },
-        { label: t("lanzarote1"), href: "/lanzarote" },
-      ],
+        { label: t("blog"), href: "/blog" },
+        { label: t("jak_zaczac"), href: "/about_start" },
+        { label: t("zespół"), href: "/about" },
+        { label: t("e-book"), href: "/ebook" },
+       { label: t("polityka_prywatnosci"), href: "/privacy" },
+       { label: t("polityka_cookies"), href: "/cookies" },
+     ],
     },
   ];
 

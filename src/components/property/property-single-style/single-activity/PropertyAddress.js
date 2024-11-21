@@ -168,7 +168,7 @@ const BookingForm = ({ data }) => {
 
           {/* Total Price */}
           <div className="total-price font-white custom-total-price">
-            <p><strong>{t('totalPrice')}: ${totalPrice.toFixed(2)}</strong></p>
+            <p><strong>{t('totalPrice')}: {totalPrice.toFixed(2)} €</strong></p>
           </div>
 
           {/* Checkout Button */}

@@ -27,10 +27,6 @@ const BlogV2 = () => {
             <div className="col-lg-12">
               <div className="breadcumb-style1">
                 <h2 className="title">Blog</h2>
-                <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">Blog</a>
-                </div>
               </div>
             </div>
           </div>
@@ -38,7 +34,13 @@ const BlogV2 = () => {
       </section>
       {/* End Breadcrumb Start */}
 
-      {/* Blog Section Area */}
+      <section className="our-blog pt-0">
+        <div className="container">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </section>
+      {/* Blog Section Area 
       <section className="our-blog pt-0">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
@@ -52,18 +54,15 @@ const BlogV2 = () => {
                   </p>
                 </div>
               </div>
-              {/* End .row */}
             </div>
-            {/* End .col-lg-8 */}
+
 
             <div className="col-lg-4">
               <BlogSidebar />
             </div>
-            {/* End .col-lg-4 */}
+           
           </div>
-          {/* End .row */}
         </div>
-        {/* End .container */}
       </section>
       {/* End Blog Section Area */}
 

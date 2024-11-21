@@ -4,6 +4,9 @@ import React from "react";
 import SearchBox from "./SearchBox";
 import ListingStatus from "./ListingStatus";
 import PropertyType from "./PropertyType";
+import Mark from "./Mark";
+import Garage from "./Garage";
+import Agency from "./Agency";
 import PriceSlider from "./PriceRange";
 import Bedroom from "./Bedroom";
 import Bathroom from "./Bathroom";
@@ -24,6 +27,15 @@ const ListingSidebar = ({ filterFunctions }) => {
       </div>
       {/* End .widget-wrapper */}
 
+
+
+      <div className="widget-wrapper">
+        <div className="checkbox-style1">
+          <Mark filterFunctions={filterFunctions} />
+        </div>
+      </div>
+      {/* End .widget-wrapper */}
+
       <div className="widget-wrapper">
         <h6 className="list-title">{t('listingStatus')}</h6>
         <div className="radio-element">
@@ -31,6 +43,8 @@ const ListingSidebar = ({ filterFunctions }) => {
         </div>
       </div>
       {/* End .widget-wrapper */}
+
+
 
       <div className="widget-wrapper">
         <h6 className="list-title">{t('propertyType')}</h6>
@@ -63,7 +77,7 @@ const ListingSidebar = ({ filterFunctions }) => {
           <Bathroom filterFunctions={filterFunctions} />
         </div>
       </div>
-      {/* End .widget-wrapper */}
+      {/* End .widget-wrapper
 
       <div className="widget-wrapper advance-feature-modal">
         <h6 className="list-title">{t('location')}</h6>
@@ -73,13 +87,27 @@ const ListingSidebar = ({ filterFunctions }) => {
       </div>
       {/* End .widget-wrapper */}
 
+      <div className="widget-wrapper advance-feature-modal">
+        <h6 className="list-title">{t('agency')}</h6>
+        <div className="form-style2 input-group">
+          <Agency filterFunctions={filterFunctions} />
+        </div>
+      </div>
+      {/* End .widget-wrapper 
+
       <div className="widget-wrapper">
         <h6 className="list-title">{t('squareFeet')}</h6>
         <SquareFeet filterFunctions={filterFunctions} />
       </div>
       {/* End .widget-wrapper */}
 
-
+<     div className="widget-wrapper">
+        <h6 className="list-title">{t('wyposazenie')}</h6>
+        <div className="checkbox-style1">
+          <Garage filterFunctions={filterFunctions} />
+        </div>
+      </div>
+      {/* End .widget-wrapper */}
 
       {/* End .widget-wrapper */}
 
@@ -98,10 +126,6 @@ const ListingSidebar = ({ filterFunctions }) => {
           <span className="flaticon-turn-back" />
           <u>{t('resetAllFilters')}</u>
         </div>
-        <a className="reset-button" href="#">
-          <span className="flaticon-favourite" />
-          <u>{t('saveSearch')}</u>
-        </a>
       </div>
     </div>
   );

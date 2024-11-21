@@ -5,9 +5,11 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
+
 const FeaturedListings = ({ data, colstyle }) => {
   const [favorites, setFavorites] = useState([]);
-
+  const { t } = useTranslation('common');
   // Load favorites from cookies on initial render
   useEffect(() => {
     const favoriteItems = Cookies.get("favorites");
@@ -226,7 +228,9 @@ const FeaturedListings = ({ data, colstyle }) => {
                 : "listing-style1 listCustom listing-type"
             }
           >
+            
             <div className="list-thumb">
+            <Link href={`/property/${listing.id}`}>
               <Image
                 width={382}
                 height={248}
@@ -244,19 +248,23 @@ const FeaturedListings = ({ data, colstyle }) => {
                 )}
               </div>
               <div className="list-price">
-                {new Intl.NumberFormat('en-US', {
+                {new Intl.NumberFormat('pl-PL', {
                   style: 'currency',
                   currency: 'EUR',
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2
                 }).format(listing.price)}{listing.forRent ? " / mo" : ""}
               </div>
+            </Link>
             </div>
             <div className="list-content">
+            <Link href={`/property/${listing.id}`}>
               <h6 className="list-title">
-                <Link href={`/property/${listing.id}`}>{listing.title}</Link>
+                {listing.title}
               </h6>
               <p className="list-text">{listing.location}</p>
+              </Link>
+              {/*
               <div className="list-meta d-flex align-items-center">
                 <a href="#">
                   <span className="flaticon-bed" /> {listing.bed} bed
@@ -268,12 +276,12 @@ const FeaturedListings = ({ data, colstyle }) => {
                   <span className="flaticon-expand" /> {listing.sqft} m2
                 </a>
               </div>
-
+                      */}
               <hr className="mt-2 mb-2" />
               <div className="list-meta2 d-flex justify-content-between align-items-center">
-                <span className="for-what">
-                  {listing.forRent ? "For Rent" : "For Sale"}
-                </span>
+                  <span className="for-what">
+                    {listing.forRent ? t('for_rent') : t('for_sale')}
+                  </span>
                 <div className="icons d-flex align-items-center">
                   <a href={`/property/${listing.id}`} target="_blank" rel="noopener noreferrer">
                     <span className="flaticon-new-tab" />
@@ -286,7 +294,9 @@ const FeaturedListings = ({ data, colstyle }) => {
                   </a>
                 </div>
               </div>
+              
             </div>
+            
           </div>
         </div>
       ))}

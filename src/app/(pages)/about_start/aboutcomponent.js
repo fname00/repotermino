@@ -27,13 +27,12 @@ const About = () => {
       <MobileMenu />
       {/* End Mobile Nav  */}
 
-      {/* Breadcrumb Sections */}
+      {/* Breadcrumb Sections 
       <section className="breadcumb-section23 p-0">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                {/* Placeholder for breadcrumb */}
               </div>
             </div>
           </div>
@@ -41,7 +40,7 @@ const About = () => {
       </section>
       {/* End Breadcrumb Sections */}
 
-      {/* About Section */}
+      {/* About Section 
       <section className="about-section py-5">
         <div className="container">
           <div className="row">
@@ -56,7 +55,7 @@ const About = () => {
       </section>
       {/* End About Section */}
 
-      {/* Features Section */}
+      {/* Features Section 
       <section className="features-section py-5 bg-light">
         <div className="container">
           <div className="row">
@@ -81,7 +80,7 @@ const About = () => {
       </section>
       {/* End Features Section */}
 
-      {/* Second Banner */}
+      {/* Second Banner 
       <section className="second-banner py-5">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
@@ -121,7 +120,7 @@ const About = () => {
       </section>
       {/* End Fun Facts Section */}
 
-      {/* Team & Values Section */}
+      {/* Team & Values Section 
       <section className="team-values-section py-5">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
@@ -150,7 +149,7 @@ const About = () => {
 
           <div className="row">
             <div className="col-12 text-center py-5">
-              <p>{t('about.section5.text')}</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
           </div>
         </div>

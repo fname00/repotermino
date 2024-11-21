@@ -207,13 +207,37 @@ li {
     font-family: var(--title-font-family);
     font-weight: 600;
 }
-
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .whatsapp-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100;
+    height: 100px;
+    background-color: #25d366;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  .whatsapp-link:hover {
+    background-color: #1ebe57;
+  }
+  .whatsapp-link img {
+    width: 100%;
+    height: 100%;
+  }
 /* All Type Of Footer Styles */
 .footer-style1 {
     background-color: var(--headings-color);
 }
 .footer-style1.at-home2 {
-    padding-top: 230px;
+    padding-top: 20px;
 }
 .footer-style1.at-home4 {
     background-color: #ffffff;

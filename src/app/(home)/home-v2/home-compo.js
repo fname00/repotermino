@@ -216,18 +216,6 @@ const Home_V2 = () => {
       </section>
       {/* End property cities */}
 
-      {/* About Us */}
-      <section className="about-us">
-        <div className="container">
-          <About />
-        </div>
-      </section>
-      {/* End About Us */}
-
-
-      {/* Our CTA */}
-      <Cta />
-      {/* End Our CTA */}
 
       {/* Start Our Footer */}
       <section className="footer-style1 at-home2 pb-0">

@@ -111,9 +111,6 @@ const SingleV2 = ({ params }) => {
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">{t('aboutActivity')}</h4>
                 <ProperytyDescriptions data={activityData} />
-                <div className="row">
-                  <PropertyDetails data={activityData} />
-                </div>
               </div>
               <div id="custom-background-input" className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <div className="row">

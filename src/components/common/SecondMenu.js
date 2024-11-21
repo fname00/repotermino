@@ -23,7 +23,6 @@ const SecondMenu = () => {
 
   return (
     <ul className="ace-responsive-menu">
-      {/*
         <li className="visible_list dropitem">
           <Link className="list-item" href="/favorites">
             <span className={handleActive("/favorites") ? "title menuActive" : "title"}>
@@ -31,7 +30,7 @@ const SecondMenu = () => {
             </span>
           </Link>
         </li>
-      */}
+        {/* End Buy Shop
       <li className="visible_list dropitem">
         <Link className="list-item" href="/buy?propertyType=shop">
           <span className={handleActive("/buy?propertyType=shop") ? "title menuActive" : "title"}>
@@ -39,8 +38,7 @@ const SecondMenu = () => {
           </span>
         </Link>
       </li>
-      {/* End Buy Shop */}
-      {/*
+      
         <li className="visible_list dropitem">
           <Link className="list-item" href="/ebook">
             <span className={handleActive("/ebook") ? "title menuActive" : "title"}>
@@ -48,7 +46,6 @@ const SecondMenu = () => {
             </span>
           </Link>
         </li>
-      */}
       {/* End ebook Item */}
 
       <li className="visible_list dropitem">
@@ -60,7 +57,7 @@ const SecondMenu = () => {
       </li>
       {/* End about Item */}
 
-      {/*
+      {/* start
         <li className="visible_list dropitem">
           <Link className="list-item" href="/blog">
             <span className={handleActive("/blog") ? "title menuActive" : "title"}>
@@ -68,7 +65,7 @@ const SecondMenu = () => {
             </span>
           </Link>
         </li>
-      */}
+      
       {/* End blog Item */}
     </ul>
   );

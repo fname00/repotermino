@@ -33,7 +33,6 @@ const PropertyHeader = ({ data }) => {
       <div className="col-lg-8">
         <div className="single-property-content mb30-md">
           <h2 className="sp-lg-title">{data.title}</h2>
-          <p className="text-muted">{t('added')} {timeAgo}</p> {/* Displaying the translated "Added" and time ago */}
         </div>
       </div>
       {/* End .col-lg--8 */}

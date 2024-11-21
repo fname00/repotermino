@@ -6,6 +6,7 @@ const Blog = () => {
  
   return (
     <>
+    {/*
       {blogData.map((item, index) => (
         <div className="blog-style1 large-size bgc-white" key={index}>
           <div className="blog-img">
@@ -33,6 +34,7 @@ const Blog = () => {
           </div>
         </div>
       ))}
+        */}
     </>
   );
 };

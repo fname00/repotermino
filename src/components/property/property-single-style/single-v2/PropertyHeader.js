@@ -99,7 +99,7 @@ const PropertyHeader = ({ data }) => {
                   </a>
             </div>
             <h3 className="price mb-0">
-              {new Intl.NumberFormat('en-US', {
+              {new Intl.NumberFormat('pl-PL', {
                 style: 'currency',
                 currency: 'EUR',
                 minimumFractionDigits: 2,

@@ -47,7 +47,7 @@ const OtherInArea = ({ data }) => {
                   <h5 className="listing-title mt10">{listing.title}</h5>
                   <p className="listing-location">{listing.location}</p>
                   <p className="listing-price">
-                    {new Intl.NumberFormat('en-US', {
+                    {new Intl.NumberFormat('pl-PL', {
                       style: 'currency',
                       currency: 'EUR',
                       minimumFractionDigits: 2,

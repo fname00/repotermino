@@ -8,28 +8,27 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { useRouter, usePathname } from 'next/navigation'; // Import useRouter and usePathname for navigation
-import i18n from 'i18next'; // Import i18n instance
-import Cookies from 'js-cookie'; // Import js-cookie to handle cookies
+import { useRouter, usePathname } from 'next/navigation';
+import i18n from 'i18next';
+import Cookies from 'js-cookie';
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
-  const [currentLocale, setCurrentLocale] = useState(i18n.language); // Add state to keep track of the current language
-  const router = useRouter(); // Initialize useRouter hook
-  const pathname = usePathname(); // Get the current pathname using usePathname
-  const { locale } = router; // Get the current locale from the router
+  const [currentLocale, setCurrentLocale] = useState(i18n.language);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { locale } = router;
 
   useEffect(() => {
-    // Check for a saved language in cookies and set it on initial load
-    const savedLocale = Cookies.get('NEXT_LOCALE'); // Get the saved locale from cookies
+    const savedLocale = Cookies.get('NEXT_LOCALE');
     if (savedLocale && savedLocale !== locale) {
-      i18n.changeLanguage(savedLocale); // Change the language in i18next
-      setCurrentLocale(savedLocale); // Update the state to trigger a re-render
-      if (pathname) { // Ensure pathname is defined before using it
-        router.push(pathname, pathname, { locale: savedLocale }); // Update the route to use the saved locale
+      i18n.changeLanguage(savedLocale);
+      setCurrentLocale(savedLocale);
+      if (pathname) {
+        router.push(pathname, pathname, { locale: savedLocale });
       }
     }
-  }, [locale, pathname]); // Add locale and pathname as dependencies
+  }, [locale, pathname]);
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -46,23 +45,21 @@ const Header = () => {
     };
   }, []);
 
-  // Define language options for the select component
   const languageOptions = [
     { value: "en", label: <><img src="/images/gb.svg" alt="English" width="20" /> English</> },
     { value: "es", label: <><img src="/images/es.svg" alt="Spanish" width="20" /> Spanish</> },
     { value: "pl", label: <><img src="/images/pl.svg" alt="Polish" width="20" /> Polish</> },
   ];
 
-  // Handle language change
   const handleLanguageChange = (selectedOption) => {
-    const newLocale = selectedOption.value; // Get the selected language code
+    const newLocale = selectedOption.value;
 
-    if (newLocale !== locale) { // Only change if the new locale is different
-      Cookies.set('NEXT_LOCALE', newLocale, { expires: 365 }); // Save the new locale in a cookie for 365 days
-      i18n.changeLanguage(newLocale); // Change language in i18next
-      setCurrentLocale(newLocale); // Update the state to trigger a re-render
-      if (pathname) { // Ensure pathname is defined before using it
-        router.push(pathname, pathname, { locale: newLocale }); // Push the new locale to the router
+    if (newLocale !== locale) {
+      Cookies.set('NEXT_LOCALE', newLocale, { expires: 365 });
+      i18n.changeLanguage(newLocale);
+      setCurrentLocale(newLocale);
+      if (pathname) {
+        router.push(pathname, pathname, { locale: newLocale });
       }
     }
   };
@@ -85,9 +82,9 @@ const Header = () => {
                     className="ml10 login-info d-flex align-items-center me-3"
                     href="tel:+012305094502"
                   >
-                    <i className="far fa-phone fz16 me-2 pl10 "></i>{" "}
+                    <i className="far fa-phone fz16 me-2 pl10 "></i>
                     <a href="tel:+44 779 985 6875" className="custom-number d-none d-xl-block">
-                    +44 779 985 6875
+                      +44 779 985 6875
                     </a>
                   </a>
                 </div>
@@ -120,9 +117,9 @@ const Header = () => {
                     <Select
                       options={languageOptions}
                       className="language-selector"
-                      value={languageOptions.find(option => option.value === currentLocale)} // Use state for the default value
+                      value={languageOptions.find(option => option.value === currentLocale)}
                       isSearchable={false}
-                      onChange={handleLanguageChange} // Handle change event
+                      onChange={handleLanguageChange}
                     />
                   </div>
                 </div>
@@ -161,6 +158,24 @@ const Header = () => {
         <SidebarPanel />
       </div>
       {/* Sidebar Panel End */}
+
+      {/* WhatsApp Button */}
+      <div className="whatsapp-button">
+        <a
+          href="https://api.whatsapp.com/send/?phone=447799856875"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-link"
+        >
+          <Image
+            src="/images/whatsapp.webp" // Upewnij się, że ścieżka jest poprawna
+            alt="WhatsApp"
+            width={150} // Dostosuj rozmiar według potrzeb
+            height={150}
+          />
+        </a>
+      </div>
+
     </>
   );
 };

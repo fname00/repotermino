@@ -43,15 +43,10 @@ const About = () => {
       <section className="our-about pb90">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
-            <div className="col-lg-6">
-              <h2>{t('teneryfa_title')}</h2> {/* Translation of the title */}
-            </div>
-            <div className="col-lg-6">
-              <p className="text mb25">
-                {t('teneryfa_description1')} {/* Translation of the first description */}
-              </p>
-              <p className="text mb55">
-                {t('teneryfa_description2')}
+
+            <div className="center">
+              <p className="text">
+                {t('polityka_cookies')} {/* Translation of the first description */}
               </p>
                {/* Translation of the second description 
               <div className="row">

@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="col-sm-6">
           <div className="text-center text-lg-start">
             <p className="copyright-text text-gray ff-heading">
-              © Sitename {getCurrentYear()}{" "}
+              © {getCurrentYear()}{" "}
               <a
                 href=""
                 target="_blank"
