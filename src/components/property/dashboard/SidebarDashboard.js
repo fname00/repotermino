@@ -26,11 +26,6 @@ const SidebarDashboard = () => {
           text: "Dodaj nową nieruchomość",
         },
         {
-          href: "/dashboard-add-activity",
-          icon: "flaticon-new-tab",
-          text: "Dodaj nową aktywność",
-        },
-        {
           href: "#", // Ustawienie href na "#" ponieważ używamy funkcji onClick do wylogowania
           icon: "flaticon-logout",
           text: "Wyloguj",

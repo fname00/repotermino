@@ -62,15 +62,7 @@ export default async function DashboardHome() {
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>Dashboard</h2>
-                    <ul className="text">Lista to-do:
-                      <li>1. Dodawanie aktywności</li>
-                      <li>2. Lista aktywności</li>
-                      <li>3. Zablokowanie API Post tylko dla Administratora</li>
-                      <li>4. Ustawienie CRON dla pozostałych</li>
-                    </ul>
-                    <ul className="text">W przyszłości:
-
-                    </ul>
+   
                   </div>
                 </div>
                 {/* col-lg-12 */}
