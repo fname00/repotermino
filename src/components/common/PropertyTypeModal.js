@@ -1,17 +1,17 @@
+// PropertyTypeModal.js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 const PropertyTypeModal = ({ isOpen, onClose }) => {
   const { t } = useTranslation('common');
 
   const handleLinkClick = (path) => {
-    // Close modal and navigate to the selected path
     onClose();
     window.location.href = path; // Alternatively, use Next.js router for navigation
   };
 
   const handleOverlayClick = (e) => {
-    // Check if the click is on the overlay
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -19,12 +19,12 @@ const PropertyTypeModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div style={{ width: 'fit-content'}} className="modal-content">
+      <div className="modal-content" style={{ width: 'fit-content' }}>
         <h2 style={{ textAlign: 'center' }}>{t('buy')}</h2>
         <ul>
-        <li onClick={() => handleLinkClick('/buy')}>{t('all')}</li>
+          <li onClick={() => handleLinkClick('/buy')}>{t('all')}</li>
           <li onClick={() => handleLinkClick('/buy?propertyType=villa')}>{t('villa')}</li>
           <li onClick={() => handleLinkClick('/buy?propertyType=penthouse')}>{t('penthouse')}</li>
           <li onClick={() => handleLinkClick('/buy?propertyType=duplex')}>{t('duplex')}</li>
@@ -37,17 +37,11 @@ const PropertyTypeModal = ({ isOpen, onClose }) => {
           <li onClick={() => handleLinkClick('/buy?propertyType=office')}>{t('office')}</li>
           <li onClick={() => handleLinkClick('/buy?propertyType=shop')}>{t('shop')}</li>
           <li onClick={() => handleLinkClick('/buy?propertyType=parking')}>{t('parking')}</li>
-          
-          
-          
-          
-          
-          
-          
         </ul>
       </div>
-    </div>
+    </div>,
+    document.body
   );
-};  
+};
 
 export default PropertyTypeModal;

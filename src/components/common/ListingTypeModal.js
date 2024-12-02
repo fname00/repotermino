@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import { useTranslation } from 'react-i18next';
 
 const PropertyTypeModal = ({ isOpen, onClose }) => {
@@ -19,7 +21,7 @@ const PropertyTypeModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div style={{ width: 'fit-content'}} className="modal-content">
         <h2 style={{ textAlign: 'center' }}>{t('rent')}</h2>
@@ -29,7 +31,8 @@ const PropertyTypeModal = ({ isOpen, onClose }) => {
           <li onClick={() => handleLinkClick('/rent?propertyStatus=Holiday')}>{t('shortterm')}</li>
         </ul>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };  
 
