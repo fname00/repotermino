@@ -64,7 +64,7 @@ const ProSidebarContent = () => {
             <span className={"title"}>{t("activity")}</span>
           </MenuItem>
 
-          <MenuItem component={<Link href="/favoritesp" />} className="visible_list dropitem">
+          <MenuItem component={<Link href="/favorites" />} className="visible_list dropitem">
             <span className={handleActive("/favorites") ? "title menuActive" : "title"}>
               {t("Favorites")}
             </span>
