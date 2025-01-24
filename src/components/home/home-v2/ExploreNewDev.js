@@ -6,7 +6,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
-const ExploreNewDev = () => {
+const ExploreNewDev = ({locale}) => {
   const [villas, setVillas] = useState([]);
   const [loading, setLoading] = useState(true);
     const [slidesPerView, setSlidesPerView] = useState(1);
@@ -47,7 +47,7 @@ const ExploreNewDev = () => {
   useEffect(() => {
     const fetchVillas = async () => {
       try {
-        const response = await fetch('/api/listings?locale=pl&pageNumber=1&searchQuery=&listingStatus=Buy&propertyTypes=land&priceRange=0,10000000&bedrooms=0&bathrooms=0&location=All%20Cities&squareFeet=&yearBuild=&categories=&currentSortingOption=Price%20High'); // Adjust the query params as needed
+        const response = await fetch(`/api/listings?locale=${encodeURIComponent(locale)}&pageNumber=1&searchQuery=&listingStatus=Buy&propertyTypes=land&priceRange=0,10000000&bedrooms=0&bathrooms=0&location=All%20Cities&squareFeet=&yearBuild=&categories=&currentSortingOption=Price%20High`); // Adjust the query params as needed
         const data = await response.json();
 
         // Sort villas by price in descending order

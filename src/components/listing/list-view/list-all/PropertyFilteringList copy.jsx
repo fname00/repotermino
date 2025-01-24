@@ -191,7 +191,6 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
             >
               <div className="offcanvas-header">
                 <h5 className="offcanvas-title" id="listingSidebarFilterLabel">
-                  Listing Filter
                 </h5>
                 <button
                   type="button"
@@ -200,7 +199,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="offcanvas-body p-0">
+              <div className="offcanvas-body sp-0">
                 <ListingSidebar
                   filterFunctions={{
                     handlelistingStatus: (elm) =>

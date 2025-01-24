@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     locale = 'pl', // Default locale is Polish
     listingStatus = "All",
     propertyTypes = [],
-    priceRange = [0, 2000000],
+    priceRange = [0, 10000000],
     bedrooms = 0,
     bathrooms = 0,
     location = "All Cities",

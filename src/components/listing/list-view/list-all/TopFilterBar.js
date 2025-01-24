@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const TopFilterBar = ({
   setCurrentSortingOption,
@@ -7,8 +8,10 @@ const TopFilterBar = ({
   pageContentTrac,
   totalListings,
 }) => {
+  const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+
   return (
-    <>
+    <>{/*
       <div className="col-sm-6">
         <div className="text-center text-sm-start">
           <p className="pagination_page_count mb-0">
@@ -26,12 +29,12 @@ const TopFilterBar = ({
           </p>
         </div>
       </div>
-      {/* End .col-sm-6 */}
+       End .col-sm-6 */}
 
-      <div className="col-sm-6">
+      <div className="">
         <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
           <div className="pcs_dropdown pr10 d-flex align-items-center">
-            <span style={{ minWidth: "60px" }}>Sort by</span>
+            <span style={{ minWidth: "120px", textAlign:"end", paddingRight: "10px" }}>{t('sortBy')}</span>
             <select
               className="form-select"
               onChange={(e) =>
@@ -39,13 +42,16 @@ const TopFilterBar = ({
                 setCurrentSortingOption(e.target.value)
               }
             >
-              <option>Newest</option>
-              <option>Best Seller</option>
-              <option>Best Match</option>
-              <option>Price Low</option>
-              <option>Price High</option>
+              <option value="newest">{t('newest')}</option>
+              <option value="bestSeller">{t('bestSeller')}</option>
+              <option value="bestMatch">{t('bestMatch')}</option>
+              <option value="priceLow">{t('priceLow')}</option>
+              <option value="priceHigh">{t('priceHigh')}</option>
             </select>
           </div>
+ 
+
+          {/* 
           <div
             className={`pl15 pr15 bdrl1 bdrr1 d-none d-md-block cursor  ${
               colstyle ? "menuActive" : "#"
@@ -62,6 +68,7 @@ const TopFilterBar = ({
           >
             List
           </div>
+          */}
         </div>
       </div>
       {/* End .col-sm-6 */}

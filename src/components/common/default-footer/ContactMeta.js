@@ -1,6 +1,7 @@
 import React from "react";
 
 const ContactMeta = () => {
+
   const contactInfoList = [
     {
       title: "Whats app",
@@ -22,7 +23,9 @@ const ContactMeta = () => {
             <p className="info-title">{contact.title}</p>
             {contact.phone && (
               <h6 className="info-phone">
-                <a href={contact.phoneLink}>{contact.phone}</a>
+                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+                Chat
+                </a>
               </h6>
             )}
             {contact.mail && (

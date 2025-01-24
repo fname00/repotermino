@@ -6,7 +6,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
-const ExploreCities = ({locale}) => {
+const ExploreHoliday = ({locale}) => {
   const [villas, setVillas] = useState([]);
   const [loading, setLoading] = useState(true);
     const [slidesPerView, setSlidesPerView] = useState(1);
@@ -47,14 +47,13 @@ const ExploreCities = ({locale}) => {
   useEffect(() => {
     const fetchVillas = async () => {
       try {
-        const response = await fetch(`/api/listings?locale=${encodeURIComponent(locale)}&pageNumber=1&searchQuery=&listingStatus=Buy&propertyTypes=villa&priceRange=0,10000000&bedrooms=0&bathrooms=0&location=All%20Cities&squareFeet=&yearBuild=&categories=&currentSortingOption=Price%20High`); // Adjust the query params as needed
+        const response = await fetch(`/api/activity?locale=${encodeURIComponent(locale)}`); // Adjust the query params as needed
         const data = await response.json();
 
         // Sort villas by price in descending order
-        const sortedVillas = data.data.sort((a, b) => b.price - a.price);
-        setVillas(sortedVillas);
+        setVillas(data);
       } catch (error) {
-        console.error("Error fetching villas:", error);
+        console.error("Error fetching holidays:", error);
       } finally {
         setLoading(false);
       }
@@ -83,11 +82,11 @@ const ExploreCities = ({locale}) => {
       spaceBetween={30}
       modules={[Navigation, Pagination]}
       navigation={{
-        nextEl: ".cities_next__active",
-        prevEl: ".cities_prev__active",
+        nextEl: ".newdev_next__active",
+        prevEl: ".newdev_prev__active",
       }}
       pagination={{
-        el: ".cities_pagination__active",
+        el: ".newdev_pagination__active",
         clickable: true,
       }}
       breakpoints={{
@@ -108,7 +107,7 @@ const ExploreCities = ({locale}) => {
       {villas.map((villa) => (
         <SwiperSlide key={villa.id}>
           <div className="item">
-            <Link href={`/property/${encodeURIComponent(villa.id)}`}>
+            <Link href={`/activity/${encodeURIComponent(villa.id)}`}>
               <div className="feature-style2 mb30">
                 <div id="custom-main-villa" className="feature-img">
                   <Image
@@ -116,7 +115,7 @@ const ExploreCities = ({locale}) => {
                     height={279}
                     className="w-100 custom-villa-height cover"
                     src={villa.image} // Assuming villa has an 'image' field
-                    alt="villa listings"
+                    alt="holiday listings"
                   />
                 </div>
                 <div className="feature-content pt20">
@@ -132,4 +131,4 @@ const ExploreCities = ({locale}) => {
   );
 };
 
-export default ExploreCities;
+export default ExploreHoliday;

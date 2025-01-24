@@ -283,14 +283,13 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
               </button>
             </div>
             <div
-              className="offcanvas offcanvas-start p-0 maxwidth75vw"
+              className="offcanvas offcanvas-start p-0  maxwidth75vw"
               tabIndex="-1"
               id="listingSidebarFilter"
               aria-labelledby="listingSidebarFilterLabel"
             >
               <div className="offcanvas-header">
                 <h5 className="offcanvas-title" id="listingSidebarFilterLabel">
-                  Listing Filter
                 </h5>
                 <button
                   type="button"
@@ -375,7 +374,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
             {/* End mobile filter sidebar */}
 
             <div className="col-lg-9">
-            {/*
+     
               <div className="row align-items-center mb20">
                 <TopFilterBar
                   pageContentTrac={[
@@ -389,7 +388,7 @@ export default function PropertyFilteringList({ defaultStatus = "All" }) {
                   totalListings={totalListings}
                 />
               </div>
-            */}
+           
               {noListings ? (
                 <div className="row mt15">
                   <div className="col-12">
