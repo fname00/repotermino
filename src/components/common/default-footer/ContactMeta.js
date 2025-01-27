@@ -22,14 +22,19 @@ const ContactMeta = () => {
           <div className="contact-info">
             <p className="info-title">{contact.title}</p>
             {contact.phone && (
-              <h6 className="info-phone">
-                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
-                Chat
+              <h6 className="info-phone mr20">
+                <a
+                  href="https://wa.me/1234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whatsapp-link2"
+                >
+                  Chat
                 </a>
               </h6>
             )}
             {contact.mail && (
-              <h6 className="info-mail">
+              <h6 className="info-mail ">
                 <a href={contact.mailLink}>{contact.mail}</a>
               </h6>
             )}

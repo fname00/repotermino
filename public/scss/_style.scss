@@ -268,7 +268,22 @@ li {
 .footer-widget .info-mail a {
     color: #ffffff;
 }
-
+.whatsapp-link2 {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: #25d366; /* Zielony kolor WhatsApp */
+    color: white;
+    border-radius: 20px; /* Zaokrąglone rogi */
+    text-decoration: none;
+    border: 2px solid #25d366; /* Zielona ramka */
+    transition: background-color 0.3s ease;
+  }
+  
+  .whatsapp-link2:hover {
+    background-color: #128c7e; /* Ciemniejszy odcień zielonego na hover */
+    border-color: #128c7e; /* Ciemniejsza ramka na hover */
+  }
+  
 .footer-widget.light-style .info-phone a,
 .footer-widget.light-style .info-mail a {
     color: var(--headings-color);
@@ -9855,6 +9870,9 @@ input:focus-visible {
     top: 30px;
     width: 169px;
     z-index: 1;
+}
+.custom-villa-height2 {
+    height: 320px;
 }
 .mobile-filter-btn.map-page span {
     background-color: rgba(255, 255, 255, 0.1);

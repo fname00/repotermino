@@ -9,6 +9,7 @@ import Explore from "@/components/home/home-v2/Explore";
 import ExploreCities from "@/components/home/home-v2/ExploreCities";
 import ExploreNewDev from "@/components/home/home-v2/ExploreNewDev";
 import ExploreHoliday from "@/components/home/home-v2/ExploreHoliday";
+import ExploreYoutube from "@/components/home/home-v2/ExploreYoutube";
 import BusinessForSale from "@/components/home/home-v2/BusinessForSale";
 import FeaturedListings from "@/components/home/home-v2/FeatuerdListings";
 import Header from "@/components/home/home-v2/Header";
@@ -80,7 +81,6 @@ const Home_V2 = () => {
                 {/* End prev */}
 
                 <div className="col-auto">
-                  <div className="pagination swiper--pagination newdev_pagination__active" />
                 </div>
                 {/* End pagination */}
 
@@ -133,7 +133,6 @@ const Home_V2 = () => {
                 {/* End prev */}
 
                 <div className="col-auto">
-                  <div className="pagination swiper--pagination cities_pagination__active" />
                 </div>
                 {/* End pagination */}
 
@@ -191,7 +190,6 @@ const Home_V2 = () => {
                 {/* End prev */}
 
                 <div className="col-auto">
-                  <div className="pagination swiper--pagination business_pagination__active" />
                 </div>
                 {/* End pagination */}
 
@@ -238,19 +236,18 @@ const Home_V2 = () => {
             <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
                 <div className="col-auto">
-                  <button className="newdev_prev__active swiper_button">
+                  <button className="holi_prev__active swiper_button">
                     <i className="far fa-arrow-left-long" />
                   </button>
                 </div>
                 {/* End prev */}
 
                 <div className="col-auto">
-                  <div className="pagination swiper--pagination newdev_pagination__active" />
                 </div>
                 {/* End pagination */}
 
                 <div className="col-auto">
-                  <button className="newdev_next__active swiper_button">
+                  <button className="holi_next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
                 </div>
@@ -271,7 +268,56 @@ const Home_V2 = () => {
           {/* End .row */}
           </div>
       </section>
+{/* Property newdev */}
+<section className="pt40 pb90 pb50-md">
+        <div className="container">
+          <div className="row justify-content-between align-items-center">
+            <div className="col-auto">
+              <div
+                className="main-title"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <h2 className="title">{t('watch')}</h2>
+              </div>
+            </div>
+            {/* End header */}
 
+            <div className="col-auto mb30">
+              <div className="row align-items-center justify-content-center">
+                <div className="col-auto">
+                  <button className="yt_prev__active swiper_button">
+                    <i className="far fa-arrow-left-long" />
+                  </button>
+                </div>
+                {/* End prev */}
+
+                <div className="col-auto">
+                </div>
+                {/* End pagination */}
+
+                <div className="col-auto">
+                  <button className="yt_next__active swiper_button">
+                    <i className="far fa-arrow-right-long" />
+                  </button>
+                </div>
+                {/* End Next */}
+              </div>
+            </div>
+            {/* End .col for navigation and pagination */}
+          </div>
+          {/* End .row */}
+
+          <div className="row">
+            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+              <div className="property-city-slider">
+                <ExploreYoutube locale={locale}/>
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+          </div>
+      </section>
       {/* Start Our Footer */}
       <section className="footer-style1 at-home2 pb-0">
         <Footer />

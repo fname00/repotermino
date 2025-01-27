@@ -191,7 +191,7 @@ const MobileMenu = () => {
               {/* End .hiddenbar_navbar_menu */}
 
               <div className="hiddenbar_footer position-relative bdrt1">
-                <div className="row pt45 pb30 pl30">
+                <div className="column pt45 pb30 pl30">
                   <ContactInfo />
                 </div>
                 {/* End .row */}

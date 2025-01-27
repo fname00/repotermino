@@ -1,8 +1,7 @@
-"use client";
 import React, { useState } from "react";
 import Slider from "rc-slider";
 
-// Funkcja do formatowania ceny
+// Nasza funkcja formatowania liczb
 const formatPrice = (value) => {
   if (value >= 1000000) {
     return `${(value / 1000000).toFixed(1)}m`;
@@ -12,38 +11,77 @@ const formatPrice = (value) => {
   return value.toString();
 };
 
+// -- FUNKCJE TRANSFORMUJĄCE (z powyższego kodu) --
+function priceToPercentage(value) {
+  if (value <= 1_000_000) {
+    return (value / 1_000_000) * 75;
+  } else {
+    const rest = value - 1_000_000;
+    const range = 9_000_000;
+    return 75 + (rest / range) * 25;
+  }
+}
+
+function percentageToPrice(percentage) {
+  if (percentage <= 75) {
+    return (percentage / 75) * 1_000_000;
+  } else {
+    const restPct = percentage - 75;
+    return 1_000_000 + (restPct / 25) * 9_000_000;
+  }
+}
+
+// ----------------------------
+
 const PriceRange = ({ filterFunctions }) => {
-  const [price, setPrice] = useState([20, 10000000]);
+  // Zakładam, że dostajesz z zewnątrz aktualny zakres cen np. 0–10_000_000
+  const minPrice = filterFunctions?.priceRange?.[0] || 0;
+  const maxPrice = filterFunctions?.priceRange?.[1] || 10_000_000;
 
-  // Obsługa zmiany zakresu cen
-  const handleOnChange = (value) => {
-    setPrice(value); // Aktualizacja lokalnego stanu
+  // Konwertujemy ceny na procenty 0–100
+  const [sliderValues, setSliderValues] = useState([
+    priceToPercentage(minPrice),
+    priceToPercentage(maxPrice),
+  ]);
+
+  // Przy każdej zmianie suwaka - aktualizujemy stan (w %)
+  const handleOnChange = (values) => {
+    setSliderValues(values);
   };
 
-  // Wywoływane po zakończeniu zmiany suwaka
-  const handleAfterChange = (value) => {
-    filterFunctions?.handlepriceRange([value[0] || 0, value[1]]); // Wywołanie API z finalnymi wartościami
+  // Po "puszczeniu" suwaka - konwertujemy % na faktyczną cenę i wołamy API
+  const handleAfterChange = (values) => {
+    const realMin = percentageToPrice(values[0]);
+    const realMax = percentageToPrice(values[1]);
+
+    filterFunctions?.handlepriceRange([realMin, realMax]);
   };
+
+  // Dla wyświetlenia: konwertujemy % → cena
+  const [realMin, realMax] = [
+    percentageToPrice(sliderValues[0]),
+    percentageToPrice(sliderValues[1]),
+  ];
 
   return (
     <div className="range-wrapper">
       <Slider
         range
-        formatLabel={() => ``}
-        max={10000000}
         min={0}
-        defaultValue={[
-          filterFunctions?.priceRange[0],
-          filterFunctions?.priceRange[1],
-        ]}
-        onChange={handleOnChange} // Wywołanie przy każdej zmianie
-        onAfterChange={handleAfterChange} // Wywołanie po zakończeniu zmiany
-        id="slider"
+        max={100}
+        // w rc-slider nazwa własności 'value' zamiast 'defaultValue' 
+        value={sliderValues}
+        style={{
+          marginLeft: "20px",
+          marginRight: "20px",
+          width: "calc(100% - 40px)",}}
+        onChange={handleOnChange}
+        onAfterChange={handleAfterChange}
       />
       <div className="d-flex align-items-center">
-        <span id="slider-range-value1">{formatPrice(price[0])}</span>
+        <span>{formatPrice(realMin)}</span>
         <i className="fa-sharp fa-solid fa-minus mx-2 dark-color icon" />
-        <span id="slider-range-value2">{formatPrice(price[1])}</span>
+        <span>{formatPrice(realMax)}</span>
       </div>
     </div>
   );

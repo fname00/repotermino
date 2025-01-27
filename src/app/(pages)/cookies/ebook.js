@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import CallToActions from "@/components/common/CallToActions";
 import DefaultHeader from "@/components/home/home-v2/Header";
 import Partner from "@/components/common/Partner";
@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const About = () => {
-    const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
+  const { t } = useTranslation("common"); // korzystamy z namespace "common"
 
   return (
     <>
@@ -21,9 +21,9 @@ const About = () => {
       <DefaultHeader />
       {/* End Main Header Nav */}
 
-      {/* Mobile Nav  */}
+      {/* Mobile Nav */}
       <MobileMenu />
-      {/* End Mobile Nav  */}
+      {/* End Mobile Nav */}
 
       {/* Breadcrumb Sections */}
       <section className="breadcumb-section22 p-0">
@@ -43,15 +43,41 @@ const About = () => {
       <section className="our-about pb90">
         <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="300">
-
             <div className="center">
-              <p className="text">
-                {t('polityka_cookies')} {/* Translation of the first description */}
-              </p>
-               {/* Translation of the second description 
-              <div className="row">
-                <button className="ud-btn btn-white">{t('download_ebook')}</button> 
-              </div>{/* Translation of button text */}
+
+              {/* SECTION 1 */}
+              <h3>{t("section_1.title")}</h3>
+              <p>{t("section_1.paragraph_1")}</p>
+              <p>{t("section_1.paragraph_2")}</p>
+              <p>{t("section_1.paragraph_3")}</p>
+              <p>{t("section_1.paragraph_4")}</p>
+              <p>{t("section_1.paragraph_5")}</p>
+              <p>{t("section_1.paragraph_6")}</p>
+              <p>{t("section_1.paragraph_7")}</p>
+              <p>{t("section_1.paragraph_8")}</p>
+              <p>{t("section_1.paragraph_9")}</p>
+              <p>{t("section_1.paragraph_10")}</p>
+              <p>{t("section_1.paragraph_11")}</p>
+
+              {/* SECTION 2 */}
+              <h3>{t("section_2.title")}</h3>
+              <p>{t("section_2.paragraph_1")}</p>
+              <p>{t("section_2.paragraph_2")}</p>
+              <p>{t("section_2.paragraph_3")}</p>
+
+              {/* SECTION 3 */}
+              <h3>{t("section_3.title")}</h3>
+              <p>{t("section_3.paragraph_1")}</p>
+              <p>{t("section_3.paragraph_2")}</p>
+              <p>{t("section_3.paragraph_3")}</p>
+              <p>{t("section_3.paragraph_4")}</p>
+              <p>{t("section_3.paragraph_5")}</p>
+              <p>{t("section_3.paragraph_6")}</p>
+              <p>{t("section_3.paragraph_7")}</p>
+              <p>{t("section_3.paragraph_8")}</p>
+              <p>{t("section_3.paragraph_9")}</p>
+              <p>{t("section_3.paragraph_10")}</p>
+
             </div>
           </div>
         </div>

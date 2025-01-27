@@ -43,7 +43,6 @@ const MenuWidget = () => {
         { label: t("jak_zaczac"), href: "/about_start" },
         { label: t("zespół"), href: "/about" },
         { label: t("e-book"), href: "/ebook" },
-       { label: t("polityka_prywatnosci"), href: "/polityka" },
        { label: t("polityka_cookies"), href: "/cookies" },
      ],
     },

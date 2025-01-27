@@ -82,11 +82,11 @@ const ExploreHoliday = ({locale}) => {
       spaceBetween={30}
       modules={[Navigation, Pagination]}
       navigation={{
-        nextEl: ".newdev_next__active",
-        prevEl: ".newdev_prev__active",
+        nextEl: ".holi_next__active",
+        prevEl: ".holi_prev__active",
       }}
       pagination={{
-        el: ".newdev_pagination__active",
+        el: ".holi_pagination__active",
         clickable: true,
       }}
       breakpoints={{
