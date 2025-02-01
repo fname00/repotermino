@@ -1,4 +1,4 @@
-"use client"; // This is a Client Component
+"use client";
 
 import ScrollToTop from "@/components/common/ScrollTop";
 import Aos from "aos";
@@ -7,8 +7,9 @@ import "aos/dist/aos.css";
 import "../../public/scss/main.scss";
 import "rc-slider/assets/index.css";
 import { DM_Sans, Poppins } from "next/font/google";
-import { useEffect, Suspense } from "react";  // Import Suspense from React
-import I18nProvider from './providers/I18nProvider'; // Import the I18nProvider component
+import { useEffect, Suspense } from "react";
+import I18nProvider from './providers/I18nProvider';
+import Script from 'next/script';
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -28,21 +29,71 @@ const poppins = Poppins({
 
 export default function RootLayout({ children }) {
   useEffect(() => {
+    // ✅ Inicjalizacja animacji AOS
     Aos.init({
       duration: 1200,
       once: true,
     });
+
+    // ✅ Dynamically import Bootstrap (poprawia działanie menu)
+    import("bootstrap").then(() => {
+      console.log("✅ Bootstrap loaded");
+    });
+
   }, []);
 
   return (
-    <html lang="en">
-      <body
-        className={`body  ${poppins.variable} ${dmSans.variable}`}
-        cz-shortcut-listen="false"
-      >
-        {/* Wrap the application with I18nProvider */}
+    <html lang="pl">
+      <head>
+        {/* ✅ Google Tag Manager w HEAD */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-PV822L8');
+          `
+        }} />
+      </head>
+      <body className={`body ${poppins.variable} ${dmSans.variable}`} cz-shortcut-listen="false">
+        {/* ✅ Skrypt Cookie Info */}
+        <Script
+          id="cookieinfo"
+          src="https://cookieinfoscript.com/js/cookieinfo.min.js"
+          strategy="afterInteractive"
+        />
+
+        {/* ✅ Fallback GTM, gdy JS jest wyłączony */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PV822L8"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+
+        {/* ✅ Skrypt dla interaktywnego menu */}
+        <Script
+          id="menu-script"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener("DOMContentLoaded", function() {
+                console.log("✅ Menu script initialized");
+                var toggles = document.querySelectorAll(".navbar-toggler");
+                toggles.forEach(toggle => {
+                  toggle.addEventListener("click", function() {
+                    document.body.classList.toggle("menu-open");
+                  });
+                });
+              });
+            `,
+          }}
+        />
+
         <I18nProvider>
-          {/* Suspense ensures translations are ready before rendering children */}
           <Suspense fallback={<div></div>}>
             <div className="wrapper ovh">{children}</div>
           </Suspense>
