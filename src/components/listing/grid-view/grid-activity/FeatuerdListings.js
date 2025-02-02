@@ -48,9 +48,10 @@ const FeaturedListings = ({ data, colstyle }) => {
                     <span className="price-label">{t('per_person')}</span>
                   </div>
                 </div>
+                {/*
                 <div className="d-flex justify-content-end">
                   <button className="activity-button">{t('buy_voucher')}</button>
-                </div>
+                </div> */}
               </div>
             </Link>
           </div>

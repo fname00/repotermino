@@ -100,90 +100,120 @@ const BookingForm = ({ data }) => {
   };
 
   return (
-    <div className="row my-3">
-      <div className="col-12">
-        <h3 className="title font-white">{t('booking')}</h3>
-        <p className="title font-white">{t('selectNumberOfPeople')}</p>
-        <form className="box box-shadow activity-select">
-          
-          {/* Adult Count */}
-          <div className="input-group">
-            <label className="input flex param-per-adult custom-input-number">
-              <span><b>{t('adult')}</b> {t('ageRangeAdult')}</span>
-              <label className="input input-number">
-                <span
-                  className={adultCount === minAdults ? "disable" : ""}
-                  data-type="minus"
-                  onClick={() => handleDecrement(setAdultCount, adultCount, minAdults)}
-                >
-                  <i className="fa-regular fa-minus"></i>
-                </span>
-                <input type="text" name="adult_count" value={adultCount} readOnly />
-                <span data-type="plus" onClick={() => handleIncrement(setAdultCount, adultCount, maxAdults)}>
-                  <i className="fa-regular fa-plus"></i>
-                </span>
+    <div className="booking-form-container" style={{ position: "relative" }}>
+      <div className="row my-3">
+        <div className="col-12">
+          <h3 className="title font-white">{t('booking')}</h3>
+          <p className="title font-white">{t('selectNumberOfPeople')}</p>
+          <form className="box box-shadow activity-select">
+            
+            {/* Adult Count */}
+            <div className="input-group">
+              <label className="input flex param-per-adult custom-input-number">
+                <span><b>{t('adult')}</b> {t('ageRangeAdult')}</span>
+                <label className="input input-number">
+                  <span
+                    className={adultCount === minAdults ? "disable" : ""}
+                    data-type="minus"
+                    onClick={() => handleDecrement(setAdultCount, adultCount, minAdults)}
+                  >
+                    <i className="fa-regular fa-minus"></i>
+                  </span>
+                  <input type="text" name="adult_count" value={adultCount} readOnly />
+                  <span data-type="plus" onClick={() => handleIncrement(setAdultCount, adultCount, maxAdults)}>
+                    <i className="fa-regular fa-plus"></i>
+                  </span>
+                </label>
               </label>
-            </label>
-          </div>
+            </div>
 
-          {/* Youth Count */}
-          <div className="input-group">
-            <label className="input flex param-per-youth custom-input-number">
-              <span><b>{t('youth')}</b> {t('ageRangeYouth')}</span>
-              <label className="input input-number">
-                <span
-                  className={youthCount === minYouth ? "disable" : ""}
-                  data-type="minus"
-                  onClick={() => handleDecrement(setYouthCount, youthCount, minYouth)}
-                >
-                  <i className="fa-regular fa-minus"></i>
-                </span>
-                <input type="text" name="youth_count" value={youthCount} readOnly />
-                <span data-type="plus" onClick={() => handleIncrement(setYouthCount, youthCount, maxYouth)}>
-                  <i className="fa-regular fa-plus"></i>
-                </span>
+            {/* Youth Count */}
+            <div className="input-group">
+              <label className="input flex param-per-youth custom-input-number">
+                <span><b>{t('youth')}</b> {t('ageRangeYouth')}</span>
+                <label className="input input-number">
+                  <span
+                    className={youthCount === minYouth ? "disable" : ""}
+                    data-type="minus"
+                    onClick={() => handleDecrement(setYouthCount, youthCount, minYouth)}
+                  >
+                    <i className="fa-regular fa-minus"></i>
+                  </span>
+                  <input type="text" name="youth_count" value={youthCount} readOnly />
+                  <span data-type="plus" onClick={() => handleIncrement(setYouthCount, youthCount, maxYouth)}>
+                    <i className="fa-regular fa-plus"></i>
+                  </span>
+                </label>
               </label>
-            </label>
-          </div>
+            </div>
 
-          {/* Infant Count */}
-          <div className="input-group">
-            <label className="input flex param-per-infant custom-input-number">
-              <span><b>{t('infant')}</b> {t('ageRangeInfant')}</span>
-              <label className="input input-number">
-                <span
-                  className={infantCount === minKids ? "disable" : ""}
-                  data-type="minus"
-                  onClick={() => handleDecrement(setInfantCount, infantCount, minKids)}
-                >
-                  <i className="fa-regular fa-minus"></i>
-                </span>
-                <input type="text" name="infant_count" value={infantCount} readOnly />
-                <span data-type="plus" onClick={() => handleIncrement(setInfantCount, infantCount, maxKids)}>
-                  <i className="fa-regular fa-plus"></i>
-                </span>
+            {/* Infant Count */}
+            <div className="input-group">
+              <label className="input flex param-per-infant custom-input-number">
+                <span><b>{t('infant')}</b> {t('ageRangeInfant')}</span>
+                <label className="input input-number">
+                  <span
+                    className={infantCount === minKids ? "disable" : ""}
+                    data-type="minus"
+                    onClick={() => handleDecrement(setInfantCount, infantCount, minKids)}
+                  >
+                    <i className="fa-regular fa-minus"></i>
+                  </span>
+                  <input type="text" name="infant_count" value={infantCount} readOnly />
+                  <span data-type="plus" onClick={() => handleIncrement(setInfantCount, infantCount, maxKids)}>
+                    <i className="fa-regular fa-plus"></i>
+                  </span>
+                </label>
               </label>
-            </label>
-          </div>
+            </div>
 
-          {/* Total Price */}
-          <div className="total-price font-white custom-total-price">
-            <p><strong>{t('totalPrice')}: {totalPrice.toFixed(2)} €</strong></p>
-          </div>
+            {/* Total Price */}
+            <div className="total-price font-white custom-total-price">
+              <p><strong>{t('totalPrice')}: {totalPrice.toFixed(2)} €</strong></p>
+            </div>
 
-          {/* Checkout Button */}
-          <button
-            id="submit-activity-select-btn"
-            className={`btn ${!loading && isAvailable ? "" : "inactive-custom-button"}`}
-            type="button"
-            onClick={handleCheckout}
-            disabled={!loading && !isAvailable}
-          >
-            <strong>{t('bookAndPay')}</strong>
-          </button>
-        </form>
+            {/* Checkout Button */}
+            <button
+              id="submit-activity-select-btn"
+              className={`btn ${!loading && isAvailable ? "" : "inactive-custom-button"}`}
+              type="button"
+              disabled={!loading && !isAvailable}
+            >
+              <strong>{t('bookAndPay')}</strong>
+            </button>
+          </form>
+        </div>
+        <div id="packages-wrapper" className="col-12"></div>
       </div>
-      <div id="packages-wrapper" className="col-12"></div>
+
+      {/* Półprzeźroczysta nakładka */}
+      <div
+        className="temporary-overlay"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 10,
+        }}
+      >
+        <a
+          href="mailto:kontakt@teneryfa.org.pl"
+          className="btn btn-primary"
+          style={{
+            padding: "1rem 2rem",
+            fontSize: "1.2rem",
+            color: "white"
+          }}
+        >
+          {t('mailres')}
+        </a>
+      </div>
     </div>
   );
 };
