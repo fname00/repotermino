@@ -57,13 +57,6 @@ export default function RootLayout({ children }) {
         }} />
       </head>
       <body className={`body ${poppins.variable} ${dmSans.variable}`} cz-shortcut-listen="false">
-        {/* ✅ Skrypt Cookie Info */}
-        <Script
-          id="cookieinfo"
-          src="https://cookieinfoscript.com/js/cookieinfo.min.js"
-          strategy="afterInteractive"
-        />
-
         {/* ✅ Fallback GTM, gdy JS jest wyłączony */}
         <noscript>
           <iframe
