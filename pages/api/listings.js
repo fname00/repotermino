@@ -115,6 +115,9 @@ export default async function handler(req, res) {
         });
       });
     }
+    console.log("Przed sortowaniem:", listings.map(elm => elm.price)); 
+
+    listings = listings.filter(elm => elm.price !== null && elm.price !== undefined && !isNaN(elm.price));
 
     // Apply sorting
     listings.sort((a, b) => {
