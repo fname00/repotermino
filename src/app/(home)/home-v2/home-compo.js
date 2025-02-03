@@ -25,7 +25,7 @@ import Cookies from "js-cookie";
 
 const Home_V2 = () => {
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
-  const locale = Cookies.get('NEXT_LOCALE') || 'en';
+  const locale = Cookies.get('NEXT_LOCALE') || 'pl';
 
   console.log('Locale type:', typeof locale);
   console.log('Locale value:', locale);

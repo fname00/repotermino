@@ -19,7 +19,7 @@ const SingleV2 = ({ params }) => {
   const [listingData, setListingData] = useState(null);
 
   // Retrieve the locale from cookies, or fall back to default locale
-  const locale = Cookies.get('NEXT_LOCALE') || 'en';
+  const locale = Cookies.get('NEXT_LOCALE') || 'pl';
 
   useEffect(() => {
     const fetchListingData = async () => {

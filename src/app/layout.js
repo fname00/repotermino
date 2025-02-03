@@ -10,6 +10,8 @@ import { DM_Sans, Poppins } from "next/font/google";
 import { useEffect, Suspense } from "react";
 import I18nProvider from './providers/I18nProvider';
 import Script from 'next/script';
+import Cookies from 'js-cookie';
+import i18n from 'i18next';
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -29,6 +31,18 @@ const poppins = Poppins({
 
 export default function RootLayout({ children }) {
   useEffect(() => {
+    // ✅ Ustawienie domyślnego języka w cookies
+    let savedLocale = Cookies.get('NEXT_LOCALE');
+
+    if (!savedLocale) {
+      savedLocale = "pl"; // Domyślny język
+      Cookies.set('NEXT_LOCALE', savedLocale, { expires: 365 });
+    }
+
+    if (savedLocale !== i18n.language) {
+      i18n.changeLanguage(savedLocale);
+    }
+
     // ✅ Inicjalizacja animacji AOS
     Aos.init({
       duration: 1200,

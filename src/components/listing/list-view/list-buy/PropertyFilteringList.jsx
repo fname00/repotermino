@@ -10,7 +10,7 @@ import PaginationTwo from "../../PaginationTwo";
 export default function PropertyFilteringList() {
   const [filteredData, setFilteredData] = useState([]);
 
-  const [currentSortingOption, setCurrentSortingOption] = useState("Newest");
+  const [currentSortingOption, setCurrentSortingOption] = useState("Price High");
 
   const [sortedFilteredData, setSortedFilteredData] = useState([]);
 
@@ -50,7 +50,7 @@ export default function PropertyFilteringList() {
     setSquirefeet([]);
     setyearBuild([0, 2050]);
     setCategories([]);
-    setCurrentSortingOption("Newest");
+    setCurrentSortingOption("Price High");
     document.querySelectorAll(".filterInput").forEach(function (element) {
       element.value = null;
     });

@@ -14,14 +14,20 @@ import Cookies from 'js-cookie';
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
-  const [currentLocale, setCurrentLocale] = useState(i18n.language);
+  const [currentLocale, setCurrentLocale] = useState(i18n.language || "pl");
   const router = useRouter();
   const pathname = usePathname();
   const { locale } = router;
 
   useEffect(() => {
-    const savedLocale = Cookies.get('NEXT_LOCALE');
-    if (savedLocale && savedLocale !== locale) {
+    let savedLocale = Cookies.get('NEXT_LOCALE');
+  
+    if (!savedLocale) {
+      savedLocale = "pl"; // Ustaw domyślny język na polski
+      Cookies.set('NEXT_LOCALE', savedLocale, { expires: 365 });
+    }
+  
+    if (savedLocale !== locale) {
       i18n.changeLanguage(savedLocale);
       setCurrentLocale(savedLocale);
       if (pathname) {
@@ -29,7 +35,7 @@ const Header = () => {
       }
     }
   }, [locale, pathname]);
-
+  
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);

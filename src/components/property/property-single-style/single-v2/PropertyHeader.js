@@ -38,7 +38,7 @@ const PropertyHeader = ({ data }) => {
 
   // Save favorites to cookies whenever it changes
   useEffect(() => {
-    Cookies.set("favorites", JSON.stringify(favorites));
+    Cookies.set("favorites", JSON.stringify(favorites), { expires: 365 });
   }, [favorites]);
 
   const toggleFavorite = (listingId) => {

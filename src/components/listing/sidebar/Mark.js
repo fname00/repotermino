@@ -7,7 +7,7 @@ const Mark = ({ filterFunctions }) => { // Usuń selectedMarks z props
   const { t } = useTranslation('common'); // Initialize translation hook with 'common' namespace
 
   const markOptions = [
-    { label: "Nowości", value: "new" },
+    { label: "Nowosci", value: "new" },
     { label: "Ekskluzywne", value: "exclusive" },
     // Dodaj więcej opcji według potrzeb
   ];

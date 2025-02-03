@@ -16,13 +16,19 @@ const MobileMenu = () => {
   const [currentLocale, setCurrentLocale] = useState(i18n.language); // Add state to keep track of the current language
 
   useEffect(() => {
-    // Check for a saved language in cookies and set it on initial load
-    const savedLocale = Cookies.get('NEXT_LOCALE'); // Get the saved locale from cookies
-    if (savedLocale && savedLocale !== i18n.language) {
-      i18n.changeLanguage(savedLocale); // Change the language in i18next
-      setCurrentLocale(savedLocale); // Update the state to trigger a re-render
+    let savedLocale = Cookies.get('NEXT_LOCALE');
+  
+    if (!savedLocale) {
+      savedLocale = "pl"; // Ustaw domyślny język na polski
+      Cookies.set('NEXT_LOCALE', savedLocale, { expires: 365 });
+    }
+  
+    if (savedLocale !== i18n.language) {
+      i18n.changeLanguage(savedLocale);
+      setCurrentLocale(savedLocale);
     }
   }, []);
+  
 
   // Define language options for the select component (only flags, no text)
   const languageOptions = [

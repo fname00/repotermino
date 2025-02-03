@@ -20,7 +20,7 @@ const SingleV2 = ({ params }) => {
   const [activityData, setActivityData] = useState(null);
 
   // Retrieve the locale from cookies, or fall back to a default if not set
-  const locale = Cookies.get('NEXT_LOCALE') || 'en';
+  const locale = Cookies.get('NEXT_LOCALE') || 'pl';
 
   useEffect(() => {
     const fetchActivityData = async () => {

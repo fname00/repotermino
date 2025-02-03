@@ -8,7 +8,7 @@ import debounce from "lodash/debounce";
 
 export default function PropertyFilteringList({ defaultStatus = "All" }) {
   const [filteredData, setFilteredData] = useState([]);
-  const [currentSortingOption, setCurrentSortingOption] = useState("Newest");
+  const [currentSortingOption, setCurrentSortingOption] = useState("Price High");
   const [totalListings, setTotalListings] = useState(0);
   
   const [pageNumber, setPageNumber] = useState(1);

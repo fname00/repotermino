@@ -42,9 +42,11 @@ const TopFilterBar = ({
                 setCurrentSortingOption(e.target.value)
               }
             >
-              <option value="Newest">{t('newest')}</option>
-              <option value="Price Low">{t('priceLow')}</option>
               <option value="Price High">{t('priceHigh')}</option>
+              <option value="Price Low">{t('priceLow')}</option>
+              <option value="Newest">{t('newest')}</option>
+              
+              
             </select>
           </div>
  

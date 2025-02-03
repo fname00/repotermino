@@ -54,7 +54,7 @@ const FavoritesList = () => {
     }
 
     setFavorites(updatedFavorites);
-    Cookies.set("favorites", JSON.stringify(updatedFavorites)); // Update cookies whenever favorites change
+    Cookies.set("favorites", JSON.stringify(updatedFavorites), { expires: 365 }); // Update cookies whenever favorites change
   };
 
   if (favorites.length === 0) {
